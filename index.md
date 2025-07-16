@@ -53,6 +53,8 @@ description: "Master DevSecOps with cutting-edge labs, real-world projects, and 
             <p>users permissions and binary </p>
       <a href="lessons/03-linux-basics/" class="btn btn-success">Start Lesson</a>
       <a href="lessons/03-linux-basics/cheatsheet.md" class="btn btn-success">cheatsheet</a>
+      <br>
+      <br>
     </div>
      <div class="module" style="text-align:center;">
       <h3>🐧 Linux Basics 4 </h3>

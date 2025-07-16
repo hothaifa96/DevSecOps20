@@ -2,7 +2,7 @@
 
 ## Table of Contents
 1. [Introduction to Networking Fundamentals](#introduction)
-2. [OSI Model](#osi-model)
+2. ![oSI Model](#osi-model)
 3. [IP Addresses](#ip-addresses)
 4. [MAC Addresses](#mac-addresses)
 5. [Subnet Masks and Subnetting](#subnet-masks)
@@ -33,7 +33,7 @@ Computer networking is the foundation of modern IT infrastructure. Understanding
 ---
 
 ## 2. OSI Model {#osi-model}
-[osi](./img/osi.png)
+![osi](./img/osi.png)
 
 The OSI (Open Systems Interconnection) model is a conceptual framework that describes how network communications occur in seven layers.
 
@@ -86,7 +86,7 @@ The OSI (Open Systems Interconnection) model is a conceptual framework that desc
 IP (Internet Protocol) addresses are unique identifiers assigned to devices on a network.
 
 ### IPv4 Addresses
-[osi](./img/ip.png)
+![osi](./img/ip.png)
 IPv4 addresses are 32-bit numbers represented in dotted decimal notation (e.g., 192.168.1.100).
 
 **Structure:**
@@ -128,7 +128,7 @@ IPv6 addresses are 128-bit numbers represented in hexadecimal notation.
 ---
 
 ## 4. MAC Addresses {#mac-addresses}
-[osi](./img/mac.png)
+![osi](./img/mac.png)
 MAC (Media Access Control) addresses are unique identifiers assigned to network interface cards.
 
 ### MAC Address Structure
@@ -159,7 +159,7 @@ MAC (Media Access Control) addresses are unique identifiers assigned to network 
 ---
 
 ## 5. Subnet Masks and Subnetting {#subnet-masks}
-[osi](./img/subnet.png)
+![osi](./img/subnet.png)
 Subnet masks divide IP networks into smaller subnetworks to improve security and performance.
 
 ### Subnet Mask Basics
@@ -256,7 +256,7 @@ Example host file entries:
 Ports are logical endpoints for network communication, allowing multiple services to run on a single host.
 
 ### Port Basics
-[osi](./img/ports.png)
+![osi](./img/ports.png)
 
 **Port Number**: 16-bit number (0-65535)
 **Socket**: Combination of IP address and port number (192.168.1.100:80)
@@ -306,7 +306,7 @@ Ports are logical endpoints for network communication, allowing multiple service
 ---
 
 ## 8. TCP and UDP Protocols {#tcp-udp}
-[osi](./img/udptcp.png)
+![osi](./img/udptcp.png)
 TCP and UDP are the primary transport layer protocols in the TCP/IP suite.
 
 ### TCP (Transmission Control Protocol)

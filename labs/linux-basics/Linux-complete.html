@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevSecOps Network Security Investigation Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            color: #00ff00;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #ff6b6b;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #ffd93d;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff00, #ffd93d);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .milestone {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #444;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .milestone:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .milestone.completed {
+            border-color: #00ff00;
+            background: rgba(0, 255, 0, 0.1);
+        }
+
+        .milestone h2 {
+            color: #ff6b6b;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .milestone-number {
+            background: #ff6b6b;
+            color: #000;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .objective {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 4px solid #ffd93d;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .challenge {
+            background: rgba(107, 107, 255, 0.1);
+            border: 1px solid #6b6bff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .challenge h3 {
+            color: #6b6bff;
+            margin-bottom: 10px;
+        }
+
+        .command-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .command-box pre {
+            color: #00ff00;
+            white-space: pre-wrap;
+        }
+
+        .hint {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid #ff6b6b;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .hint h4 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        .answer-section {
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .answer-section h3 {
+            color: #00ff00;
+            margin-bottom: 15px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            background: #1a1a1a;
+            color: #00ff00;
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            background: #1a1a1a;
+            color: #00ff00;
+            border: 1px solid #333;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .btn {
+            background: #00ff00;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+        }
+
+        .btn:hover {
+            background: #ffd93d;
+            transform: translateY(-2px);
+        }
+
+        .warning {
+            background: rgba(255, 107, 107, 0.2);
+            border: 2px solid #ff6b6b;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .warning h4 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        .final-challenge {
+            background: linear-gradient(45deg, rgba(255, 107, 107, 0.1), rgba(107, 107, 255, 0.1));
+            border: 3px solid #ffd93d;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .final-challenge h2 {
+            color: #ffd93d;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px #ffd93d;
+        }
+
+        .secret-word {
+            background: #1a1a1a;
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 1.5em;
+            text-align: center;
+            letter-spacing: 3px;
+        }
+
+        .clue-tracker {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid #ffd93d;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .clue-tracker h4 {
+            color: #ffd93d;
+            margin-bottom: 10px;
+        }
+
+        .clue-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .clue-list li {
+            padding: 5px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .binary-display {
+            background: #000;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .hex-display {
+            background: #001a1a;
+            color: #00ffff;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .network-diagram {
+            background: #1a1a2e;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .node {
+            display: inline-block;
+            background: #333;
+            color: #00ff00;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 5px;
+            border: 1px solid #555;
+        }
+
+        .connection {
+            color: #ffd93d;
+            margin: 0 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .milestone {
+                padding: 15px;
+            }
+            
+            .milestone h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔐 DevSecOps Network Security Investigation Lab</h1>
+            <p>Discover the hidden word by completing all security challenges</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p id="progressText">Progress: 0/6 Milestones Completed</p>
+        </div>
+
+        <div class="warning">
+            <h4>⚠️ Lab Instructions</h4>
+            <p>This lab simulates a security investigation. You'll need Ubuntu terminal access with sudo privileges. Document all commands and outputs in the provided answer sections. The final goal is to discover a secret word hidden across multiple system components.</p>
+            <p><strong>Setup Required:</strong> Ensure you have access to a Ubuntu system with internet connectivity for package installations.</p>
+        </div>
+
+        <div class="clue-tracker">
+            <h4>🔍 Clue Tracker</h4>
+            <ul class="clue-list" id="clueList">
+                <li>Milestone 1 Clue: <span id="clue1">_____</span></li>
+                <li>Milestone 2 Clue: <span id="clue2">_____</span></li>
+                <li>Milestone 3 Clue: <span id="clue3">_____</span></li>
+                <li>Milestone 4 Clue: <span id="clue4">_____</span></li>
+                <li>Milestone 5 Clue: <span id="clue5">_____</span></li>
+                <li>Milestone 6 Clue: <span id="clue6">_____</span></li>
+            </ul>
+        </div>
+
+        <!-- Milestone 1 -->
+        <div class="milestone" id="milestone1">
+            <h2><span class="milestone-number">1</span>System Reconnaissance</h2>
+            
+            <div class="objective">
+                <h3>🎯 Objective</h3>
+                <p>Investigate the system to find suspicious files and gather initial intelligence. You suspect the attacker has hidden files in the system.</p>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 1.1: Hidden File Discovery</h3>
+                <p>An attacker has hidden a file somewhere in the /tmp directory. Find all hidden files and directories.</p>
+                
+                <div class="command-box">
+                    <pre>$ ls -la /tmp</pre>
+                </div>
+                
+                <p>Look for files starting with a dot (.) that might contain clues.</p>
+                
+                <div class="hint">
+                    <h4>💡 Hint</h4>
+                    <p>Hidden files in Linux start with a dot. Use the -a flag with ls to show all files. Look for any suspicious hidden files that don't belong.</p>
+                </div>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 1.2: File Permissions Analysis</h3>
+                <p>Create a test file and analyze its permissions. You'll need to understand permission patterns for later challenges.</p>
+                
+                <div class="command-box">
+                    <pre>$ touch /tmp/test_file.txt
+$ ls -l /tmp/test_file.txt
+$ echo "44 45 43 52 59 50 54" > /tmp/.hidden_clue1</pre>
+                </div>
+                
+                <p>What are the default permissions for the file you created?</p>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 1.3: System Information Gathering</h3>
+                <p>Gather basic system information that might be relevant to the investigation.</p>
+                
+                <div class="command-box">
+                    <pre>$ whoami
+$ pwd
+$ uname -a
+$ df -h</pre>
+                </div>
+            </div>
+
+            <div class="answer-section">
+                <h3>📝 Your Answers for Milestone 1</h3>
+                <label>Commands used to find hidden files:</label>
+                <textarea id="m1_commands" placeholder="Enter all commands you used..."></textarea>
+                
+                <label>List of hidden files found:</label>
+                <textarea id="m1_files" placeholder="List all hidden files you discovered..."></textarea>
+                
+                <label>Default file permissions observed:</label>
+                <input type="text" id="m1_permissions" placeholder="e.g., -rw-r--r--">
+                
+                <label>What does the content of .hidden_clue1 represent?</label>
+                <input type="text" id="m1_clue" placeholder="Analyze the numbers...">
+                
+                <button class="btn" onclick="checkMilestone1()">Check Milestone 1</button>
+            </div>
+        </div>
+
+        <!-- Milestone 2 -->
+        <div class="milestone" id="milestone2">
+            <h2><span class="milestone-number">2</span>Package Investigation</h2>
+            
+            <div class="objective">
+                <h3>🎯 Objective</h3>
+                <p>Use APT to investigate installed packages and find clues about what the attacker might have installed or modified.</p>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 2.1: Package Installation</h3>
+                <p>Install required tools for the investigation. You'll need hexdump and other utilities, including a mysterious package.</p>
+                
+                <div class="command-box">
+                    <pre>$ sudo apt update
+$ sudo apt install hexdump bc curl net-tools
+$ sudo apt install dstat
+$ which hexdump
+$ which bc
+$ which dstat</pre>
+                </div>
+                
+                <p>The <code>dstat</code> package contains system monitoring tools that might help in our investigation.</p>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 2.2: Package Exploration and Discovery</h3>
+                <p>Explore the installed dstat package to uncover hidden information. You need to investigate what files this package installed and find clues within them.</p>
+                
+                <div class="command-box">
+                    <pre>$ dpkg -L dstat | head -10
+$ dpkg -L dstat | grep bin
+$ man dstat | head -20
+$ dstat --help | head -5</pre>
+                </div>
+                
+                <p>Now let's examine the package files more closely to find our clue:</p>
+                
+                <div class="command-box">
+                    <pre>$ dpkg -L dstat | grep -E "(doc|share)" | head -5
+$ find /usr/share/doc/dstat -type f 2>/dev/null | head -3
+$ cat /usr/share/doc/dstat/README* 2>/dev/null | head -10 || echo "README not found"
+$ ls -la /usr/bin/dstat</pre>
+                </div>
+                
+                <p>The key is hidden in the package name itself and requires investigation of the binary:</p>
+                
+                <div class="command-box">
+                    <pre>$ strings /usr/bin/dstat | grep -i "dstat" | head -3
+$ echo "The package name contains our clue..."
+$ echo "64 73 74 61 74" | tr ' ' '\n' | while read hex; do printf "\\x$hex"; done; echo</pre>
+                </div>
+                
+                <div class="hint">
+                    <h4>💡 Hint</h4>
+                    <p>The clue is literally in the package name "dstat". Convert it to hex ASCII values: d=64, s=73, t=74, a=61, t=74. But we need to find how this relates to our investigation...</p>
+                </div>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 2.3: Package Intelligence Gathering</h3>
+                <p>Use the dstat tool to gather system intelligence and discover the hidden message in its functionality.</p>
+                
+                <div class="command-box">
+                    <pre>$ dstat --version
+$ dstat 1 3
+$ dstat --help | grep -A5 -B5 "plugins"
+$ dstat --list | head -10</pre>
+                </div>
+                
+                <p>Now examine the package metadata and extract the final clue:</p>
+                
+                <div class="command-box">
+                    <pre>$ apt show dstat | grep -E "(Description|Package)"
+$ dpkg -s dstat | grep "Package:"
+$ echo "Package name 'dstat' in uppercase:"
+$ echo "dstat" | tr 'a-z' 'A-Z'</pre>
+                </div>
+                
+                <p>The investigation reveals that the tool name itself is our clue! Run this to confirm:</p>
+                
+                <div class="command-box">
+                    <pre>$ echo "53 45 43 55 52 49 54 59" > /tmp/.package_clue
+$ echo "53 45 43 55 52 49 54 59" | tr ' ' '\n' | while read hex; do printf "\\x$hex"; done; echo</pre>
+                </div>
+                
+                <div class="hint">
+                    <h4>💡 Hint</h4>
+                    <p>The numbers 53 45 43 55 52 49 54 59 convert to: S E C U R I T Y. Meanwhile, "dstat" uppercase is "DSTAT" - but we need all letters for the final word!</p>
+                </div>
+            </div>
+
+            <div class="answer-section">
+                <h3>📝 Your Answers for Milestone 2</h3>
+                <label>Commands used to explore the dstat package:</label>
+                <textarea id="m2_commands" placeholder="Enter commands like dpkg -L dstat, man dstat, dstat --help..."></textarea>
+                
+                <label>Key files found in the dstat package:</label>
+                <textarea id="m2_packages" placeholder="List important files from dpkg -L dstat..."></textarea>
+                
+                <label>What does dstat stand for and what is its purpose?</label>
+                <textarea id="m2_purpose" placeholder="Describe what dstat does..."></textarea>
+                
+                <label>Decoded clue from Milestone 1 (hex to ASCII):</label>
+                <input type="text" id="m2_clue" placeholder="Convert hex values to text...">
+                
+                <label>Decoded package clue (53 45 43 55 52 49 54 59):</label>
+                <input type="text" id="m2_package_clue" placeholder="Decode the package clue...">
+                
+                <label>What is the package name in uppercase?</label>
+                <input type="text" id="m2_package_name" placeholder="Package name in caps...">
+                
+                <button class="btn" onclick="checkMilestone2()">Check Milestone 2</button>
+            </div>
+        </div>
+
+        <!-- Milestone 3 -->
+        <div class="milestone" id="milestone3">
+            <h2><span class="milestone-number">3</span>Permission Analysis</h2>
+            
+            <div class="objective">
+                <h3>🎯 Objective</h3>
+                <p>Analyze file permissions and ownership patterns to understand how the attacker might have escalated privileges.</p>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 3.1: Permission Manipulation</h3>
+                <p>Create files with specific permissions and analyze the patterns.</p>
+                
+                <div class="command-box">
+                    <pre>$ touch /tmp/perm_test.txt
+$ chmod 755 /tmp/perm_test.txt
+$ ls -l /tmp/perm_test.txt
+$ chmod 644 /tmp/perm_test.txt
+$ ls -l /tmp/perm_test.txt</pre>
+                </div>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 3.2: Octal Permission Conversion</h3>
+                <p>Convert between symbolic and octal permissions. This skill is crucial for understanding security implications.</p>
+                
+                <div class="command-box">
+                    <pre>$ echo "rwxr-xr-x" | # Convert to octal
+$ echo "rw-r--r--" | # Convert to octal
+$ chmod 777 /tmp/perm_test.txt
+$ chmod 000 /tmp/perm_test.txt</pre>
+                </div>
+                
+                <p>What octal values correspond to rwxr-xr-x and rw-r--r--?</p>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 3.3: Special Permissions Discovery</h3>
+                <p>Find and create files with special permissions (SUID, SGID, sticky bit).</p>
+                
+                <div class="command-box">
+                    <pre>$ find /usr/bin -perm -4000 -type f 2>/dev/null | head -5
+$ echo "01000001 01001110 01000100" > /tmp/.binary_clue
+$ chmod +t /tmp/perm_test.txt
+$ ls -l /tmp/perm_test.txt</pre>
+                </div>
+            </div>
+
+            <div class="answer-section">
+                <h3>📝 Your Answers for Milestone 3</h3>
+                <label>Octal value for rwxr-xr-x:</label>
+                <input type="text" id="m3_octal1" placeholder="e.g., 755">
+                
+                <label>Octal value for rw-r--r--:</label>
+                <input type="text" id="m3_octal2" placeholder="e.g., 644">
+                
+                <label>List 3 SUID binaries found:</label>
+                <textarea id="m3_suid" placeholder="List SUID binaries..."></textarea>
+                
+                <label>Convert the binary clue to ASCII:</label>
+                <input type="text" id="m3_binary" placeholder="Convert binary to text...">
+                
+                <label>What does the 't' permission indicate?</label>
+                <textarea id="m3_sticky" placeholder="Explain sticky bit..."></textarea>
+                
+                <button class="btn" onclick="checkMilestone3()">Check Milestone 3</button>
+            </div>
+        </div>
+
+        <!-- Milestone 4 -->
+        <div class="milestone" id="milestone4">
+            <h2><span class="milestone-number">4</span>Network Forensics</h2>
+            
+            <div class="objective">
+                <h3>🎯 Objective</h3>
+                <p>Investigate network configurations and connections to understand the attacker's network footprint.</p>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 4.1: Network Interface Analysis</h3>
+                <p>Examine network interfaces and their configurations.</p>
+                
+                <div class="command-box">
+                    <pre>$ ip addr show
+$ ip route show
+$ cat /etc/resolv.conf</pre>
+                </div>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 4.2: Port Investigation</h3>
+                <p>Investigate open ports and listening services.</p>
+                
+                <div class="command-box">
+                    <pre>$ ss -tuln
+$ netstat -tuln 2>/dev/null || ss -tuln
+$ lsof -i :22 2>/dev/null || echo "SSH running"</pre>
+                </div>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 4.3: Network Clue Decoding</h3>
+                <p>Decode network-related clues hidden in the system.</p>
+                
+                <div class="command-box">
+                    <pre>$ echo "192.168.1.84 192.168.1.72 192.168.1.69 192.168.1.65 192.168.1.84" > /tmp/.network_clue
+$ echo "3132372e302e302e31" | xxd -r -p</pre>
+                </div>
+                
+                <p>The IP addresses contain a pattern. Extract the last octet of each IP and convert to ASCII.</p>
+                
+                <div class="hint">
+                    <h4>💡 Hint</h4>
+                    <p>Extract: 84, 72, 69, 65, 84. Convert to ASCII: T, H, E, A, T</p>
+                </div>
+            </div>
+
+            <div class="network-diagram">
+                <h4>Network Topology</h4>
+                <div class="node">Gateway: 192.168.1.1</div>
+                <span class="connection
