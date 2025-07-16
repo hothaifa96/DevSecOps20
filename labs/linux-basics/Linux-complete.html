@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevSecOps Network Security Investigation Lab</title>
+    <title>DevSecOps Investigation Lab</title>
     <style>
         * {
             margin: 0;
@@ -48,18 +48,29 @@
 
         .progress-bar {
             width: 100%;
-            height: 20px;
+            height: 25px;
             background: #333;
-            border-radius: 10px;
+            border-radius: 15px;
             margin: 20px 0;
             overflow: hidden;
+            position: relative;
         }
 
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #00ff00, #ffd93d);
             width: 0%;
-            transition: width 0.5s ease;
+            transition: width 0.8s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000;
         }
 
         .milestone {
@@ -103,6 +114,10 @@
             font-weight: bold;
         }
 
+        .milestone.completed .milestone-number {
+            background: #00ff00;
+        }
+
         .objective {
             background: rgba(255, 215, 0, 0.1);
             border-left: 4px solid #ffd93d;
@@ -122,21 +137,6 @@
         .challenge h3 {
             color: #6b6bff;
             margin-bottom: 10px;
-        }
-
-        .command-box {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 5px;
-            padding: 15px;
-            margin: 10px 0;
-            font-family: 'Courier New', monospace;
-            overflow-x: auto;
-        }
-
-        .command-box pre {
-            color: #00ff00;
-            white-space: pre-wrap;
         }
 
         .hint {
@@ -167,7 +167,7 @@
 
         textarea {
             width: 100%;
-            min-height: 100px;
+            min-height: 80px;
             background: #1a1a1a;
             color: #00ff00;
             border: 1px solid #333;
@@ -175,6 +175,7 @@
             padding: 10px;
             font-family: 'Courier New', monospace;
             resize: vertical;
+            margin-bottom: 10px;
         }
 
         input[type="text"] {
@@ -185,6 +186,7 @@
             border: 1px solid #333;
             border-radius: 5px;
             font-family: 'Courier New', monospace;
+            margin-bottom: 10px;
         }
 
         .btn {
@@ -197,11 +199,18 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Courier New', monospace;
+            margin: 5px;
         }
 
         .btn:hover {
             background: #ffd93d;
             transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .warning {
@@ -244,73 +253,36 @@
             letter-spacing: 3px;
         }
 
-        .clue-tracker {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid #ffd93d;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 15px 0;
-        }
-
-        .clue-tracker h4 {
-            color: #ffd93d;
-            margin-bottom: 10px;
-        }
-
-        .clue-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .clue-list li {
-            padding: 5px 0;
-            border-bottom: 1px solid #333;
-        }
-
-        .binary-display {
-            background: #000;
-            color: #00ff00;
-            padding: 15px;
-            border-radius: 5px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            margin: 10px 0;
-            overflow-x: auto;
-        }
-
-        .hex-display {
-            background: #001a1a;
-            color: #00ffff;
-            padding: 15px;
-            border-radius: 5px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            margin: 10px 0;
-            overflow-x: auto;
-        }
-
-        .network-diagram {
-            background: #1a1a2e;
-            border: 1px solid #333;
+        .success-message {
+            background: rgba(0, 255, 0, 0.2);
+            border: 2px solid #00ff00;
             border-radius: 10px;
             padding: 20px;
-            margin: 15px 0;
+            margin: 20px 0;
             text-align: center;
+            display: none;
         }
 
-        .node {
-            display: inline-block;
-            background: #333;
-            color: #00ff00;
-            padding: 10px 15px;
+        .script-box {
+            background: #1a1a1a;
+            border: 1px solid #ffd93d;
             border-radius: 5px;
-            margin: 5px;
-            border: 1px solid #555;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            color: #ffd93d;
         }
 
-        .connection {
+        .clue-display {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid #ffd93d;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
             color: #ffd93d;
-            margin: 0 10px;
         }
 
         @media (max-width: 768px) {
@@ -335,334 +307,454 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🔐 DevSecOps Network Security Investigation Lab</h1>
-            <p>Discover the hidden word by completing all security challenges</p>
+            <h1>🔐 DevSecOps Investigation Lab</h1>
+            <p>Uncover the hidden secrets by executing the mysterious script</p>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
+                <div class="progress-text" id="progressText">Progress: 0/5 Milestones Completed</div>
             </div>
-            <p id="progressText">Progress: 0/6 Milestones Completed</p>
         </div>
 
         <div class="warning">
-            <h4>⚠️ Lab Instructions</h4>
-            <p>This lab simulates a security investigation. You'll need Ubuntu terminal access with sudo privileges. Document all commands and outputs in the provided answer sections. The final goal is to discover a secret word hidden across multiple system components.</p>
-            <p><strong>Setup Required:</strong> Ensure you have access to a Ubuntu system with internet connectivity for package installations.</p>
+            <h4>⚠️ Mission Briefing</h4>
+            <p>You've discovered a suspicious script on a compromised server. Your mission is to safely analyze it and uncover the hidden information. Execute the script and follow the clues to complete your investigation.</p>
+            <p><strong>Requirements:</strong> Ubuntu/Linux terminal with curl and base64 tools available.</p>
         </div>
 
-        <div class="clue-tracker">
-            <h4>🔍 Clue Tracker</h4>
-            <ul class="clue-list" id="clueList">
-                <li>Milestone 1 Clue: <span id="clue1">_____</span></li>
-                <li>Milestone 2 Clue: <span id="clue2">_____</span></li>
-                <li>Milestone 3 Clue: <span id="clue3">_____</span></li>
-                <li>Milestone 4 Clue: <span id="clue4">_____</span></li>
-                <li>Milestone 5 Clue: <span id="clue5">_____</span></li>
-                <li>Milestone 6 Clue: <span id="clue6">_____</span></li>
-            </ul>
+        <div class="script-box">
+            <strong>The Mysterious Script:</strong><br>
+            <code>bash &lt;(curl -s https://raw.githubusercontent.com/hothaifa96/DevSecOps20/refs/heads/main/labs/linux-basics/hidden.sh)</code>
         </div>
 
         <!-- Milestone 1 -->
         <div class="milestone" id="milestone1">
-            <h2><span class="milestone-number">1</span>System Reconnaissance</h2>
+            <h2><span class="milestone-number">1</span>Initial Script Execution</h2>
             
             <div class="objective">
                 <h3>🎯 Objective</h3>
-                <p>Investigate the system to find suspicious files and gather initial intelligence. You suspect the attacker has hidden files in the system.</p>
+                <p>Execute the mysterious script and observe its behavior. Document what happens and any files created.</p>
             </div>
 
             <div class="challenge">
-                <h3>Challenge 1.1: Hidden File Discovery</h3>
-                <p>An attacker has hidden a file somewhere in the /tmp directory. Find all hidden files and directories.</p>
-                
-                <div class="command-box">
-                    <pre>$ ls -la /tmp</pre>
-                </div>
-                
-                <p>Look for files starting with a dot (.) that might contain clues.</p>
+                <h3>Challenge 1: Script Execution</h3>
+                <p>Run the provided script and carefully observe what it does. The script appears to be encoded and may create files on your system.</p>
                 
                 <div class="hint">
-                    <h4>💡 Hint</h4>
-                    <p>Hidden files in Linux start with a dot. Use the -a flag with ls to show all files. Look for any suspicious hidden files that don't belong.</p>
-                </div>
-            </div>
-
-            <div class="challenge">
-                <h3>Challenge 1.2: File Permissions Analysis</h3>
-                <p>Create a test file and analyze its permissions. You'll need to understand permission patterns for later challenges.</p>
-                
-                <div class="command-box">
-                    <pre>$ touch /tmp/test_file.txt
-$ ls -l /tmp/test_file.txt
-$ echo "44 45 43 52 59 50 54" > /tmp/.hidden_clue1</pre>
-                </div>
-                
-                <p>What are the default permissions for the file you created?</p>
-            </div>
-
-            <div class="challenge">
-                <h3>Challenge 1.3: System Information Gathering</h3>
-                <p>Gather basic system information that might be relevant to the investigation.</p>
-                
-                <div class="command-box">
-                    <pre>$ whoami
-$ pwd
-$ uname -a
-$ df -h</pre>
+                    <h4>💡 Tips</h4>
+                    <ul>
+                        <li>Execute the script exactly as provided</li>
+                        <li>Look for any files created in the /tmp directory</li>
+                        <li>Check if any new files appear after execution</li>
+                        <li>Pay attention to the output or any visible changes</li>
+                    </ul>
                 </div>
             </div>
 
             <div class="answer-section">
-                <h3>📝 Your Answers for Milestone 1</h3>
-                <label>Commands used to find hidden files:</label>
-                <textarea id="m1_commands" placeholder="Enter all commands you used..."></textarea>
+                <h3>📝 Your Findings for Milestone 1</h3>
+                <label>Command you used to execute the script:</label>
+                <textarea id="m1_command" placeholder="Enter the exact command you ran..."></textarea>
                 
-                <label>List of hidden files found:</label>
-                <textarea id="m1_files" placeholder="List all hidden files you discovered..."></textarea>
+                <label>What files were created? (Check /tmp directory):</label>
+                <textarea id="m1_files" placeholder="List any files created by the script..."></textarea>
                 
-                <label>Default file permissions observed:</label>
-                <input type="text" id="m1_permissions" placeholder="e.g., -rw-r--r--">
+                <label>Any visible output or behavior observed:</label>
+                <textarea id="m1_output" placeholder="Describe what you saw when running the script..."></textarea>
                 
-                <label>What does the content of .hidden_clue1 represent?</label>
-                <input type="text" id="m1_clue" placeholder="Analyze the numbers...">
-                
-                <button class="btn" onclick="checkMilestone1()">Check Milestone 1</button>
+                <button class="btn" onclick="checkMilestone1()">Complete Milestone 1</button>
             </div>
         </div>
 
         <!-- Milestone 2 -->
         <div class="milestone" id="milestone2">
-            <h2><span class="milestone-number">2</span>Package Investigation</h2>
+            <h2><span class="milestone-number">2</span>File Content Analysis</h2>
             
             <div class="objective">
                 <h3>🎯 Objective</h3>
-                <p>Use APT to investigate installed packages and find clues about what the attacker might have installed or modified.</p>
+                <p>Examine the contents of any files created by the script. There may be encoded or hidden information that needs to be decoded.</p>
             </div>
 
             <div class="challenge">
-                <h3>Challenge 2.1: Package Installation</h3>
-                <p>Install required tools for the investigation. You'll need hexdump and other utilities, including a mysterious package.</p>
-                
-                <div class="command-box">
-                    <pre>$ sudo apt update
-$ sudo apt install hexdump bc curl net-tools
-$ sudo apt install dstat
-$ which hexdump
-$ which bc
-$ which dstat</pre>
-                </div>
-                
-                <p>The <code>dstat</code> package contains system monitoring tools that might help in our investigation.</p>
-            </div>
-
-            <div class="challenge">
-                <h3>Challenge 2.2: Package Exploration and Discovery</h3>
-                <p>Explore the installed dstat package to uncover hidden information. You need to investigate what files this package installed and find clues within them.</p>
-                
-                <div class="command-box">
-                    <pre>$ dpkg -L dstat | head -10
-$ dpkg -L dstat | grep bin
-$ man dstat | head -20
-$ dstat --help | head -5</pre>
-                </div>
-                
-                <p>Now let's examine the package files more closely to find our clue:</p>
-                
-                <div class="command-box">
-                    <pre>$ dpkg -L dstat | grep -E "(doc|share)" | head -5
-$ find /usr/share/doc/dstat -type f 2>/dev/null | head -3
-$ cat /usr/share/doc/dstat/README* 2>/dev/null | head -10 || echo "README not found"
-$ ls -la /usr/bin/dstat</pre>
-                </div>
-                
-                <p>The key is hidden in the package name itself and requires investigation of the binary:</p>
-                
-                <div class="command-box">
-                    <pre>$ strings /usr/bin/dstat | grep -i "dstat" | head -3
-$ echo "The package name contains our clue..."
-$ echo "64 73 74 61 74" | tr ' ' '\n' | while read hex; do printf "\\x$hex"; done; echo</pre>
-                </div>
+                <h3>Challenge 2: Content Investigation</h3>
+                <p>Investigate the content of the file created by the script. You'll need to examine what's inside and understand its significance.</p>
                 
                 <div class="hint">
-                    <h4>💡 Hint</h4>
-                    <p>The clue is literally in the package name "dstat". Convert it to hex ASCII values: d=64, s=73, t=74, a=61, t=74. But we need to find how this relates to our investigation...</p>
-                </div>
-            </div>
-
-            <div class="challenge">
-                <h3>Challenge 2.3: Package Intelligence Gathering</h3>
-                <p>Use the dstat tool to gather system intelligence and discover the hidden message in its functionality.</p>
-                
-                <div class="command-box">
-                    <pre>$ dstat --version
-$ dstat 1 3
-$ dstat --help | grep -A5 -B5 "plugins"
-$ dstat --list | head -10</pre>
-                </div>
-                
-                <p>Now examine the package metadata and extract the final clue:</p>
-                
-                <div class="command-box">
-                    <pre>$ apt show dstat | grep -E "(Description|Package)"
-$ dpkg -s dstat | grep "Package:"
-$ echo "Package name 'dstat' in uppercase:"
-$ echo "dstat" | tr 'a-z' 'A-Z'</pre>
-                </div>
-                
-                <p>The investigation reveals that the tool name itself is our clue! Run this to confirm:</p>
-                
-                <div class="command-box">
-                    <pre>$ echo "53 45 43 55 52 49 54 59" > /tmp/.package_clue
-$ echo "53 45 43 55 52 49 54 59" | tr ' ' '\n' | while read hex; do printf "\\x$hex"; done; echo</pre>
-                </div>
-                
-                <div class="hint">
-                    <h4>💡 Hint</h4>
-                    <p>The numbers 53 45 43 55 52 49 54 59 convert to: S E C U R I T Y. Meanwhile, "dstat" uppercase is "DSTAT" - but we need all letters for the final word!</p>
+                    <h4>💡 Tips</h4>
+                    <ul>
+                        <li>Use commands like 'cat', 'less', or 'more' to view file contents</li>
+                        <li>Look for any text that might be encoded</li>
+                        <li>The content might be a simple word or phrase</li>
+                        <li>Document exactly what you find in the file</li>
+                    </ul>
                 </div>
             </div>
 
             <div class="answer-section">
-                <h3>📝 Your Answers for Milestone 2</h3>
-                <label>Commands used to explore the dstat package:</label>
-                <textarea id="m2_commands" placeholder="Enter commands like dpkg -L dstat, man dstat, dstat --help..."></textarea>
+                <h3>📝 Your Findings for Milestone 2</h3>
+                <label>Command used to view the file content:</label>
+                <textarea id="m2_command" placeholder="Enter the command you used to read the file..."></textarea>
                 
-                <label>Key files found in the dstat package:</label>
-                <textarea id="m2_packages" placeholder="List important files from dpkg -L dstat..."></textarea>
+                <label>Exact content found in the file:</label>
+                <input type="text" id="m2_content" placeholder="What word or phrase did you find?">
                 
-                <label>What does dstat stand for and what is its purpose?</label>
-                <textarea id="m2_purpose" placeholder="Describe what dstat does..."></textarea>
+                <label>File path and name:</label>
+                <input type="text" id="m2_filepath" placeholder="Full path to the file...">
                 
-                <label>Decoded clue from Milestone 1 (hex to ASCII):</label>
-                <input type="text" id="m2_clue" placeholder="Convert hex values to text...">
-                
-                <label>Decoded package clue (53 45 43 55 52 49 54 59):</label>
-                <input type="text" id="m2_package_clue" placeholder="Decode the package clue...">
-                
-                <label>What is the package name in uppercase?</label>
-                <input type="text" id="m2_package_name" placeholder="Package name in caps...">
-                
-                <button class="btn" onclick="checkMilestone2()">Check Milestone 2</button>
+                <button class="btn" onclick="checkMilestone2()">Complete Milestone 2</button>
             </div>
         </div>
 
         <!-- Milestone 3 -->
         <div class="milestone" id="milestone3">
-            <h2><span class="milestone-number">3</span>Permission Analysis</h2>
+            <h2><span class="milestone-number">3</span>Script Source Analysis</h2>
             
             <div class="objective">
                 <h3>🎯 Objective</h3>
-                <p>Analyze file permissions and ownership patterns to understand how the attacker might have escalated privileges.</p>
+                <p>Download and examine the source code of the script to understand how it works and what it's actually doing.</p>
             </div>
 
             <div class="challenge">
-                <h3>Challenge 3.1: Permission Manipulation</h3>
-                <p>Create files with specific permissions and analyze the patterns.</p>
+                <h3>Challenge 3: Source Code Investigation</h3>
+                <p>Retrieve the actual script content and analyze its code to understand the encoding mechanism and logic.</p>
                 
-                <div class="command-box">
-                    <pre>$ touch /tmp/perm_test.txt
-$ chmod 755 /tmp/perm_test.txt
-$ ls -l /tmp/perm_test.txt
-$ chmod 644 /tmp/perm_test.txt
-$ ls -l /tmp/perm_test.txt</pre>
-                </div>
-            </div>
-
-            <div class="challenge">
-                <h3>Challenge 3.2: Octal Permission Conversion</h3>
-                <p>Convert between symbolic and octal permissions. This skill is crucial for understanding security implications.</p>
-                
-                <div class="command-box">
-                    <pre>$ echo "rwxr-xr-x" | # Convert to octal
-$ echo "rw-r--r--" | # Convert to octal
-$ chmod 777 /tmp/perm_test.txt
-$ chmod 000 /tmp/perm_test.txt</pre>
-                </div>
-                
-                <p>What octal values correspond to rwxr-xr-x and rw-r--r--?</p>
-            </div>
-
-            <div class="challenge">
-                <h3>Challenge 3.3: Special Permissions Discovery</h3>
-                <p>Find and create files with special permissions (SUID, SGID, sticky bit).</p>
-                
-                <div class="command-box">
-                    <pre>$ find /usr/bin -perm -4000 -type f 2>/dev/null | head -5
-$ echo "01000001 01001110 01000100" > /tmp/.binary_clue
-$ chmod +t /tmp/perm_test.txt
-$ ls -l /tmp/perm_test.txt</pre>
+                <div class="hint">
+                    <h4>💡 Tips</h4>
+                    <ul>
+                        <li>Use curl to download the script content without executing it</li>
+                        <li>Look for variables and encoding patterns (like base64)</li>
+                        <li>Identify how the script processes the encoded data</li>
+                        <li>Find the specific word extraction mechanism</li>
+                    </ul>
                 </div>
             </div>
 
             <div class="answer-section">
-                <h3>📝 Your Answers for Milestone 3</h3>
-                <label>Octal value for rwxr-xr-x:</label>
-                <input type="text" id="m3_octal1" placeholder="e.g., 755">
+                <h3>📝 Your Findings for Milestone 3</h3>
+                <label>Command used to download the script source:</label>
+                <textarea id="m3_command" placeholder="How did you retrieve the script content?"></textarea>
                 
-                <label>Octal value for rw-r--r--:</label>
-                <input type="text" id="m3_octal2" placeholder="e.g., 644">
+                <label>What encoding method is used in the script?:</label>
+                <input type="text" id="m3_encoding" placeholder="What type of encoding did you identify?">
                 
-                <label>List 3 SUID binaries found:</label>
-                <textarea id="m3_suid" placeholder="List SUID binaries..."></textarea>
+                <label>Which word position does the script extract?:</label>
+                <input type="text" id="m3_position" placeholder="Which word from the decoded string?">
                 
-                <label>Convert the binary clue to ASCII:</label>
-                <input type="text" id="m3_binary" placeholder="Convert binary to text...">
-                
-                <label>What does the 't' permission indicate?</label>
-                <textarea id="m3_sticky" placeholder="Explain sticky bit..."></textarea>
-                
-                <button class="btn" onclick="checkMilestone3()">Check Milestone 3</button>
+                <button class="btn" onclick="checkMilestone3()">Complete Milestone 3</button>
             </div>
         </div>
 
         <!-- Milestone 4 -->
         <div class="milestone" id="milestone4">
-            <h2><span class="milestone-number">4</span>Network Forensics</h2>
+            <h2><span class="milestone-number">4</span>Manual Decoding</h2>
             
             <div class="objective">
                 <h3>🎯 Objective</h3>
-                <p>Investigate network configurations and connections to understand the attacker's network footprint.</p>
+                <p>Manually decode the encoded string from the script to understand the full message and verify your findings.</p>
             </div>
 
             <div class="challenge">
-                <h3>Challenge 4.1: Network Interface Analysis</h3>
-                <p>Examine network interfaces and their configurations.</p>
-                
-                <div class="command-box">
-                    <pre>$ ip addr show
-$ ip route show
-$ cat /etc/resolv.conf</pre>
-                </div>
-            </div>
-
-            <div class="challenge">
-                <h3>Challenge 4.2: Port Investigation</h3>
-                <p>Investigate open ports and listening services.</p>
-                
-                <div class="command-box">
-                    <pre>$ ss -tuln
-$ netstat -tuln 2>/dev/null || ss -tuln
-$ lsof -i :22 2>/dev/null || echo "SSH running"</pre>
-                </div>
-            </div>
-
-            <div class="challenge">
-                <h3>Challenge 4.3: Network Clue Decoding</h3>
-                <p>Decode network-related clues hidden in the system.</p>
-                
-                <div class="command-box">
-                    <pre>$ echo "192.168.1.84 192.168.1.72 192.168.1.69 192.168.1.65 192.168.1.84" > /tmp/.network_clue
-$ echo "3132372e302e302e31" | xxd -r -p</pre>
-                </div>
-                
-                <p>The IP addresses contain a pattern. Extract the last octet of each IP and convert to ASCII.</p>
+                <h3>Challenge 4: Decryption Process</h3>
+                <p>Take the encoded string from the script and decode it manually to see the complete message.</p>
                 
                 <div class="hint">
-                    <h4>💡 Hint</h4>
-                    <p>Extract: 84, 72, 69, 65, 84. Convert to ASCII: T, H, E, A, T</p>
+                    <h4>💡 Tips</h4>
+                    <ul>
+                        <li>Extract the encoded string (variable 'e') from the script</li>
+                        <li>Use the appropriate decoding command</li>
+                        <li>Examine the full decoded sentence</li>
+                        <li>Identify which word is being extracted</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="network-diagram">
-                <h4>Network Topology</h4>
-                <div class="node">Gateway: 192.168.1.1</div>
-                <span class="connection
+            <div class="answer-section">
+                <h3>📝 Your Findings for Milestone 4</h3>
+                <label>Command used to decode the string:</label>
+                <textarea id="m4_command" placeholder="How did you decode the base64 string?"></textarea>
+                
+                <label>Full decoded message:</label>
+                <textarea id="m4_decoded" placeholder="What is the complete decoded sentence?"></textarea>
+                
+                <label>The extracted word (8th word):</label>
+                <input type="text" id="m4_word" placeholder="What is the 8th word in the sentence?">
+                
+                <button class="btn" onclick="checkMilestone4()">Complete Milestone 4</button>
+            </div>
+        </div>
+
+        <!-- Milestone 5 -->
+        <div class="milestone" id="milestone5">
+            <h2><span class="milestone-number">5</span>Security Analysis</h2>
+            
+            <div class="objective">
+                <h3>🎯 Objective</h3>
+                <p>Analyze the security implications of the script and document your complete investigation findings.</p>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 5: Final Assessment</h3>
+                <p>Provide a comprehensive analysis of what the script does, its potential security implications, and how it could be detected or prevented.</p>
+                
+                <div class="hint">
+                    <h4>💡 Tips</h4>
+                    <ul>
+                        <li>Consider what information the script reveals</li>
+                        <li>Think about how this type of script could be malicious</li>
+                        <li>Assess the security risks of running unknown scripts</li>
+                        <li>Document lessons learned for DevSecOps practices</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="answer-section">
+                <h3>📝 Your Final Analysis</h3>
+                <label>Security risks identified:</label>
+                <textarea id="m5_risks" placeholder="What security risks does this script present?"></textarea>
+                
+                <label>How could this be detected/prevented?:</label>
+                <textarea id="m5_prevention" placeholder="What security measures could prevent this?"></textarea>
+                
+                <label>Key lessons learned:</label>
+                <textarea id="m5_lessons" placeholder="What did you learn from this investigation?"></textarea>
+                
+                <label>The secret word discovered:</label>
+                <input type="text" id="m5_secret" placeholder="What word did the script extract?">
+                
+                <button class="btn" onclick="checkMilestone5()">Complete Investigation</button>
+            </div>
+        </div>
+
+        <!-- Final Results -->
+        <div class="final-challenge" id="finalSection" style="display: none;">
+            <h2>🎉 Investigation Complete!</h2>
+            <div class="success-message" id="successMessage">
+                <h3>Congratulations, Security Analyst!</h3>
+                <p>You have successfully completed the DevSecOps Investigation Lab!</p>
+                <div class="secret-word" id="secretWordDisplay">
+                    Secret Word: <span id="finalSecretWord">???</span>
+                </div>
+                <p>You've demonstrated key skills in:</p>
+                <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
+                    <li>🔍 Script execution and analysis</li>
+                    <li>🔐 Encoding/decoding techniques</li>
+                    <li>📁 File system investigation</li>
+                    <li>🛡️ Security risk assessment</li>
+                    <li>📊 DevSecOps best practices</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <button class="btn" onclick="saveProgress()">💾 Save Progress</button>
+            <button class="btn" onclick="exportResults()">📁 Export Results</button>
+            <button class="btn" onclick="resetLab()">🔄 Reset Lab</button>
+        </div>
+    </div>
+
+    <script>
+        let completedMilestones = [false, false, false, false, false];
+        let currentProgress = 0;
+
+        function updateProgress() {
+            const completed = completedMilestones.filter(Boolean).length;
+            const percentage = (completed / 5) * 100;
+            
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = `Progress: ${completed}/5 Milestones Completed`;
+            
+            if (completed === 5) {
+                document.getElementById('finalSection').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'block';
+                const secretWord = document.getElementById('m5_secret').value || 'dog';
+                document.getElementById('finalSecretWord').textContent = secretWord.toUpperCase();
+            }
+        }
+
+        function checkMilestone1() {
+            const command = document.getElementById('m1_command').value.toLowerCase();
+            const files = document.getElementById('m1_files').value.toLowerCase();
+            
+            if (command.includes('bash') && command.includes('curl') && 
+                (files.includes('randomword') || files.includes('/tmp'))) {
+                completedMilestones[0] = true;
+                document.getElementById('milestone1').classList.add('completed');
+                updateProgress();
+                alert('✅ Milestone 1 Completed!\n\nYou successfully executed the script and identified the created file.');
+            } else {
+                alert('❌ Please ensure you:\n- Used the provided bash command with curl\n- Found the file created in /tmp directory');
+            }
+        }
+
+        function checkMilestone2() {
+            const command = document.getElementById('m2_command').value.toLowerCase();
+            const content = document.getElementById('m2_content').value.toLowerCase();
+            const filepath = document.getElementById('m2_filepath').value.toLowerCase();
+            
+            if (command.includes('cat') && 
+                (content.includes('dog') || content.includes('devops')) &&
+                filepath.includes('/tmp')) {
+                completedMilestones[1] = true;
+                document.getElementById('milestone2').classList.add('completed');
+                updateProgress();
+                alert('✅ Milestone 2 Completed!\n\nYou successfully analyzed the file content and found the hidden word.');
+            } else {
+                alert('❌ Please ensure you:\n- Used cat or similar command to view the file\n- Found the correct word in the file\n- Identified the correct file path');
+            }
+        }
+
+        function checkMilestone3() {
+            const command = document.getElementById('m3_command').value.toLowerCase();
+            const encoding = document.getElementById('m3_encoding').value.toLowerCase();
+            const position = document.getElementById('m3_position').value;
+            
+            if (command.includes('curl') && 
+                encoding.includes('base64') &&
+                (position.includes('8') || position.includes('eighth'))) {
+                completedMilestones[2] = true;
+                document.getElementById('milestone3').classList.add('completed');
+                updateProgress();
+                alert('✅ Milestone 3 Completed!\n\nYou successfully analyzed the script source and understood its mechanism.');
+            } else {
+                alert('❌ Please ensure you:\n- Downloaded the script with curl\n- Identified base64 encoding\n- Found that it extracts the 8th word');
+            }
+        }
+
+        function checkMilestone4() {
+            const command = document.getElementById('m4_command').value.toLowerCase();
+            const decoded = document.getElementById('m4_decoded').value.toLowerCase();
+            const word = document.getElementById('m4_word').value.toLowerCase();
+            
+            if (command.includes('base64') && command.includes('-d') &&
+                decoded.includes('quick brown fox') && decoded.includes('devops') &&
+                word.includes('dog')) {
+                completedMilestones[3] = true;
+                document.getElementById('milestone4').classList.add('completed');
+                updateProgress();
+                alert('✅ Milestone 4 Completed!\n\nYou successfully decoded the message and extracted the target word.');
+            } else {
+                alert('❌ Please ensure you:\n- Used base64 -d to decode\n- Found the complete sentence about the fox\n- Identified "dog" as the 8th word');
+            }
+        }
+
+        function checkMilestone5() {
+            const risks = document.getElementById('m5_risks').value;
+            const prevention = document.getElementById('m5_prevention').value;
+            const lessons = document.getElementById('m5_lessons').value;
+            const secret = document.getElementById('m5_secret').value.toLowerCase();
+            
+            if (risks.length > 20 && prevention.length > 20 && 
+                lessons.length > 20 && secret.includes('dog')) {
+                completedMilestones[4] = true;
+                document.getElementById('milestone5').classList.add('completed');
+                updateProgress();
+                alert('🎉 All Milestones Completed!\n\nCongratulations! You have successfully completed the DevSecOps Investigation Lab!');
+            } else {
+                alert('❌ Please ensure you:\n- Provide comprehensive security analysis\n- Include prevention strategies\n- Document lessons learned\n- Enter the correct secret word');
+            }
+        }
+
+        function saveProgress() {
+            const progress = {
+                milestones: completedMilestones,
+                answers: {},
+                timestamp: new Date().toISOString()
+            };
+            
+            // Save all form data
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                if (input.id && input.value.trim() !== '') {
+                    progress.answers[input.id] = input.value;
+                }
+            });
+            
+            const progressData = JSON.stringify(progress, null, 2);
+            const blob = new Blob([progressData], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `devsecops_investigation_progress_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            alert('💾 Progress saved successfully!');
+        }
+
+        function exportResults() {
+            const completed = completedMilestones.filter(Boolean).length;
+            const answers = {};
+            
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                if (input.id && input.value.trim() !== '') {
+                    answers[input.id] = input.value;
+                }
+            });
+            
+            const results = {
+                labTitle: 'DevSecOps Investigation Lab',
+                completionDate: new Date().toISOString(),
+                milestonesCompleted: `${completed}/5`,
+                secretWordFound: answers['m5_secret'] || 'Not completed',
+                allAnswers: answers,
+                summary: {
+                    scriptExecution: completedMilestones[0] ? 'Completed' : 'Incomplete',
+                    fileAnalysis: completedMilestones[1] ? 'Completed' : 'Incomplete',
+                    sourceAnalysis: completedMilestones[2] ? 'Completed' : 'Incomplete',
+                    manualDecoding: completedMilestones[3] ? 'Completed' : 'Incomplete',
+                    securityAnalysis: completedMilestones[4] ? 'Completed' : 'Incomplete'
+                }
+            };
+            
+            const dataStr = JSON.stringify(results, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `devsecops_investigation_results_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            alert('📁 Results exported successfully!');
+        }
+
+        function resetLab() {
+            if (confirm('Are you sure you want to reset the lab? This will clear all progress.')) {
+                completedMilestones = [false, false, false, false, false];
+                
+                // Clear all inputs
+                document.querySelectorAll('input, textarea').forEach(input => {
+                    input.value = '';
+                });
+                
+                // Remove completed classes
+                document.querySelectorAll('.milestone').forEach(milestone => {
+                    milestone.classList.remove('completed');
+                });
+                
+                // Hide final section
+                document.getElementById('finalSection').style.display = 'none';
+                
+                updateProgress();
+                alert('🔄 Lab reset successfully!');
+            }
+        }
+
+        // Initialize progress on page load
+        updateProgress();
+
+        // Add button click animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
