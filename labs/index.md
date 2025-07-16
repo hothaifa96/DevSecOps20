@@ -123,7 +123,7 @@ Welcome to the DevSecOps course labs! Click on any lab category below to explore
         <ul class="file-list">
             <li><a href="linux-basics/linux-basics-1.md">Linux Basics 1 - Introduction to Linux</a></li>
             <li><a href="linux-basics/linux-basics-2.md">Linux Basics 2 - Advanced Commands</a></li>
-            <li><a href="linux-basics/linux-basics-3.md">Linux Basics 2 - Advanced Commands</a></li>
+            <li><a href="linux-basics/piping.md">Linux Basics 2 - Advanced Commands</a></li>
             <li><a href="linux-basics/Linux-complete.html">Linux Basics 2 - Advanced Commands</a></li>
         </ul>
     </div>

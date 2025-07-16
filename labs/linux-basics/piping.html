@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevSecOps Linux Piping Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            color: #00ff00;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #ff6b6b;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #ffd93d;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 25px;
+            background: #333;
+            border-radius: 15px;
+            margin: 20px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff00, #ffd93d);
+            width: 0%;
+            transition: width 0.8s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .milestone {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #444;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .milestone:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .milestone.completed {
+            border-color: #00ff00;
+            background: rgba(0, 255, 0, 0.1);
+        }
+
+        .milestone h2 {
+            color: #ff6b6b;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .milestone-number {
+            background: #ff6b6b;
+            color: #000;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .milestone.completed .milestone-number {
+            background: #00ff00;
+        }
+
+        .objective {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 4px solid #ffd93d;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .challenge {
+            background: rgba(107, 107, 255, 0.1);
+            border: 1px solid #6b6bff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .challenge h3 {
+            color: #6b6bff;
+            margin-bottom: 10px;
+        }
+
+        .hint {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid #ff6b6b;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .hint h4 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        .answer-section {
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .answer-section h3 {
+            color: #00ff00;
+            margin-bottom: 15px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 80px;
+            background: #1a1a1a;
+            color: #00ff00;
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            background: #1a1a1a;
+            color: #00ff00;
+            border: 1px solid #333;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            background: #00ff00;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background: #ffd93d;
+            transform: translateY(-2px);
+        }
+
+        .pipe-flow {
+            background: #1a1a2e;
+            border: 1px solid #6b6bff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .pipe-element {
+            display: inline-block;
+            background: #333;
+            color: #00ff00;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 5px;
+            border: 1px solid #555;
+        }
+
+        .pipe-arrow {
+            color: #ffd93d;
+            font-size: 1.5em;
+            margin: 0 10px;
+        }
+
+        .command-example {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            color: #ffd93d;
+        }
+
+        .final-challenge {
+            background: linear-gradient(45deg, rgba(255, 107, 107, 0.1), rgba(107, 107, 255, 0.1));
+            border: 3px solid #ffd93d;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .success-message {
+            background: rgba(0, 255, 0, 0.2);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+        }
+
+        .data-sample {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid #ffd93d;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .pipe-element {
+                display: block;
+                margin: 10px auto;
+            }
+            .pipe-arrow {
+                display: block;
+                margin: 10px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ DevSecOps Linux Piping Lab</h1>
+            <p>Master the art of chaining commands with pipes, redirections, and filters</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+                <div class="progress-text" id="progressText">Progress: 0/6 Milestones Completed</div>
+            </div>
+        </div>
+
+        <div class="pipe-flow">
+            <h4>🔄 The Power of Piping</h4>
+            <div class="pipe-element">INPUT</div>
+            <span class="pipe-arrow">|</span>
+            <div class="pipe-element">FILTER</div>
+            <span class="pipe-arrow">|</span>
+            <div class="pipe-element">TRANSFORM</div>
+            <span class="pipe-arrow">></span>
+            <div class="pipe-element">OUTPUT</div>
+        </div>
+
+        <!-- Milestone 1: Basic Piping -->
+        <div class="milestone" id="milestone1">
+            <h2><span class="milestone-number">1</span>Basic Piping Fundamentals</h2>
+            
+            <div class="objective">
+                <h3>🎯 Objective</h3>
+                <p>Learn the basics of piping commands together using | operator and understand how data flows between commands.</p>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 1: First Pipes</h3>
+                <p>Create a sample file and practice basic piping operations.</p>
+                
+                <div class="command-example">
+                    First, create a test file:<br>
+                    <code>echo -e "apple\nbanana\ncherry\ndate\napricot" > fruits.txt</code>
+                </div>
+                
+                <div class="hint">
+                    <h4>💡 Basic piping commands to try:</h4>
+                    <ul>
+                        <li><code>cat fruits.txt | wc -l</code> - Count lines</li>
+                        <li><code>cat fruits.txt | sort</code> - Sort alphabetically</li>
+                        <li><code>cat fruits.txt | grep a</code> - Find lines containing 'a'</li>
+                        <li><code>ls -la | head -5</code> - Show first 5 directory entries</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="answer-section">
+                <h3>📝 Your Basic Piping Practice</h3>
+                <label>Command to count lines in fruits.txt:</label>
+                <input type="text" id="m1_count_lines" placeholder="cat fruits.txt | ?">
+                
+                <label>Command to sort fruits.txt:</label>
+                <input type="text" id="m1_sort" placeholder="cat fruits.txt | ?">
+                
+                <label>How many lines contain the letter 'a'?:</label>
+                <input type="text" id="m1_grep_count" placeholder="Use grep to find out">
+                
+                <label>Command to show first 3 lines of fruits.txt:</label>
+                <input type="text" id="m1_head" placeholder="cat fruits.txt | ?">
+                
+                <label>What does the pipe (|) operator do?:</label>
+                <textarea id="m1_pipe_explanation" placeholder="Explain what the pipe operator does..."></textarea>
+                
+                <button class="btn" onclick="checkMilestone1()">Complete Milestone 1</button>
+            </div>
+        </div>
+
+        <!-- Milestone 2: Filtering and Searching -->
+        <div class="milestone" id="milestone2">
+            <h2><span class="milestone-number">2</span>Advanced Filtering with grep</h2>
+            
+            <div class="objective">
+                <h3>🎯 Objective</h3>
+                <p>Master grep patterns and combine them with other commands for powerful text processing.</p>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 2: grep Mastery</h3>
+                <p>Practice advanced grep patterns and combine them with other commands.</p>
+                
+                <div class="command-example">
+                    Create a sample log file:<br>
+                    <code>echo -e "2024-01-01 ERROR: Database connection failed\n2024-01-01 INFO: User login successful\n2024-01-02 WARNING: Low disk space\n2024-01-02 ERROR: File not found\n2024-01-03 INFO: Backup completed" > system.log</code>
+                </div>
+                
+                <div class="hint">
+                    <h4>💡 grep patterns to explore:</h4>
+                    <ul>
+                        <li><code>cat system.log | grep ERROR</code> - Find error lines</li>
+                        <li><code>cat system.log | grep -v INFO</code> - Exclude info lines</li>
+                        <li><code>cat system.log | grep -c ERROR</code> - Count error occurrences</li>
+                        <li><code>ps aux | grep ssh</code> - Find SSH processes</li>
+                        <li><code>cat system.log | grep "2024-01-02"</code> - Find specific date</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="answer-section">
+                <h3>📝 Your grep Filtering Results</h3>
+                <label>Command to find all ERROR lines:</label>
+                <input type="text" id="m2_find_errors" placeholder="cat system.log | grep ?">
+                
+                <label>Command to exclude INFO lines:</label>
+                <input type="text" id="m2_exclude_info" placeholder="Use grep -v">
+                
+                <label>How many ERROR entries are in the log?:</label>
+                <input type="text" id="m2_error_count" placeholder="Use grep -c">
+                
+                <label>Command to find lines from 2024-01-02:</label>
+                <input type="text" id="m2_specific_date" placeholder="cat system.log | grep ?">
+                
+                <label>Find your current shell process:</label>
+                <input type="text" id="m2_shell_process" placeholder="ps aux | grep ?">
+                
+                <button class="btn" onclick="checkMilestone2()">Complete Milestone 2</button>
+            </div>
+        </div>
+
+        <!-- Milestone 3: Text Processing with awk and sed -->
+        <div class="milestone" id="milestone3">
+            <h2><span class="milestone-number">3</span>Text Processing with awk & sed</h2>
+            
+            <div class="objective">
+                <h3>🎯 Objective</h3>
+                <p>Use awk and sed for advanced text manipulation and column extraction.</p>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 3: Advanced Text Processing</h3>
+                <p>Practice awk for column extraction and sed for text replacement.</p>
+                
+                <div class="command-example">
+                    Create a CSV-like file:<br>
+                    <code>echo -e "john,25,engineer\nmary,30,manager\nbob,22,intern\nalice,28,developer" > employees.txt</code>
+                </div>
+                
+                <div class="hint">
+                    <h4>💡 awk and sed commands to try:</h4>
+                    <ul>
+                        <li><code>cat employees.txt | awk -F',' '{print $1}'</code> - Extract names</li>
+                        <li><code>cat employees.txt | awk -F',' '{print $2}'</code> - Extract ages</li>
+                        <li><code>cat employees.txt | awk -F',' '$2 > 25'</code> - Filter by age</li>
+                        <li><code>cat employees.txt | sed 's/engineer/senior engineer/'</code> - Replace text</li>
+                        <li><code>ps aux | awk '{print $1, $11}'</code> - Extract user and command</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="answer-section">
+                <h3>📝 Your Text Processing Results</h3>
+                <label>Command to extract all names (first column):</label>
+                <input type="text" id="m3_extract_names" placeholder="cat employees.txt | awk ?">
+                
+                <label>Command to show employees older than 25:</label>
+                <input type="text" id="m3_filter_age" placeholder="Use awk with condition">
+                
+                <label>Command to replace 'intern' with 'junior developer':</label>
+                <input type="text" id="m3_replace_text" placeholder="cat employees.txt | sed ?">
+                
+                <label>Extract just usernames from 'ps aux':</label>
+                <input type="text" id="m3_extract_users" placeholder="ps aux | awk ?">
+                
+                <label>What does the -F option in awk do?:</label>
+                <textarea id="m3_awk_explanation" placeholder="Explain the -F option..."></textarea>
+                
+                <button class="btn" onclick="checkMilestone3()">Complete Milestone 3</button>
+            </div>
+        </div>
+
+        <!-- Milestone 4: Sorting and Counting -->
+        <div class="milestone" id="milestone4">
+            <h2><span class="milestone-number">4</span>Data Sorting & Counting</h2>
+            
+            <div class="objective">
+                <h3>🎯 Objective</h3>
+                <p>Master sort, uniq, and count operations for data analysis and log processing.</p>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 4: Data Analysis Pipeline</h3>
+                <p>Create complex pipelines for data sorting, counting, and analysis.</p>
+                
+                <div class="command-example">
+                    Create access log data:<br>
+                    <code>echo -e "192.168.1.1\n10.0.0.5\n192.168.1.1\n203.0.113.1\n10.0.0.5\n192.168.1.1\n203.0.113.1" > access.log</code>
+                </div>
+                
+                <div class="hint">
+                    <h4>💡 Sorting and counting commands:</h4>
+                    <ul>
+                        <li><code>cat access.log | sort</code> - Sort IP addresses</li>
+                        <li><code>cat access.log | sort | uniq</code> - Get unique IPs</li>
+                        <li><code>cat access.log | sort | uniq -c</code> - Count occurrences</li>
+                        <li><code>cat access.log | sort | uniq -c | sort -nr</code> - Sort by count</li>
+                        <li><code>ls -la | awk '{print $1}' | sort | uniq -c</code> - Count file permissions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="answer-section">
+                <h3>📝 Your Sorting & Counting Results</h3>
+                <label>Command to get unique IP addresses:</label>
+                <input type="text" id="m4_unique_ips" placeholder="cat access.log | sort | ?">
+                
+                <label>Command to count IP occurrences:</label>
+                <input type="text" id="m4_count_ips" placeholder="Use uniq -c">
+                
+                <label>Most frequent IP address:</label>
+                <input type="text" id="m4_most_frequent" placeholder="From your count results">
+                
+                <label>Command to sort by count (descending):</label>
+                <input type="text" id="m4_sort_by_count" placeholder="Add sort -nr to the pipeline">
+                
+                <label>Count unique file permissions in current directory:</label>
+                <input type="text" id="m4_count_permissions" placeholder="ls -la | awk ? | sort | uniq -c">
+                
+                <button class="btn" onclick="checkMilestone4()">Complete Milestone 4</button>
+            </div>
+        </div>
+
+        <!-- Milestone 5: Redirection and File Operations -->
+        <div class="milestone" id="milestone5">
+            <h2><span class="milestone-number">5</span>Redirection & File Operations</h2>
+            
+            <div class="objective">
+                <h3>🎯 Objective</h3>
+                <p>Master input/output redirection, tee command, and complex file operations.</p>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 5: Advanced I/O Operations</h3>
+                <p>Practice redirection operators and file manipulation techniques.</p>
+                
+                <div class="hint">
+                    <h4>💡 Redirection operators to explore:</h4>
+                    <ul>
+                        <li><code>ls -la > directory_listing.txt</code> - Redirect to file</li>
+                        <li><code>cat file1.txt file2.txt >> combined.txt</code> - Append to file</li>
+                        <li><code>ls -la | tee listing.txt</code> - Display and save</li>
+                        <li><code>cat nonexistent.txt 2> errors.txt</code> - Redirect errors</li>
+                        <li><code>cat file.txt | tee output.txt | wc -l</code> - Copy and continue pipeline</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="answer-section">
+                <h3>📝 Your Redirection Practice</h3>
+                <label>Command to save directory listing to a file:</label>
+                <input type="text" id="m5_save_listing" placeholder="ls -la ?">
+                
+                <label>Command to append two files into one:</label>
+                <input type="text" id="m5_append_files" placeholder="Use >> operator">
+                
+                <label>Command to display output AND save to file:</label>
+                <input type="text" id="m5_tee_command" placeholder="Use tee command">
+                
+                <label>Command to redirect errors to a file:</label>
+                <input type="text" id="m5_redirect_errors" placeholder="Use 2> operator">
+                
+                <label>What's the difference between > and >>?:</label>
+                <textarea id="m5_redirect_explanation" placeholder="Explain the difference between > and >>..."></textarea>
+                
+                <button class="btn" onclick="checkMilestone5()">Complete Milestone 5</button>
+            </div>
+        </div>
+
+        <!-- Milestone 6: Complex Pipeline Mastery -->
+        <div class="milestone" id="milestone6">
+            <h2><span class="milestone-number">6</span>Complex Pipeline Mastery</h2>
+            
+            <div class="objective">
+                <h3>🎯 Objective</h3>
+                <p>Combine all learned techniques into powerful, real-world pipeline solutions for DevSecOps tasks.</p>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 6: DevSecOps Pipeline Scenarios</h3>
+                <p>Apply your piping skills to realistic DevSecOps scenarios like log analysis and system monitoring.</p>
+                
+                <div class="data-sample">
+                    <strong>Sample log data to work with:</strong><br>
+                    <code>echo -e "Jan 15 10:30:45 server1 sshd[1234]: Failed password for root from 192.168.1.100\nJan 15 10:31:02 server1 sshd[1235]: Accepted password for admin from 10.0.0.5\nJan 15 10:31:15 server1 httpd[2001]: 404 Not Found /admin\nJan 15 10:31:30 server1 sshd[1236]: Failed password for root from 192.168.1.100\nJan 15 10:32:01 server1 httpd[2002]: 200 OK /login" > security.log</code>
+                </div>
+                
+                <div class="hint">
+                    <h4>💡 Real-world pipeline examples:</h4>
+                    <ul>
+                        <li><code>cat security.log | grep "Failed password" | awk '{print $9}' | sort | uniq -c | sort -nr</code> - Top failed login IPs</li>
+                        <li><code>ps aux | awk '{sum+=$6} END {print sum/1024 " MB"}'</code> - Total memory usage</li>
+                        <li><code>cat security.log | grep "sshd" | wc -l</code> - Count SSH events</li>
+                        <li><code>ls -la | awk '{print $3}' | sort | uniq -c</code> - Files by owner</li>
+                        <li><code>cat security.log | grep -E "(Failed|404)" | tee alerts.txt | wc -l</code> - Security alerts</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="answer-section">
+                <h3>📝 Your DevSecOps Pipeline Solutions</h3>
+                <label>Find the IP with most failed login attempts:</label>
+                <input type="text" id="m6_failed_logins" placeholder="Complex pipeline to analyze failed logins">
+                
+                <label>Count total SSH-related log entries:</label>
+                <input type="text" id="m6_ssh_count" placeholder="cat security.log | grep ? | wc -l">
+                
+                <label>Find all security alerts (Failed + 404 errors):</label>
+                <input type="text" id="m6_security_alerts" placeholder="Use grep -E pattern">
+                
+                <label>Create a pipeline to monitor disk usage by directory:</label>
+                <input type="text" id="m6_disk_usage" placeholder="du command with piping">
+                
+                <label>Extract unique process names from ps output:</label>
+                <input type="text" id="m6_process_names" placeholder="ps aux | awk ? | sort | uniq">
+                
+                <label>Your most complex pipeline creation:</label>
+                <textarea id="m6_complex_pipeline" placeholder="Create your own complex pipeline for a specific task..."></textarea>
+                
+                <button class="btn" onclick="checkMilestone6()">Complete Pipeline Mastery</button>
+            </div>
+        </div>
+
+        <!-- Final Results -->
+        <div class="final-challenge" id="finalSection" style="display: none;">
+            <h2>🎉 Pipeline Mastery Achieved!</h2>
+            <div class="success-message" id="successMessage">
+                <h3>Congratulations, Pipeline Master!</h3>
+                <p>You have mastered the art of Linux piping and command chaining!</p>
+                
+                <div class="pipe-flow">
+                    <h4>⚡ Your Pipeline Arsenal</h4>
+                    <div class="pipe-element">grep | awk | sed</div>
+                    <span class="pipe-arrow">|</span>
+                    <div class="pipe-element">sort | uniq | wc</div>
+                    <span class="pipe-arrow">|</span>
+                    <div class="pipe-element">tee > files</div>
+                </div>
+                
+                <p><strong>Skills Mastered:</strong></p>
+                <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
+                    <li>🔗 Basic piping with | operator</li>
+                    <li>🔍 Advanced filtering with grep patterns</li>
+                    <li>✏️ Text processing with awk and sed</li>
+                    <li>📊 Data sorting and counting with sort/uniq</li>
+                    <li>📁 I/O redirection and file operations</li>
+                    <li>⚡ Complex pipeline creation for DevSecOps</li>
+                </ul>
+                
+                <p style="margin-top: 20px; color: #ffd93d;">
+                    <strong>You can now create powerful one-liners for log analysis, system monitoring, and data processing!</strong>
+                </p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <button class="btn" onclick="saveProgress()">💾 Save Progress</button>
+            <button class="btn" onclick="exportResults()">📁 Export Results</button>
+            <button class="btn" onclick="resetLab()">🔄 Reset Lab</button>
+        </div>
+    </div>
+
+    <script>
+        let completedMilestones = [false, false, false, false, false, false];
+
+        function updateProgress() {
+            const completed = completedMilestones.filter(Boolean).length;
+            const percentage = (completed / 6) * 100;
+            
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = `Progress: ${completed}/6 Milestones Completed`;
+            
+            if (completed === 6) {
+                document.getElementById('finalSection').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'block';
+            }
+        }
+
+        function checkMilestone1() {
+            const countLines = document.getElementById('m1_count_lines').value.toLowerCase();
+            const sort = document.getElementById('m1_sort').value.toLowerCase();
+            const grepCount = document.getElementById('m1_grep_count').value;
+            const head = document.getElementById('m1_head').value.toLowerCase();
+            const pipeExplanation = document.getElementById('m1_pipe_explanation').value;
+            
+            if ((countLines.includes('wc -l') || countLines.includes('wc')) &&
+                sort.includes('sort') &&
+                (grepCount.includes('3') || grepCount.includes('three')) &&
+                head.includes('head') &&
+                pipeExplanation.length > 20) {
+                completedMilestones[0] = true;
+                document.getElementById('milestone1').classList.add('completed');
+                updateProgress();
+                alert('✅ Milestone 1 Completed!\n\nYou understand basic piping fundamentals.');
+            } else {
+                alert('❌ Please ensure you:\n- Use wc -l to count lines\n- Use sort command\n- Count lines with letter "a"\n- Use head command\n- Explain what pipe operator does');
+            }
+        }
+
+        function checkMilestone2() {
+            const findErrors = document.getElementById('m2_find_errors').value.toLowerCase();
+            const excludeInfo = document.getElementById('m2_exclude_info').value.toLowerCase();
+            const errorCount = document.getElementById('m2_error_count').value;
+            const specificDate = document.getElementById('m2_specific_date').value;
+            const shellProcess = document.getElementById('m2_shell_process').value.toLowerCase();
+            
+            if (findErrors.includes('grep') && findErrors.includes('error') &&
+                excludeInfo.includes('grep -v') && excludeInfo.includes('info') &&
+                (errorCount.includes('2') || errorCount.includes('two')) &&
+                specificDate.includes('2024-01-02') &&
+                shellProcess.includes('ps') && shellProcess.includes('grep')) {
+                completedMilestones[1] = true;
+                document.getElementById('milestone2').classList.add('completed');
+                updateProgress();
+                alert('✅ Milestone 2 Completed!\n\nYou mastered grep filtering techniques.');
+            } else {
+                alert('❌ Please ensure you:\n- Use grep to find ERROR lines\n- Use grep -v to exclude INFO\n- Count should be 2 errors\n- Search for specific date\n- Use ps and grep for processes');
+            }
+        }
+
+        function checkMilestone3() {
+            const extractNames = document.getElementById('m3_extract_names').value.toLowerCase();
+            const filterAge = document.getElementById('m3_filter_age').value.toLowerCase();
+            const replaceText = document.getElementById('m3_replace_text').value.toLowerCase();
+            const extractUsers = document.getElementById('m3_extract_users').value.toLowerCase();
+            const awkExplanation = document.getElementById('m3_awk_explanation').value;
+            
+            if (extractNames.includes('awk') && extractNames.includes('$1') &&
+                filterAge.includes('awk') && (filterAge.includes('$2 > 25') || filterAge.includes('25')) &&
+                replaceText.includes('sed') && replaceText.includes('s/') &&
+                extractUsers.includes('awk') && extractUsers.includes('$1') &&
+                awkExplanation.length > 15) {
+                completedMilestones[2] = true;
+                document.getElementById('milestone3').classList.add('completed');
+                updateProgress();
+                alert('✅ Milestone 3 Completed!\n\nYou learned awk and sed text processing.');
+            } else {
+                alert('❌ Please ensure you:\n- Use awk with $1 for first column\n- Filter age with awk condition\n- Use sed s/// for replacement\n- Extract users with awk $1\n- Explain -F option');
+            }
+        }
+
+        function checkMilestone4() {
+            const uniqueIps = document.getElementById('m4_unique_ips').value.toLowerCase();
+            const countIps = document.getElementById('m4_count_ips').value.toLowerCase();
+            const mostFrequent = document.getElementById('m4_most_frequent').value;
+            const sortByCount = document.getElementById('m4_sort_by_count').value.toLowerCase();
+            const countPermissions = document.getElementById('m4_count_permissions').value.toLowerCase();
+            
+            if (uniqueIps.includes('uniq') &&
+                countIps.includes('uniq -c') &&
+                mostFrequent.includes('192.168.1.1') &&
+                sortByCount.includes('sort -nr') &&
+                countPermissions.includes('awk') && countPermissions.includes('uniq -c')) {
+                completedMilestones[3] = true;
+                document.getElementById('milestone4').classList.add('completed');
+                updateProgress();
+                alert('✅ Milestone 4 Completed!\n\nYou mastered sorting and counting operations.');
+            } else {
+                alert('❌ Please ensure you:\n- Use uniq for unique items\n- Use uniq -c for counting\n- Identify most frequent IP\n- Use sort -nr for descending sort\n- Count permissions with awk and uniq');
+            }
+        }
+
+        function checkMilestone5() {
+            const saveListing = document.getElementById('m5_save_listing').value;
+            const appendFiles = document.getElementById('m5_append_files').value;
+            const teeCommand = document.getElementById('m5_tee_command').value.toLowerCase();
+            const redirectErrors = document.getElementById('m5_redirect_errors').value;
+            const redirectExplanation = document.getElementById('m5_redirect_explanation').value;
+            
+            if (saveListing.includes('>') &&
+                appendFiles.includes('>>') &&
+                teeCommand.includes('tee') &&
+                redirectErrors.includes('2>') &&
+                redirectExplanation.length > 20) {
+                completedMilestones[4] = true;
+                document.getElementById('milestone5').classList.add('completed');
+                updateProgress();
+                alert('✅ Milestone 5 Completed!\n\nYou learned redirection and file operations.');
+            } else {
+                alert('❌ Please ensure you:\n- Use > for redirection\n- Use >> for appending\n- Use tee command\n- Use 2> for error redirection\n- Explain difference between > and >>');
+            }
+        }
+
+        function checkMilestone6() {
+            const failedLogins = document.getElementById('m6_failed_logins').value.toLowerCase();
+            const sshCount = document.getElementById('m6_ssh_count').value.toLowerCase();
+            const securityAlerts = document.getElementById('m6_security_alerts').value.toLowerCase();
+            const diskUsage = document.getElementById('m6_disk_usage').value.toLowerCase();
+            const processNames = document.getElementById('m6_process_names').value.toLowerCase();
+            const complexPipeline = document.getElementById('m6_complex_pipeline').value;
+            
+            if (failedLogins.includes('grep') && failedLogins.includes('failed') &&
+                sshCount.includes('grep') && sshCount.includes('sshd') && sshCount.includes('wc') &&
+                securityAlerts.includes('grep -e') &&
+                diskUsage.includes('du') &&
+                processNames.includes('awk') && processNames.includes('uniq') &&
+                complexPipeline.length > 30) {
+                completedMilestones[5] = true;
+                document.getElementById('milestone6').classList.add('completed');
+                updateProgress();
+                alert('🎉 All Milestones Completed!\n\nCongratulations! You are now a Linux Pipeline Master!');
+            } else {
+                alert('❌ Please ensure you:\n- Create pipeline for failed login analysis\n- Count SSH entries properly\n- Use grep -E for multiple patterns\n- Use du for disk usage\n- Extract unique process names\n- Create a complex custom pipeline');
+            }
+        }
+
+        function saveProgress() {
+            const progress = {
+                milestones: completedMilestones,
+                answers: {},
+                timestamp: new Date().toISOString()
+            };
+            
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                if (input.id && input.value.trim() !== '') {
+                    progress.answers[input.id] = input.value;
+                }
+            });
+            
+            const progressData = JSON.stringify(progress, null, 2);
+            const blob = new Blob([progressData], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `linux_piping_progress_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            alert('💾 Progress saved successfully!');
+        }
+
+        function exportResults() {
+            const completed = completedMilestones.filter(Boolean).length;
+            const answers = {};
+            
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                if (input.id && input.value.trim() !== '') {
+                    answers[input.id] = input.value;
+                }
+            });
+            
+            const results = {
+                labTitle: 'DevSecOps Linux Piping Lab',
+                completionDate: new Date().toISOString(),
+                milestonesCompleted: `${completed}/6`,
+                allAnswers: answers,
+                summary: {
+                    basicPiping: completedMilestones[0] ? 'Completed' : 'Incomplete',
+                    grepFiltering: completedMilestones[1] ? 'Completed' : 'Incomplete',
+                    textProcessing: completedMilestones[2] ? 'Completed' : 'Incomplete',
+                    sortingCounting: completedMilestones[3] ? 'Completed' : 'Incomplete',
+                    redirection: completedMilestones[4] ? 'Completed' : 'Incomplete',
+                    complexPipelines: completedMilestones[5] ? 'Completed' : 'Incomplete'
+                }
+            };
+            
+            const dataStr = JSON.stringify(results, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `linux_piping_results_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            alert('📁 Results exported successfully!');
+        }
+
+        function resetLab() {
+            if (confirm('Are you sure you want to reset the lab? This will clear all progress.')) {
+                completedMilestones = [false, false, false, false, false, false];
+                
+                document.querySelectorAll('input, textarea').forEach(input => {
+                    input.value = '';
+                });
+                
+                document.querySelectorAll('.milestone').forEach(milestone => {
+                    milestone.classList.remove('completed');
+                });
+                
+                document.getElementById('finalSection').style.display = 'none';
+                
+                updateProgress();
+                alert('🔄 Lab reset successfully!');
+            }
+        }
+
+        // Initialize progress on page load
+        updateProgress();
+
+        // Add button click animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
