@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevSecOps Investigation Lab</title>
+    <title>DevSecOps Network Commands Lab</title>
     <style>
         * {
             margin: 0;
@@ -207,23 +207,31 @@
             transform: translateY(-2px);
         }
 
-        .btn:disabled {
-            background: #666;
-            cursor: not-allowed;
-            transform: none;
+        .network-diagram {
+            background: #1a1a2e;
+            border: 1px solid #6b6bff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
         }
 
-        .warning {
-            background: rgba(255, 107, 107, 0.2);
-            border: 2px solid #ff6b6b;
+        .network-node {
+            display: inline-block;
+            background: #333;
+            color: #00ff00;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 5px;
+            border: 1px solid #555;
+        }
+
+        .subnet-calc {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid #ffd93d;
             border-radius: 10px;
             padding: 15px;
-            margin: 20px 0;
-        }
-
-        .warning h4 {
-            color: #ff6b6b;
-            margin-bottom: 10px;
+            margin: 15px 0;
         }
 
         .final-challenge {
@@ -233,24 +241,6 @@
             padding: 30px;
             margin: 30px 0;
             text-align: center;
-        }
-
-        .final-challenge h2 {
-            color: #ffd93d;
-            font-size: 2.2em;
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px #ffd93d;
-        }
-
-        .secret-word {
-            background: #1a1a1a;
-            border: 2px solid #00ff00;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            font-size: 1.5em;
-            text-align: center;
-            letter-spacing: 3px;
         }
 
         .success-message {
@@ -263,43 +253,26 @@
             display: none;
         }
 
-        .script-box {
+        .command-example {
             background: #1a1a1a;
-            border: 1px solid #ffd93d;
+            border: 1px solid #333;
             border-radius: 5px;
-            padding: 15px;
+            padding: 10px;
             margin: 10px 0;
             font-family: 'Courier New', monospace;
             color: #ffd93d;
         }
 
-        .clue-display {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid #ffd93d;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px 0;
-            text-align: center;
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #ffd93d;
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .milestone {
-                padding: 15px;
-            }
-            
-            .milestone h2 {
-                font-size: 1.5em;
+            .two-column {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -307,239 +280,324 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🔐 DevSecOps Investigation Lab</h1>
-            <p>Uncover the hidden secrets by executing the mysterious script</p>
+            <h1>🌐 DevSecOps Network Commands Lab</h1>
+            <p>Master essential network reconnaissance and troubleshooting commands</p>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
-                <div class="progress-text" id="progressText">Progress: 0/5 Milestones Completed</div>
+                <div class="progress-text" id="progressText">Progress: 0/6 Milestones Completed</div>
             </div>
         </div>
 
-        <div class="warning">
-            <h4>⚠️ Mission Briefing</h4>
-            <p>You've discovered a suspicious script on a compromised server. Your mission is to safely analyze it and uncover the hidden information. Execute the script and follow the clues to complete your investigation.</p>
-            <p><strong>Requirements:</strong> Ubuntu/Linux terminal with curl and base64 tools available.</p>
-        </div>
-
-        <div class="script-box">
-            <strong>The Mysterious Script:</strong><br>
-            <code>bash &lt;(curl -s https://raw.githubusercontent.com/hothaifa96/DevSecOps20/refs/heads/main/labs/linux-basics/hidden.sh)</code>
-        </div>
-
-        <!-- Milestone 1 -->
+        <!-- Milestone 1: Basic Network Discovery -->
         <div class="milestone" id="milestone1">
-            <h2><span class="milestone-number">1</span>Initial Script Execution</h2>
+            <h2><span class="milestone-number">1</span>Network Interface Discovery</h2>
             
             <div class="objective">
                 <h3>🎯 Objective</h3>
-                <p>Execute the mysterious script and observe its behavior. Document what happens and any files created.</p>
+                <p>Discover and analyze your system's network interfaces, IP addresses, and routing configuration.</p>
             </div>
 
             <div class="challenge">
-                <h3>Challenge 1: Script Execution</h3>
-                <p>Run the provided script and carefully observe what it does. The script appears to be encoded and may create files on your system.</p>
+                <h3>Challenge 1: Interface Investigation</h3>
+                <p>Use network commands to gather information about your system's network configuration.</p>
                 
                 <div class="hint">
-                    <h4>💡 Tips</h4>
+                    <h4>💡 Commands to explore:</h4>
                     <ul>
-                        <li>Execute the script exactly as provided</li>
-                        <li>Look for any files created in the /tmp directory</li>
-                        <li>Check if any new files appear after execution</li>
-                        <li>Pay attention to the output or any visible changes</li>
+                        <li><code>ip a</code> or <code>ip addr show</code> - Show all network interfaces</li>
+                        <li><code>ip route</code> - Display routing table</li>
+                        <li><code>ifconfig</code> - Alternative interface display (if available)</li>
+                        <li><code>hostname -I</code> - Show IP addresses</li>
                     </ul>
                 </div>
             </div>
 
             <div class="answer-section">
-                <h3>📝 Your Findings for Milestone 1</h3>
-                <label>Command you used to execute the script:</label>
-                <textarea id="m1_command" placeholder="Enter the exact command you ran..."></textarea>
+                <h3>📝 Your Network Discovery</h3>
+                <label>Command used to show network interfaces:</label>
+                <input type="text" id="m1_interface_cmd" placeholder="e.g., ip a">
                 
-                <label>What files were created? (Check /tmp directory):</label>
-                <textarea id="m1_files" placeholder="List any files created by the script..."></textarea>
+                <label>Your primary network interface name:</label>
+                <input type="text" id="m1_interface_name" placeholder="e.g., eth0, ens33, wlan0">
                 
-                <label>Any visible output or behavior observed:</label>
-                <textarea id="m1_output" placeholder="Describe what you saw when running the script..."></textarea>
+                <label>Your system's IP address:</label>
+                <input type="text" id="m1_ip_address" placeholder="e.g., 192.168.1.100">
+                
+                <label>Default gateway IP:</label>
+                <input type="text" id="m1_gateway" placeholder="Found in routing table">
+                
+                <label>Command output (paste relevant lines):</label>
+                <textarea id="m1_output" placeholder="Paste the output of your network commands..."></textarea>
                 
                 <button class="btn" onclick="checkMilestone1()">Complete Milestone 1</button>
             </div>
         </div>
 
-        <!-- Milestone 2 -->
+        <!-- Milestone 2: DNS Investigation -->
         <div class="milestone" id="milestone2">
-            <h2><span class="milestone-number">2</span>File Content Analysis</h2>
+            <h2><span class="milestone-number">2</span>DNS Resolution & Investigation</h2>
             
             <div class="objective">
                 <h3>🎯 Objective</h3>
-                <p>Examine the contents of any files created by the script. There may be encoded or hidden information that needs to be decoded.</p>
+                <p>Master DNS lookup tools to investigate domain names and their associated records.</p>
             </div>
 
             <div class="challenge">
-                <h3>Challenge 2: Content Investigation</h3>
-                <p>Investigate the content of the file created by the script. You'll need to examine what's inside and understand its significance.</p>
+                <h3>Challenge 2: DNS Reconnaissance</h3>
+                <p>Use various DNS tools to investigate google.com and github.com domains.</p>
                 
                 <div class="hint">
-                    <h4>💡 Tips</h4>
+                    <h4>💡 Commands to explore:</h4>
                     <ul>
-                        <li>Use commands like 'cat', 'less', or 'more' to view file contents</li>
-                        <li>Look for any text that might be encoded</li>
-                        <li>The content might be a simple word or phrase</li>
-                        <li>Document exactly what you find in the file</li>
+                        <li><code>nslookup google.com</code> - Basic DNS lookup</li>
+                        <li><code>dig google.com</code> - Detailed DNS information</li>
+                        <li><code>dig google.com MX</code> - Mail exchange records</li>
+                        <li><code>dig google.com NS</code> - Name server records</li>
+                        <li><code>host github.com</code> - Simple DNS lookup</li>
                     </ul>
                 </div>
             </div>
 
             <div class="answer-section">
-                <h3>📝 Your Findings for Milestone 2</h3>
-                <label>Command used to view the file content:</label>
-                <textarea id="m2_command" placeholder="Enter the command you used to read the file..."></textarea>
+                <h3>📝 Your DNS Investigation</h3>
+                <label>IP address of google.com:</label>
+                <input type="text" id="m2_google_ip" placeholder="Found using nslookup or dig">
                 
-                <label>Exact content found in the file:</label>
-                <input type="text" id="m2_content" placeholder="What word or phrase did you find?">
+                <label>Command to find MX records:</label>
+                <input type="text" id="m2_mx_cmd" placeholder="Command used for mail records">
                 
-                <label>File path and name:</label>
-                <input type="text" id="m2_filepath" placeholder="Full path to the file...">
+                <label>One MX record for google.com:</label>
+                <input type="text" id="m2_mx_record" placeholder="e.g., 10 smtp.google.com">
+                
+                <label>IP address of github.com:</label>
+                <input type="text" id="m2_github_ip" placeholder="Found using DNS lookup">
+                
+                <label>Your system's DNS server:</label>
+                <input type="text" id="m2_dns_server" placeholder="Check /etc/resolv.conf or dig output">
                 
                 <button class="btn" onclick="checkMilestone2()">Complete Milestone 2</button>
             </div>
         </div>
 
-        <!-- Milestone 3 -->
+        <!-- Milestone 3: Port Scanning & Connection Testing -->
         <div class="milestone" id="milestone3">
-            <h2><span class="milestone-number">3</span>Script Source Analysis</h2>
+            <h2><span class="milestone-number">3</span>Port Scanning & Connectivity</h2>
             
             <div class="objective">
                 <h3>🎯 Objective</h3>
-                <p>Download and examine the source code of the script to understand how it works and what it's actually doing.</p>
+                <p>Learn to test network connectivity and scan for open ports using various tools.</p>
             </div>
 
             <div class="challenge">
-                <h3>Challenge 3: Source Code Investigation</h3>
-                <p>Retrieve the actual script content and analyze its code to understand the encoding mechanism and logic.</p>
+                <h3>Challenge 3: Network Connectivity Tests</h3>
+                <p>Test connectivity to various services and scan for open ports.</p>
                 
                 <div class="hint">
-                    <h4>💡 Tips</h4>
+                    <h4>💡 Commands to explore:</h4>
                     <ul>
-                        <li>Use curl to download the script content without executing it</li>
-                        <li>Look for variables and encoding patterns (like base64)</li>
-                        <li>Identify how the script processes the encoded data</li>
-                        <li>Find the specific word extraction mechanism</li>
+                        <li><code>nc -zv google.com 80</code> - Test specific port</li>
+                        <li><code>nc -zv google.com 443</code> - Test HTTPS port</li>
+                        <li><code>telnet google.com 80</code> - Alternative connectivity test</li>
+                        <li><code>ss -tuln</code> - Show listening ports</li>
+                        <li><code>netstat -tuln</code> - Alternative port listing</li>
                     </ul>
                 </div>
             </div>
 
             <div class="answer-section">
-                <h3>📝 Your Findings for Milestone 3</h3>
-                <label>Command used to download the script source:</label>
-                <textarea id="m3_command" placeholder="How did you retrieve the script content?"></textarea>
+                <h3>📝 Your Connectivity Tests</h3>
+                <label>Command to test port 80 on google.com:</label>
+                <input type="text" id="m3_port80_cmd" placeholder="Command using nc or telnet">
                 
-                <label>What encoding method is used in the script?:</label>
-                <input type="text" id="m3_encoding" placeholder="What type of encoding did you identify?">
+                <label>Is port 80 open on google.com? (yes/no):</label>
+                <input type="text" id="m3_port80_result" placeholder="yes or no">
                 
-                <label>Which word position does the script extract?:</label>
-                <input type="text" id="m3_position" placeholder="Which word from the decoded string?">
+                <label>Command to list listening ports:</label>
+                <input type="text" id="m3_listening_cmd" placeholder="ss or netstat command">
+                
+                <label>One listening port on your system:</label>
+                <input type="text" id="m3_listening_port" placeholder="e.g., 22 (SSH)">
+                
+                <label>Test result for github.com port 22:</label>
+                <input type="text" id="m3_github_ssh" placeholder="Open/Closed/Filtered">
                 
                 <button class="btn" onclick="checkMilestone3()">Complete Milestone 3</button>
             </div>
         </div>
 
-        <!-- Milestone 4 -->
+        <!-- Milestone 4: Subnet Calculations -->
         <div class="milestone" id="milestone4">
-            <h2><span class="milestone-number">4</span>Manual Decoding</h2>
+            <h2><span class="milestone-number">4</span>Subnet Analysis & CIDR</h2>
             
             <div class="objective">
                 <h3>🎯 Objective</h3>
-                <p>Manually decode the encoded string from the script to understand the full message and verify your findings.</p>
+                <p>Understand subnet calculations, CIDR notation, and network ranges.</p>
+            </div>
+
+            <div class="subnet-calc">
+                <h4>📊 Subnet Reference</h4>
+                <p><strong>Common CIDR Notations:</strong></p>
+                <ul>
+                    <li>/24 = 255.255.255.0 (256 hosts)</li>
+                    <li>/16 = 255.255.0.0 (65,536 hosts)</li>
+                    <li>/8 = 255.0.0.0 (16,777,216 hosts)</li>
+                </ul>
             </div>
 
             <div class="challenge">
-                <h3>Challenge 4: Decryption Process</h3>
-                <p>Take the encoded string from the script and decode it manually to see the complete message.</p>
+                <h3>Challenge 4: Subnet Calculations</h3>
+                <p>Analyze the network 192.168.1.0/24 and perform subnet calculations.</p>
                 
                 <div class="hint">
-                    <h4>💡 Tips</h4>
+                    <h4>💡 Tools and commands:</h4>
                     <ul>
-                        <li>Extract the encoded string (variable 'e') from the script</li>
-                        <li>Use the appropriate decoding command</li>
-                        <li>Examine the full decoded sentence</li>
-                        <li>Identify which word is being extracted</li>
+                        <li><code>ipcalc 192.168.1.0/24</code> - Subnet calculator (if available)</li>
+                        <li><code>sipcalc 192.168.1.0/24</code> - Alternative calculator</li>
+                        <li>Manual calculation using binary math</li>
+                        <li>Online subnet calculators for verification</li>
                     </ul>
                 </div>
             </div>
 
             <div class="answer-section">
-                <h3>📝 Your Findings for Milestone 4</h3>
-                <label>Command used to decode the string:</label>
-                <textarea id="m4_command" placeholder="How did you decode the base64 string?"></textarea>
+                <h3>📝 Your Subnet Analysis</h3>
+                <label>Network address for 192.168.1.0/24:</label>
+                <input type="text" id="m4_network" placeholder="e.g., 192.168.1.0">
                 
-                <label>Full decoded message:</label>
-                <textarea id="m4_decoded" placeholder="What is the complete decoded sentence?"></textarea>
+                <label>Broadcast address for 192.168.1.0/24:</label>
+                <input type="text" id="m4_broadcast" placeholder="e.g., 192.168.1.255">
                 
-                <label>The extracted word (8th word):</label>
-                <input type="text" id="m4_word" placeholder="What is the 8th word in the sentence?">
+                <label>First usable host IP:</label>
+                <input type="text" id="m4_first_host" placeholder="e.g., 192.168.1.1">
+                
+                <label>Last usable host IP:</label>
+                <input type="text" id="m4_last_host" placeholder="e.g., 192.168.1.254">
+                
+                <label>Number of usable host addresses:</label>
+                <input type="text" id="m4_host_count" placeholder="e.g., 254">
+                
+                <label>Subnet mask in decimal notation:</label>
+                <input type="text" id="m4_subnet_mask" placeholder="e.g., 255.255.255.0">
                 
                 <button class="btn" onclick="checkMilestone4()">Complete Milestone 4</button>
             </div>
         </div>
 
-        <!-- Milestone 5 -->
+        <!-- Milestone 5: Network Troubleshooting -->
         <div class="milestone" id="milestone5">
-            <h2><span class="milestone-number">5</span>Security Analysis</h2>
+            <h2><span class="milestone-number">5</span>Network Troubleshooting</h2>
             
             <div class="objective">
                 <h3>🎯 Objective</h3>
-                <p>Analyze the security implications of the script and document your complete investigation findings.</p>
+                <p>Use ping, traceroute, and other tools to diagnose network connectivity issues.</p>
             </div>
 
             <div class="challenge">
-                <h3>Challenge 5: Final Assessment</h3>
-                <p>Provide a comprehensive analysis of what the script does, its potential security implications, and how it could be detected or prevented.</p>
+                <h3>Challenge 5: Connectivity Diagnosis</h3>
+                <p>Diagnose network paths and measure connectivity to various targets.</p>
                 
                 <div class="hint">
-                    <h4>💡 Tips</h4>
+                    <h4>💡 Troubleshooting commands:</h4>
                     <ul>
-                        <li>Consider what information the script reveals</li>
-                        <li>Think about how this type of script could be malicious</li>
-                        <li>Assess the security risks of running unknown scripts</li>
-                        <li>Document lessons learned for DevSecOps practices</li>
+                        <li><code>ping -c 4 8.8.8.8</code> - Test connectivity to Google DNS</li>
+                        <li><code>traceroute google.com</code> - Trace route to destination</li>
+                        <li><code>tracepath google.com</code> - Alternative route tracing</li>
+                        <li><code>mtr google.com</code> - Continuous route monitoring</li>
+                        <li><code>ping -c 10 127.0.0.1</code> - Test loopback</li>
                     </ul>
                 </div>
             </div>
 
             <div class="answer-section">
-                <h3>📝 Your Final Analysis</h3>
-                <label>Security risks identified:</label>
-                <textarea id="m5_risks" placeholder="What security risks does this script present?"></textarea>
+                <h3>📝 Your Troubleshooting Results</h3>
+                <label>Average ping time to 8.8.8.8 (ms):</label>
+                <input type="text" id="m5_ping_time" placeholder="e.g., 15.2 ms">
                 
-                <label>How could this be detected/prevented?:</label>
-                <textarea id="m5_prevention" placeholder="What security measures could prevent this?"></textarea>
+                <label>Number of hops to google.com:</label>
+                <input type="text" id="m5_hops" placeholder="Count from traceroute">
                 
-                <label>Key lessons learned:</label>
-                <textarea id="m5_lessons" placeholder="What did you learn from this investigation?"></textarea>
+                <label>First hop IP (your gateway):</label>
+                <input type="text" id="m5_first_hop" placeholder="From traceroute output">
                 
-                <label>The secret word discovered:</label>
-                <input type="text" id="m5_secret" placeholder="What word did the script extract?">
+                <label>Command to test loopback interface:</label>
+                <input type="text" id="m5_loopback_cmd" placeholder="ping command for 127.0.0.1">
                 
-                <button class="btn" onclick="checkMilestone5()">Complete Investigation</button>
+                <label>Any packet loss to 8.8.8.8? (yes/no):</label>
+                <input type="text" id="m5_packet_loss" placeholder="Check ping statistics">
+                
+                <button class="btn" onclick="checkMilestone5()">Complete Milestone 5</button>
+            </div>
+        </div>
+
+        <!-- Milestone 6: Advanced Network Analysis -->
+        <div class="milestone" id="milestone6">
+            <h2><span class="milestone-number">6</span>Advanced Network Analysis</h2>
+            
+            <div class="objective">
+                <h3>🎯 Objective</h3>
+                <p>Combine multiple network tools for comprehensive analysis and security assessment.</p>
+            </div>
+
+            <div class="challenge">
+                <h3>Challenge 6: Comprehensive Network Assessment</h3>
+                <p>Perform a complete network analysis of your environment and a target domain.</p>
+                
+                <div class="hint">
+                    <h4>💡 Advanced techniques:</h4>
+                    <ul>
+                        <li><code>whois google.com</code> - Domain registration info</li>
+                        <li><code>dig google.com ANY</code> - All DNS records</li>
+                        <li><code>curl -I https://google.com</code> - HTTP headers</li>
+                        <li><code>arp -a</code> - ARP table (local network)</li>
+                        <li><code>route -n</code> - Kernel routing table</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="answer-section">
+                <h3>📝 Your Advanced Analysis</h3>
+                <label>Organization that owns google.com (from whois):</label>
+                <input type="text" id="m6_whois_org" placeholder="Organization name">
+                
+                <label>HTTP status code from google.com:</label>
+                <input type="text" id="m6_http_status" placeholder="e.g., 200, 301, 302">
+                
+                <label>Number of entries in your ARP table:</label>
+                <input type="text" id="m6_arp_count" placeholder="Count from arp -a">
+                
+                <label>Your network's subnet (CIDR notation):</label>
+                <input type="text" id="m6_network_cidr" placeholder="e.g., 192.168.1.0/24">
+                
+                <label>Most significant network finding:</label>
+                <textarea id="m6_finding" placeholder="Describe an interesting discovery from your analysis..."></textarea>
+                
+                <button class="btn" onclick="checkMilestone6()">Complete Network Mastery</button>
             </div>
         </div>
 
         <!-- Final Results -->
         <div class="final-challenge" id="finalSection" style="display: none;">
-            <h2>🎉 Investigation Complete!</h2>
+            <h2>🎉 Network Mastery Achieved!</h2>
             <div class="success-message" id="successMessage">
-                <h3>Congratulations, Security Analyst!</h3>
-                <p>You have successfully completed the DevSecOps Investigation Lab!</p>
-                <div class="secret-word" id="secretWordDisplay">
-                    Secret Word: <span id="finalSecretWord">???</span>
+                <h3>Congratulations, Network Specialist!</h3>
+                <p>You have mastered essential DevSecOps network commands!</p>
+                
+                <div class="network-diagram">
+                    <h4>🌐 Your Network Arsenal</h4>
+                    <div class="network-node">DNS: dig, nslookup</div>
+                    <div class="network-node">Connectivity: ping, nc</div>
+                    <div class="network-node">Routing: traceroute, ip</div>
+                    <div class="network-node">Analysis: ss, netstat</div>
                 </div>
-                <p>You've demonstrated key skills in:</p>
+                
+                <p><strong>Skills Mastered:</strong></p>
                 <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
-                    <li>🔍 Script execution and analysis</li>
-                    <li>🔐 Encoding/decoding techniques</li>
-                    <li>📁 File system investigation</li>
-                    <li>🛡️ Security risk assessment</li>
-                    <li>📊 DevSecOps best practices</li>
+                    <li>🔍 Network interface discovery and configuration</li>
+                    <li>🌐 DNS resolution and record analysis</li>
+                    <li>🔌 Port scanning and connectivity testing</li>
+                    <li>📊 Subnet calculations and CIDR notation</li>
+                    <li>🔧 Network troubleshooting and diagnostics</li>
+                    <li>🛡️ Advanced network reconnaissance</li>
                 </ul>
             </div>
         </div>
@@ -552,104 +610,144 @@
     </div>
 
     <script>
-        let completedMilestones = [false, false, false, false, false];
-        let currentProgress = 0;
+        let completedMilestones = [false, false, false, false, false, false];
 
         function updateProgress() {
             const completed = completedMilestones.filter(Boolean).length;
-            const percentage = (completed / 5) * 100;
+            const percentage = (completed / 6) * 100;
             
             document.getElementById('progressFill').style.width = percentage + '%';
-            document.getElementById('progressText').textContent = `Progress: ${completed}/5 Milestones Completed`;
+            document.getElementById('progressText').textContent = `Progress: ${completed}/6 Milestones Completed`;
             
-            if (completed === 5) {
+            if (completed === 6) {
                 document.getElementById('finalSection').style.display = 'block';
                 document.getElementById('successMessage').style.display = 'block';
-                const secretWord = document.getElementById('m5_secret').value || 'dog';
-                document.getElementById('finalSecretWord').textContent = secretWord.toUpperCase();
             }
         }
 
         function checkMilestone1() {
-            const command = document.getElementById('m1_command').value.toLowerCase();
-            const files = document.getElementById('m1_files').value.toLowerCase();
+            const interfaceCmd = document.getElementById('m1_interface_cmd').value.toLowerCase();
+            const interfaceName = document.getElementById('m1_interface_name').value;
+            const ipAddress = document.getElementById('m1_ip_address').value;
+            const gateway = document.getElementById('m1_gateway').value;
             
-            if (command.includes('bash') && command.includes('curl') && 
-                (files.includes('randomword') || files.includes('/tmp'))) {
+            if ((interfaceCmd.includes('ip a') || interfaceCmd.includes('ifconfig')) &&
+                interfaceName.length > 0 && 
+                ipAddress.match(/\d+\.\d+\.\d+\.\d+/) &&
+                gateway.match(/\d+\.\d+\.\d+\.\d+/)) {
                 completedMilestones[0] = true;
                 document.getElementById('milestone1').classList.add('completed');
                 updateProgress();
-                alert('✅ Milestone 1 Completed!\n\nYou successfully executed the script and identified the created file.');
+                alert('✅ Milestone 1 Completed!\n\nYou successfully discovered your network configuration.');
             } else {
-                alert('❌ Please ensure you:\n- Used the provided bash command with curl\n- Found the file created in /tmp directory');
+                alert('❌ Please ensure you:\n- Used ip a or ifconfig command\n- Found your interface name\n- Identified your IP address\n- Found your gateway IP');
             }
         }
 
         function checkMilestone2() {
-            const command = document.getElementById('m2_command').value.toLowerCase();
-            const content = document.getElementById('m2_content').value.toLowerCase();
-            const filepath = document.getElementById('m2_filepath').value.toLowerCase();
+            const googleIp = document.getElementById('m2_google_ip').value;
+            const mxCmd = document.getElementById('m2_mx_cmd').value.toLowerCase();
+            const mxRecord = document.getElementById('m2_mx_record').value;
+            const githubIp = document.getElementById('m2_github_ip').value;
+            const dnsServer = document.getElementById('m2_dns_server').value;
             
-            if (command.includes('cat') && 
-                (content.includes('dog') || content.includes('devops')) &&
-                filepath.includes('/tmp')) {
+            if (googleIp.match(/\d+\.\d+\.\d+\.\d+/) &&
+                (mxCmd.includes('dig') && mxCmd.includes('mx')) &&
+                mxRecord.length > 0 &&
+                githubIp.match(/\d+\.\d+\.\d+\.\d+/) &&
+                dnsServer.match(/\d+\.\d+\.\d+\.\d+/)) {
                 completedMilestones[1] = true;
                 document.getElementById('milestone2').classList.add('completed');
                 updateProgress();
-                alert('✅ Milestone 2 Completed!\n\nYou successfully analyzed the file content and found the hidden word.');
+                alert('✅ Milestone 2 Completed!\n\nYou mastered DNS investigation techniques.');
             } else {
-                alert('❌ Please ensure you:\n- Used cat or similar command to view the file\n- Found the correct word in the file\n- Identified the correct file path');
+                alert('❌ Please ensure you:\n- Found Google\'s IP address\n- Used dig for MX records\n- Found an MX record\n- Found GitHub\'s IP\n- Identified your DNS server');
             }
         }
 
         function checkMilestone3() {
-            const command = document.getElementById('m3_command').value.toLowerCase();
-            const encoding = document.getElementById('m3_encoding').value.toLowerCase();
-            const position = document.getElementById('m3_position').value;
+            const port80Cmd = document.getElementById('m3_port80_cmd').value.toLowerCase();
+            const port80Result = document.getElementById('m3_port80_result').value.toLowerCase();
+            const listeningCmd = document.getElementById('m3_listening_cmd').value.toLowerCase();
+            const listeningPort = document.getElementById('m3_listening_port').value;
+            const githubSsh = document.getElementById('m3_github_ssh').value.toLowerCase();
             
-            if (command.includes('curl') && 
-                encoding.includes('base64') &&
-                (position.includes('8') || position.includes('eighth'))) {
+            if ((port80Cmd.includes('nc') || port80Cmd.includes('telnet')) &&
+                port80Result.includes('yes') &&
+                (listeningCmd.includes('ss') || listeningCmd.includes('netstat')) &&
+                listeningPort.length > 0 &&
+                githubSsh.length > 0) {
                 completedMilestones[2] = true;
                 document.getElementById('milestone3').classList.add('completed');
                 updateProgress();
-                alert('✅ Milestone 3 Completed!\n\nYou successfully analyzed the script source and understood its mechanism.');
+                alert('✅ Milestone 3 Completed!\n\nYou learned port scanning and connectivity testing.');
             } else {
-                alert('❌ Please ensure you:\n- Downloaded the script with curl\n- Identified base64 encoding\n- Found that it extracts the 8th word');
+                alert('❌ Please ensure you:\n- Used nc or telnet for port testing\n- Confirmed port 80 is open\n- Used ss or netstat for listening ports\n- Found a listening port\n- Tested GitHub SSH port');
             }
         }
 
         function checkMilestone4() {
-            const command = document.getElementById('m4_command').value.toLowerCase();
-            const decoded = document.getElementById('m4_decoded').value.toLowerCase();
-            const word = document.getElementById('m4_word').value.toLowerCase();
+            const network = document.getElementById('m4_network').value;
+            const broadcast = document.getElementById('m4_broadcast').value;
+            const firstHost = document.getElementById('m4_first_host').value;
+            const lastHost = document.getElementById('m4_last_host').value;
+            const hostCount = document.getElementById('m4_host_count').value;
+            const subnetMask = document.getElementById('m4_subnet_mask').value;
             
-            if (command.includes('base64') && command.includes('-d') &&
-                decoded.includes('quick brown fox') && decoded.includes('devops') &&
-                word.includes('dog')) {
+            if (network.includes('192.168.1.0') &&
+                broadcast.includes('192.168.1.255') &&
+                firstHost.includes('192.168.1.1') &&
+                lastHost.includes('192.168.1.254') &&
+                hostCount.includes('254') &&
+                subnetMask.includes('255.255.255.0')) {
                 completedMilestones[3] = true;
                 document.getElementById('milestone4').classList.add('completed');
                 updateProgress();
-                alert('✅ Milestone 4 Completed!\n\nYou successfully decoded the message and extracted the target word.');
+                alert('✅ Milestone 4 Completed!\n\nYou mastered subnet calculations and CIDR notation.');
             } else {
-                alert('❌ Please ensure you:\n- Used base64 -d to decode\n- Found the complete sentence about the fox\n- Identified "dog" as the 8th word');
+                alert('❌ Please check your subnet calculations:\n- Network: 192.168.1.0\n- Broadcast: 192.168.1.255\n- First host: 192.168.1.1\n- Last host: 192.168.1.254\n- Host count: 254\n- Subnet mask: 255.255.255.0');
             }
         }
 
         function checkMilestone5() {
-            const risks = document.getElementById('m5_risks').value;
-            const prevention = document.getElementById('m5_prevention').value;
-            const lessons = document.getElementById('m5_lessons').value;
-            const secret = document.getElementById('m5_secret').value.toLowerCase();
+            const pingTime = document.getElementById('m5_ping_time').value;
+            const hops = document.getElementById('m5_hops').value;
+            const firstHop = document.getElementById('m5_first_hop').value;
+            const loopbackCmd = document.getElementById('m5_loopback_cmd').value.toLowerCase();
+            const packetLoss = document.getElementById('m5_packet_loss').value.toLowerCase();
             
-            if (risks.length > 20 && prevention.length > 20 && 
-                lessons.length > 20 && secret.includes('dog')) {
+            if (pingTime.length > 0 &&
+                hops.length > 0 &&
+                firstHop.match(/\d+\.\d+\.\d+\.\d+/) &&
+                loopbackCmd.includes('ping') && loopbackCmd.includes('127.0.0.1') &&
+                (packetLoss.includes('yes') || packetLoss.includes('no'))) {
                 completedMilestones[4] = true;
                 document.getElementById('milestone5').classList.add('completed');
                 updateProgress();
-                alert('🎉 All Milestones Completed!\n\nCongratulations! You have successfully completed the DevSecOps Investigation Lab!');
+                alert('✅ Milestone 5 Completed!\n\nYou learned network troubleshooting techniques.');
             } else {
-                alert('❌ Please ensure you:\n- Provide comprehensive security analysis\n- Include prevention strategies\n- Document lessons learned\n- Enter the correct secret word');
+                alert('❌ Please ensure you:\n- Measured ping time to 8.8.8.8\n- Counted hops in traceroute\n- Found first hop IP\n- Used ping for loopback test\n- Checked for packet loss');
+            }
+        }
+
+        function checkMilestone6() {
+            const whoisOrg = document.getElementById('m6_whois_org').value;
+            const httpStatus = document.getElementById('m6_http_status').value;
+            const arpCount = document.getElementById('m6_arp_count').value;
+            const networkCidr = document.getElementById('m6_network_cidr').value;
+            const finding = document.getElementById('m6_finding').value;
+            
+            if (whoisOrg.length > 0 &&
+                httpStatus.match(/\d{3}/) &&
+                arpCount.length > 0 &&
+                networkCidr.includes('/') &&
+                finding.length > 20) {
+                completedMilestones[5] = true;
+                document.getElementById('milestone6').classList.add('completed');
+                updateProgress();
+                alert('🎉 All Milestones Completed!\n\nCongratulations! You have mastered network commands for DevSecOps!');
+            } else {
+                alert('❌ Please ensure you:\n- Found organization from whois\n- Got HTTP status code\n- Counted ARP entries\n- Used CIDR notation\n- Described a significant finding');
             }
         }
 
@@ -660,7 +758,6 @@
                 timestamp: new Date().toISOString()
             };
             
-            // Save all form data
             const inputs = document.querySelectorAll('input, textarea');
             inputs.forEach(input => {
                 if (input.id && input.value.trim() !== '') {
@@ -673,7 +770,7 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `devsecops_investigation_progress_${new Date().toISOString().split('T')[0]}.json`;
+            a.download = `network_commands_progress_${new Date().toISOString().split('T')[0]}.json`;
             a.click();
             URL.revokeObjectURL(url);
             
@@ -692,17 +789,17 @@
             });
             
             const results = {
-                labTitle: 'DevSecOps Investigation Lab',
+                labTitle: 'DevSecOps Network Commands Lab',
                 completionDate: new Date().toISOString(),
-                milestonesCompleted: `${completed}/5`,
-                secretWordFound: answers['m5_secret'] || 'Not completed',
+                milestonesCompleted: `${completed}/6`,
                 allAnswers: answers,
                 summary: {
-                    scriptExecution: completedMilestones[0] ? 'Completed' : 'Incomplete',
-                    fileAnalysis: completedMilestones[1] ? 'Completed' : 'Incomplete',
-                    sourceAnalysis: completedMilestones[2] ? 'Completed' : 'Incomplete',
-                    manualDecoding: completedMilestones[3] ? 'Completed' : 'Incomplete',
-                    securityAnalysis: completedMilestones[4] ? 'Completed' : 'Incomplete'
+                    networkDiscovery: completedMilestones[0] ? 'Completed' : 'Incomplete',
+                    dnsInvestigation: completedMilestones[1] ? 'Completed' : 'Incomplete',
+                    portScanning: completedMilestones[2] ? 'Completed' : 'Incomplete',
+                    subnetAnalysis: completedMilestones[3] ? 'Completed' : 'Incomplete',
+                    troubleshooting: completedMilestones[4] ? 'Completed' : 'Incomplete',
+                    advancedAnalysis: completedMilestones[5] ? 'Completed' : 'Incomplete'
                 }
             };
             
@@ -711,7 +808,7 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `devsecops_investigation_results_${new Date().toISOString().split('T')[0]}.json`;
+            a.download = `network_commands_results_${new Date().toISOString().split('T')[0]}.json`;
             a.click();
             URL.revokeObjectURL(url);
             
@@ -720,19 +817,16 @@
 
         function resetLab() {
             if (confirm('Are you sure you want to reset the lab? This will clear all progress.')) {
-                completedMilestones = [false, false, false, false, false];
+                completedMilestones = [false, false, false, false, false, false];
                 
-                // Clear all inputs
                 document.querySelectorAll('input, textarea').forEach(input => {
                     input.value = '';
                 });
                 
-                // Remove completed classes
                 document.querySelectorAll('.milestone').forEach(milestone => {
                     milestone.classList.remove('completed');
                 });
                 
-                // Hide final section
                 document.getElementById('finalSection').style.display = 'none';
                 
                 updateProgress();
