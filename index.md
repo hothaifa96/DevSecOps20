@@ -107,27 +107,27 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
       <li>
         <span>Lesson 1: Linux Basics 1</span>
         <div class="lesson-links">
-          <a href="Linux-basics/01-linux-basics/index.md" class="btn-link">Start Lesson</a>
-          <a href="Linux-basics/01-linux-basics/cheatsheet.md" class="btn-link">Cheatsheet</a>
-          <a href="Linux-basics/01-linux-basics/lesson1.drawio.pdf" class="btn-link">PDF</a>
+          <a href="./lessons/Linux-basics/01-linux-basics/index.md" class="btn-link">Start Lesson</a>
+          <a href="lessons/Linux-basics/01-linux-basics/lesson1.drawio.pdf" class="btn-link">PDF</a>
         </div>
       </li>
       <li>
         <span>Lesson 2: Linux Basics 2</span>
         <div class="lesson-links">
-          <a href="Linux-basics/02-linux-basics/index.md" class="btn-link">Start Lesson</a>
-          <a href="Linux-basics/02-linux-basics/cheatsheet.md" class="btn-link">Cheatsheet</a>
+          <a href="lessons/Linux-basics/02-linux-basics/index.md" class="btn-link">Start Lesson</a>
+          <a href="lessons/Linux-basics/02-linux-basics/cheatsheet.md" class="btn-link">Cheatsheet</a>
         </div>
       </li>
       <li>
         <span>Lesson 3: Linux Basics 3</span>
         <div class="lesson-links">
-          <a href="Linux-basics/03-linux-basics/index.md" class="btn-link">Start Lesson</a>
-          <a href="Linux-basics/03-linux-basics/cheatsheet.md" class="btn-link">Cheatsheet</a>
+          <a href="lessons/Linux-basics/03-linux-basics/index.md" class="btn-link">Start Lesson</a>
+          <a href="lessons/Linux-basics/03-linux-basics/cheatsheet.md" class="btn-link">Cheatsheet</a>
+          <a href="lessons/Linux-basics/03-linux-basics/lesson3.drawio.pdf" class="btn-link">Cheatsheet</a>
         </div>
       </li>
       <li>
-        <span>Lesson 4: Linux Basics 4</span>
+        <span>Lesson 4: Linux Basics 4(networks)</span>
         <div class="lesson-links">
           <a href="Linux-basics/04-linux-basics/index.md" class="btn-link">Start Lesson</a>
         </div>
@@ -146,8 +146,10 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
       <li>
         <span>Lesson 1: Python Basics</span>
         <div class="lesson-links">
-          <a href="Python/05-python-lesson1.py/index.md" class="btn-link">Start Lesson</a>
-          <a href="Python/05-python-lesson1.py/class_code.py" class="btn-link">Class Code</a>
+          <a href="lessons/Python/05-python-lesson1.py/index.md" class="btn-link">Start Lesson</a>
+          <a href="lessons/Python/05-python-lesson1.py/class_code.py" class="btn-link">Class Code</a>
+          <a href="lessons/Python/05-python-lesson1.py/lesson1.pdf" class="btn-link">Class Code</a>
+
         </div>
       </li>
     </ul>
