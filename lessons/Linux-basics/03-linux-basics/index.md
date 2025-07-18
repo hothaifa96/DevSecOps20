@@ -1,3 +1,7 @@
+---
+layout: default
+title: DevSecOps lessons
+---
 # DevOps Lesson: Number Systems, Users, Permissions & Command Line
 
 ## Table of Contents

@@ -1,3 +1,8 @@
+---
+layout: default
+title: DevSecOps lessons
+---
+
 # Python Lesson 1 - Complete Guide
 
 ## Table of Contents

@@ -1,3 +1,8 @@
+---
+layout: default
+title: DevSecOps lessons
+---
+
 # Linux Basics - Comprehensive Guide
 
 ## Table of Contents

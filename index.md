@@ -95,11 +95,13 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
 }
 </style>
 
-<div style="background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);">
+
+<!-- Labs Card (Footer) -->
+<div class="lesson-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
   <h3>🔬 Hands-On Labs</h3>
   <p>Apply your knowledge with practical exercises, real-world scenarios, and interactive challenges. Master DevSecOps through hands-on experience.</p>
   <div class="lesson-files">
-    <a href="../labs/" class="btn-link" style="font-size:1.1em; font-weight:bold;">Access Labs</a>
+    <a href="/labs/" class="btn-link" style="font-size:1.1em; font-weight:bold;">Access Labs</a>
   </div>
 </div>
 
@@ -165,13 +167,5 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
   </div>
 </div>
 
-<!-- Labs Card (Footer) -->
-<div class="lesson-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-  <h3>🔬 Hands-On Labs</h3>
-  <p>Apply your knowledge with practical exercises, real-world scenarios, and interactive challenges. Master DevSecOps through hands-on experience.</p>
-  <div class="lesson-files">
-    <a href="/labs/" class="btn-link" style="font-size:1.1em; font-weight:bold;">Access Labs</a>
-  </div>
-</div>
 
 </div>
