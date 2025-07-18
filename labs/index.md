@@ -123,7 +123,7 @@ Welcome to the DevSecOps course labs! Click on any lab category below to explore
         <ul class="file-list">
             <li><a href="linux-basics/linux-basics-1.md">Linux Basics 1 - Introduction to Linux</a></li>
             <li><a href="linux-basics/linux-basics-2.md">Linux Basics 2 - Advanced Commands</a></li>
-            <li><a href="linux-basics/piping.md">Linux piping - Advanced Commands</a></li>
+            <li><a href="linux-basics/piping.html">Linux piping - Advanced Commands</a></li>
             <li><a href="linux-basics/Linux-complete.html">Linux final lab</a></li>
         </ul>
     </div>
@@ -184,7 +184,8 @@ Welcome to the DevSecOps course labs! Click on any lab category below to explore
     <div class="lab-files">
         <h4>Available Labs:</h4>
         <ul class="file-list">
-            <li class="empty-folder">Coming Soon - Labs in development</li>
+            <li><a href="python/1Lab.html">Python Lab 1</a></li>
+     
         </ul>
     </div>
 </div>
