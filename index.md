@@ -95,6 +95,14 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
 }
 </style>
 
+<div style="background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);">
+  <h3>🔬 Hands-On Labs</h3>
+  <p>Apply your knowledge with practical exercises, real-world scenarios, and interactive challenges. Master DevSecOps through hands-on experience.</p>
+  <div class="lesson-files">
+    <a href="../labs/" class="btn-link" style="font-size:1.1em; font-weight:bold;">Access Labs</a>
+  </div>
+</div>
+
 <div class="lesson-container">
 
 <!-- Linux Basics Card -->
@@ -107,7 +115,7 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
       <li>
         <span>Lesson 1: Linux Basics 1</span>
         <div class="lesson-links">
-          <a href="./lessons/Linux-basics/01-linux-basics/index.md" class="btn-link">Start Lesson</a>
+          <a href="lessons/Linux-basics/01-linux-basics/index.md" class="btn-link">Start Lesson</a>
           <a href="lessons/Linux-basics/01-linux-basics/lesson1.drawio.pdf" class="btn-link">PDF</a>
         </div>
       </li>
@@ -147,12 +155,22 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
         <span>Lesson 1: Python Basics</span>
         <div class="lesson-links">
           <a href="lessons/Python/05-python-lesson1.py/index.md" class="btn-link">Start Lesson</a>
-          <a href="lessons/Python/05-python-lesson1.py/class_code.py" class="btn-link">Class Code</a>
-          <a href="lessons/Python/05-python-lesson1.py/lesson1.pdf" class="btn-link">Class Code</a>
+          <a href="https://github.com/hothaifa96/DevSecOps20/blob/main/lessons/Python/05-python-lesson1.py/class_code.py" class="btn-link">Class Code</a>
+          <a href="lessons/Python/05-python-lesson1.py/Python1.pdf" class="btn-link">Class Code</a>
 
         </div>
       </li>
     </ul>
+
+  </div>
+</div>
+
+<!-- Labs Card (Footer) -->
+<div class="lesson-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+  <h3>🔬 Hands-On Labs</h3>
+  <p>Apply your knowledge with practical exercises, real-world scenarios, and interactive challenges. Master DevSecOps through hands-on experience.</p>
+  <div class="lesson-files">
+    <a href="labs/" class="btn-link" style="font-size:1.1em; font-weight:bold;">Access Labs</a>
   </div>
 </div>
 
