@@ -100,7 +100,7 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
   <h3>🔬 Hands-On Labs</h3>
   <p>Apply your knowledge with practical exercises, real-world scenarios, and interactive challenges. Master DevSecOps through hands-on experience.</p>
   <div class="lesson-files">
-    <a href="/labs/" class="btn-link" style="font-size:1.1em; font-weight:bold;">Access Labs</a>
+    <a href="{{ site.baseurl }}/labs/" class="btn-link" style="font-size:1.1em; font-weight:bold;">Access Labs</a>
   </div>
 </div>
 
@@ -116,29 +116,29 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
       <li>
         <span>Lesson 1: Linux Basics 1</span>
         <div class="lesson-links">
-          <a href="/lessons/Linux-basics/01-linux-basics/" class="btn-link">Start Lesson</a>
-          <a href="/lessons/Linux-basics/01-linux-basics/lesson1.drawio.pdf" class="btn-link">PDF</a>
+          <a href="{{ site.baseurl }}/lessons/Linux-basics/01-linux-basics/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Linux-basics/01-linux-basics/lesson1.drawio.pdf" class="btn-link">PDF</a>
         </div>
       </li>
       <li>
         <span>Lesson 2: Linux Basics 2</span>
         <div class="lesson-links">
-          <a href="/lessons/Linux-basics/02-linux-basics/" class="btn-link">Start Lesson</a>
-          <a href="/lessons/Linux-basics/02-linux-basics/cheatsheet.md" class="btn-link">Cheatsheet</a>
+          <a href="{{ site.baseurl }}/lessons/Linux-basics/02-linux-basics/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Linux-basics/02-linux-basics/cheatsheet.md" class="btn-link">Cheatsheet</a>
         </div>
       </li>
       <li>
         <span>Lesson 3: Linux Basics 3</span>
         <div class="lesson-links">
-          <a href="/lessons/Linux-basics/03-linux-basics/" class="btn-link">Start Lesson</a>
-          <a href="/lessons/Linux-basics/03-linux-basics/cheatsheet.md" class="btn-link">Cheatsheet</a>
-          <a href="/lessons/Linux-basics/03-linux-basics/lesson3.drawio.pdf" class="btn-link">PDF</a>
+          <a href="{{ site.baseurl }}/lessons/Linux-basics/03-linux-basics/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Linux-basics/03-linux-basics/cheatsheet.md" class="btn-link">Cheatsheet</a>
+          <a href="{{ site.baseurl }}/lessons/Linux-basics/03-linux-basics/lesson3.drawio.pdf" class="btn-link">PDF</a>
         </div>
       </li>
       <li>
         <span>Lesson 4: Linux Basics 4(networks)</span>
         <div class="lesson-links">
-          <a href="/lessons/Linux-basics/04-linux-basics/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Linux-basics/04-linux-basics/" class="btn-link">Start Lesson</a>
         </div>
       </li>
     </ul>
@@ -155,9 +155,9 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
       <li>
         <span>Lesson 1: Python Basics</span>
         <div class="lesson-links">
-          <a href="/lessons/Python/05-python-lesson1.py/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Python/05-python-lesson1.py/" class="btn-link">Start Lesson</a>
           <a href="https://github.com/hothaifa96/DevSecOps20/blob/main/lessons/Python/05-python-lesson1.py/class_code.py" class="btn-link">Class Code</a>
-          <a href="/lessons/Python/05-python-lesson1.py/python1.pdf" class="btn-link">PDF</a>
+          <a href="{{ site.baseurl }}/lessons/Python/05-python-lesson1.py/python1.pdf" class="btn-link">PDF</a>
 
         </div>
       </li>
