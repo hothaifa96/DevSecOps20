@@ -153,7 +153,7 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
     <h4>Available lessons:</h4>
     <ul class="file-list">
       <li>
-        <span>Lesson 1: Python Basics</span>
+        <span>Lesson 1: input,print and datatypes</span>
         <div class="lesson-links">
           <a href="{{ site.baseurl }}/lessons/Python/05-python-lesson1.py/" class="btn-link">Start Lesson</a>
           <a href="https://github.com/hothaifa96/DevSecOps20/blob/main/lessons/Python/05-python-lesson1.py/class_code.py" class="btn-link">Class Code</a>
@@ -161,9 +161,17 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
 
         </div>
       </li>
-    </ul>
+      <li>
+        <span>Lesson 2: Strings and Lists</span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/" class="btn-link">Start Lesson</a>
+          <a href="https://github.com/hothaifa96/DevSecOps20/blob/main/lessons/Python/06-python-lesson2.py/class_code.py" class="btn-link">Class Code</a>
+          <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/python2.pdf" class="btn-link">PDF</a>
 
+        </div>
+      </li>
+
+    </ul>
   </div>
 </div>
-
 </div>
