@@ -25,10 +25,10 @@ exclude:
   - vendor/ruby/
 
 # Collections
-collections:
-  lessons:
-    output: true
-    permalink: /:collection/:name/
-  labs:
-    output: true
-    permalink: /:collection/:name/
+# collections:
+#   lessons:
+#     output: true
+#     permalink: /:collection/:name/
+#   labs:
+#     output: true
+#     permalink: /:collection/:name/
