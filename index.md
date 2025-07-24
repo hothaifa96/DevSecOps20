@@ -95,7 +95,6 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
 }
 </style>
 
-<!-- Labs Card (Footer) -->
 <div class="lesson-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
   <h3>🔬 Hands-On Labs</h3>
   <p>Apply your knowledge with practical exercises, real-world scenarios, and interactive challenges. Master DevSecOps through hands-on experience.</p>
@@ -158,7 +157,6 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
           <a href="{{ site.baseurl }}/lessons/Python/05-python-lesson1.py/" class="btn-link">Start Lesson</a>
           <a href="https://github.com/hothaifa96/DevSecOps20/blob/main/lessons/Python/05-python-lesson1.py/class_code.py" class="btn-link">Class Code</a>
           <a href="{{ site.baseurl }}/lessons/Python/05-python-lesson1.py/python1.pdf" class="btn-link">PDF</a>
-
         </div>
       </li>
       <li>
@@ -167,10 +165,8 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
           <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/" class="btn-link">Start Lesson</a>
           <a href="https://github.com/hothaifa96/DevSecOps20/blob/main/lessons/Python/06-python-lesson2.py/class_code.py" class="btn-link">Class Code</a>
           <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/python2.pdf" class="btn-link">PDF</a>
-
         </div>
       </li>
-
     </ul>
   </div>
 </div>
