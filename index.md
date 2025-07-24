@@ -163,7 +163,7 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
         <span>Lesson 2: Strings and Lists</span>
         <div class="lesson-links">
           <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/" class="btn-link">Start Lesson</a>
-          <a href="https://github.com/hothaifa96/DevSecOps20/blob/main/lessons/Python/06-python-lesson2.py/class_code.py" class="btn-link">Class Code</a>
+          <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/cheatsheet.webp" class="btn-link">Class Code</a>
           <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/python2.pdf" class="btn-link">PDF</a>
         </div>
       </li>
