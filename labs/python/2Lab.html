@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Python Homework Assignment</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .question {
+            background-color: #ecf0f1;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+            border-radius: 5px;
+        }
+        .question-number {
+            font-weight: bold;
+            color: #2980b9;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .challenge {
+            background-color: #fff3cd;
+            border-left-color: #ffc107;
+        }
+        .super-challenge {
+            background-color: #f8d7da;
+            border-left-color: #dc3545;
+        }
+        .example {
+            background-color: #d4edda;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        .note {
+            font-style: italic;
+            color: #666;
+            margin-top: 5px;
+        }
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .answer-section {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .user-input {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            border: 2px solid #bdc3c7;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+        }
+        .user-input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        .show-answer-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        .show-answer-btn:hover {
+            background-color: #2980b9;
+        }
+        .correct-answer {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            display: none;
+        }
+        .correct-answer h4 {
+            color: #155724;
+            margin-top: 0;
+        }
+        .code-block {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            margin: 10px 0;
+            border: 1px solid #e9ecef;
+        }
+        .instructions {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e8f4fd;
+            border-radius: 5px;
+        }
+        .instructions h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Interactive Python Homework Assignment</h1>
+        
+        <div class="question">
+            <div class="question-number">1.</div>
+            What does the <code>input()</code> function do? What type does it return?
+            
+            <div class="answer-section">
+                <textarea class="user-input" placeholder="Type your answer here..."></textarea>
+                <button class="show-answer-btn" onclick="showAnswer(1)">Show Answer</button>
+                <div class="correct-answer" id="answer-1">
+                    <h4>Correct Answer:</h4>
+                    <p>The <code>input()</code> function reads a line of text from the user (keyboard input) and returns it as a <strong>string</strong> data type. It always returns a string, even if the user enters numbers.</p>
+                    <div class="code-block">name = input("Enter your name: ")
+print(type(name))  # &lt;class 'str'&gt;</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-number">2.</div>
+            How can you convert the return type of <code>input()</code> to be an integer? A decimal (float)?
+            
+            <div class="answer-section">
+                <textarea class="user-input" placeholder="Type your answer here..."></textarea>
+                <button class="show-answer-btn" onclick="showAnswer(2)">Show Answer</button>
+                <div class="correct-answer" id="answer-2">
+                    <h4>Correct Answer:</h4>
+                    <p><strong>For integer:</strong> Use <code>int(input())</code></p>
+                    <p><strong>For float:</strong> Use <code>float(input())</code></p>
+                    <div class="code-block"># Integer conversion
+age = int(input("Enter your age: "))
+
+# Float conversion  
+height = float(input("Enter your height: "))</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-number">3.</div>
+            What does the <code>split()</code> function do? What type does it return? If you want the separation in <code>split()</code> to not be by space, how can you do that?
+            
+            <div class="answer-section">
+                <textarea class="user-input" placeholder="Type your answer here..."></textarea>
+                <button class="show-answer-btn" onclick="showAnswer(3)">Show Answer</button>
+                <div class="correct-answer" id="answer-3">
+                    <h4>Correct Answer:</h4>
+                    <p>The <code>split()</code> function splits a string into a <strong>list</strong> of substrings. By default, it splits by whitespace (spaces).</p>
+                    <p>To split by a different character, pass it as a parameter: <code>split(",")</code> or <code>split(";")</code></p>
+                    <div class="code-block">text = "apple,banana,cherry"
+words = text.split(",")  # Split by comma
+print(words)  # ['apple', 'banana', 'cherry']
+
+sentence = "Hello World Python"
+words2 = sentence.split()  # Split by space (default)
+print(words2)  # ['Hello', 'World', 'Python']</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-number">4.</div>
+            What does the <code>format()</code> function do? How does it save on writing?
+            
+            <div class="answer-section">
+                <textarea class="user-input" placeholder="Type your answer here..."></textarea>
+                <button class="show-answer-btn" onclick="showAnswer(4)">Show Answer</button>
+                <div class="correct-answer" id="answer-4">
+                    <h4>Correct Answer:</h4>
+                    <p>The <code>format()</code> function allows you to insert values into strings using placeholders <code>{}</code>. It saves writing by avoiding string concatenation with <code>+</code>.</p>
+                    <div class="code-block"># Using format() - cleaner
+name = "John"
+age = 25
+message = "Hello {}, you are {} years old".format(name, age)
+
+# Without format() - more writing
+message = "Hello " + name + ", you are " + str(age) + " years old"
+
+# Modern way with f-strings (even better)
+message = f"Hello {name}, you are {age} years old"</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-number">5.</div>
+            What does the <code>in</code> operation do (between an element and a list)?
+            
+            <div class="answer-section">
+                <textarea class="user-input" placeholder="Type your answer here..."></textarea>
+                <button class="show-answer-btn" onclick="showAnswer(5)">Show Answer</button>
+                <div class="correct-answer" id="answer-5">
+                    <h4>Correct Answer:</h4>
+                    <p>The <code>in</code> operator checks if an element exists in a list (or other sequence). It returns <code>True</code> if the element is found, <code>False</code> if not.</p>
+                    <div class="code-block">fruits = ["apple", "banana", "cherry"]
+
+print("apple" in fruits)     # True
+print("orange" in fruits)    # False
+
+# Can also be used with strings
+text = "Hello World"
+print("World" in text)       # True
+print("xyz" in text)         # False</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-number">6.</div>
+            Create a string containing your full name: first + last name (separated by space). Then:
+            <ul>
+                <li>Print the last five characters of the string</li>
+                <li>Print the first third of the string</li>
+                <li>Count how many times the letter 'a' appears in the string</li>
+                <li>Write a command that checks if the letter 'b' appears in the string (returns true/false)</li>
+                <li>Split the string into a list with the first cell containing your first name and the second cell containing your last name</li>
+                <li>Reverse the order of elements in the list</li>
+                <li>Change the last name to uppercase letters</li>
+                <li>Remove the middle character from your first name</li>
+                <li>Create and print a string containing your full name after the changes</li>
+            </ul>
+            
+            <div class="answer-section">
+                <textarea class="user-input" placeholder="Write your Python code here..."></textarea>
+                <button class="show-answer-btn" onclick="showAnswer(6)">Show Answer</button>
+                <div class="correct-answer" id="answer-6">
+                    <h4>Correct Answer:</h4>
+                    <div class="code-block"># Create full name string
+full_name = "John Smith"  # Replace with your actual name
+print(f"Full name: {full_name}")
+
+# Print last five characters
+print(f"Last 5 characters: {full_name[-5:]}")
+
+# Print first third of the string
+first_third_length = len(full_name) // 3
+print(f"First third: {full_name[:first_third_length]}")
+
+# Count how many times 'a' appears
+a_count = full_name.count('a')
+print(f"Letter 'a' appears {a_count} times")
+
+# Check if 'b' appears in the string
+has_b = 'b' in full_name
+print(f"Contains letter 'b': {has_b}")
+
+# Split into list [first_name, last_name]
+name_list = full_name.split()
+print(f"Name list: {name_list}")
+
+# Reverse the order of elements
+name_list.reverse()
+print(f"Reversed list: {name_list}")
+
+# Change last name (now first in list) to uppercase
+name_list[0] = name_list[0].upper()
+print(f"After uppercase: {name_list}")
+
+# Remove middle character from first name (now second in list)
+first_name = name_list[1]
+middle_index = len(first_name) // 2
+modified_first = first_name[:middle_index] + first_name[middle_index+1:]
+name_list[1] = modified_first
+
+# Create and print final string
+final_name = f"{name_list[1]} {name_list[0]}"
+print(f"Final name: {final_name}")</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-number">7.</div>
+            Print the position of the first + last letter 'o' in the sentence: "Hello world!"
+            <ul>
+                <li>Print the sentence from the beginning up to the first 'o'</li>
+                <li>Print the sentence from the last 'o' to the end</li>
+            </ul>
+            
+            <div class="answer-section">
+                <textarea class="user-input" placeholder="Write your Python code here..."></textarea>
+                <button class="show-answer-btn" onclick="showAnswer(7)">Show Answer</button>
+                <div class="correct-answer" id="answer-7">
+                    <h4>Correct Answer:</h4>
+                    <div class="code-block">sentence = "Hello world!"
+
+# Find first and last position of 'o'
+first_o = sentence.find('o')
+last_o = sentence.rfind('o')
+
+print(f"First 'o' position: {first_o}")
+print(f"Last 'o' position: {last_o}")
+
+# Print from beginning up to first 'o'
+print(f"From start to first 'o': '{sentence[:first_o]}'")
+
+# Print from last 'o' to the end
+print(f"From last 'o' to end: '{sentence[last_o:]}'")
+
+# Alternative: Print up to and including first 'o'
+print(f"Up to and including first 'o': '{sentence[:first_o+1]}'")
+
+# If no 'o' found, find() returns -1
+if first_o == -1:
+    print("Letter 'o' not found in the sentence")</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-number">8.</div>
+            Print the sentence "Hello World" without the letter 'o'.
+            
+            <div class="answer-section">
+                <textarea class="user-input" placeholder="Write your Python code here..."></textarea>
+                <button class="show-answer-btn" onclick="showAnswer(8)">Show Answer</button>
+                <div class="correct-answer" id="answer-8">
+                    <h4>Correct Answer:</h4>
+                    <div class="code-block"># Solution 1: Using replace() method
+sentence = "Hello World"
+no_o_sentence = sentence.replace('o', '')
+print(f"Without 'o': '{no_o_sentence}'")
+
+# Solution 2: Using list comprehension
+sentence = "Hello World"
+no_o_sentence = ''.join([char for char in sentence if char != 'o'])
+print(f"Without 'o': '{no_o_sentence}'")
+
+# Solution 3: Using a loop
+sentence = "Hello World"
+result = ""
+for char in sentence:
+    if char != 'o':
+        result += char
+print(f"Without 'o': '{result}'")
+
+# Solution 4: Remove both lowercase and uppercase 'o'
+sentence = "Hello World"
+no_o_sentence = sentence.replace('o', '').replace('O', '')
+print(f"Without any 'o' or 'O': '{no_o_sentence}'")</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-number">9.</div>
+            How do you write conditions in Python? What is the difference between <code>else</code> and <code>elif</code>?
+            
+            <div class="answer-section">
+                <textarea class="user-input" placeholder="Type your answer here..."></textarea>
+                <button class="show-answer-btn" onclick="showAnswer(9)">Show Answer</button>
+                <div class="correct-answer" id="answer-9">
+                    <h4>Correct Answer:</h4>
+                    <p>Conditions in Python use <code>if</code>, <code>elif</code>, and <code>else</code>:</p>
+                    <p><strong>else:</strong> Executes when the if condition is False (only one else per if)</p>
+                    <p><strong>elif:</strong> "else if" - allows multiple conditions to be checked in sequence</p>
+                    <div class="code-block">age = 18
+
+if age < 13:
+    print("Child")
+elif age < 18:
+    print("Teenager") 
+elif age < 65:
+    print("Adult")
+else:
+    print("Senior")
+
+# Simple if-else
+if age >= 18:
+    print("Can vote")
+else:
+    print("Cannot vote")</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-number">10.</div>
+            How does Python know if lines of code belong to an <code>if</code> statement or not?
+            
+            <div class="answer-section">
+                <textarea class="user-input" placeholder="Type your answer here..."></textarea>
+                <button class="show-answer-btn" onclick="showAnswer(10)">Show Answer</button>
+                <div class="correct-answer" id="answer-10">
+                    <h4>Correct Answer:</h4>
+                    <p>Python uses <strong>indentation</strong> (spaces or tabs) to determine which lines belong to an if statement. All lines with the same indentation level after the colon (:) belong to that block.</p>
+                    <div class="code-block">if age >= 18:
+    print("You are an adult")      # This line is indented - belongs to if
+    print("You can vote")          # This line is indented - belongs to if
+print("This runs regardless")      # No indentation - outside if block
+
+# Wrong indentation causes IndentationError
+if age >= 18:
+print("This will cause an error")  # Missing indentation!</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-number">11.</div>
+            Write a Python program that takes two numbers as input and prints the larger of the two.
+            
+            <div class="answer-section">
+                <textarea class="user-input" placeholder="Write your Python code here..."></textarea>
+                <button class="show-answer-btn" onclick="showAnswer(11)">Show Answer</button>
+                <div class="correct-answer" id="answer-11">
+                    <h4>Correct Answer:</h4>
+                    <div class="code-block"># Solution 1: Using if-else
+num1 = float(input("Enter first number: "))
+num2 = float(input("Enter second number: "))
+
+if num1 > num2:
+    print(f"The larger number is: {num1}")
+elif num2 > num1:
+    print(f"The larger number is: {num2}")
+else:
+    print("Both numbers are equal")
+
+# Solution 2: Using max() function
+num1 = float(input("Enter first number: "))
+num2 = float(input("Enter second number: "))
+larger = max(num1, num2)
+print(f"The larger number is: {larger}")</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-number">12.</div>
+            Write a Python program that takes three numbers as input and prints the largest one.
+            
+            <div class="answer-section">
+                <textarea class="user-input" placeholder="Write your Python code here..."></textarea>
+                <button class="show-answer-btn" onclick="showAnswer(12)">Show Answer</button>
+                <div class="correct-answer" id="answer-12">
+                    <h4>Correct Answer:</h4>
+                    <div class="code-block"># Solution 1: Using if-elif-else
+num1 = float(input("Enter first number: "))
+num2 = float(input("Enter second number: "))
+num3 = float(input("Enter third number: "))
+
+if num1 >= num2 and num1 >= num3:
+    print(f"The largest number is: {num1}")
+elif num2 >= num1 and num2 >= num3:
+    print(f"The largest number is: {num2}")
+else:
+    print(f"The largest number is: {num3}")
+
+# Solution 2: Using max() function
+num1 = float(input("Enter first number: "))
+num2 = float(input("Enter second number: "))
+num3 = float(input("Enter third number: "))
+largest = max(num1, num2, num3)
+print(f"The largest number is: {largest}")</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question challenge">
+            <div class="question-number">13. *Challenge:</div>
+            Write a Python program that takes an addition problem as input and prints whether it's correct or not.
+            <div class="example">
+                <strong>Example:</strong><br>
+                Input: 3 + 4 = 7<br>
+                Output: TRUE
+            </div>
+            <div class="note">(Note that there are spaces in the input between the digits)</div>
+            <div class="example">
+                Input: 2 + 3 = 9<br>
+                Output: FALSE
+            </div>
+            
+            <div class="answer-section">
+                <textarea class="user-input" placeholder="Write your Python code here..."></textarea>
+                <button class="show-answer-btn" onclick="showAnswer(13)">Show Answer</button>
+                <div class="correct-answer" id="answer-13">
+                    <h4>Correct Answer:</h4>
+                    <div class="code-block"># Solution using split()
+equation = input("Enter an equation (e.g., 3 + 4 = 7): ")
+parts = equation.split()
+
+# parts[0] = first number, parts[1] = operator, parts[2] = second number
+# parts[3] = "=", parts[4] = result
+num1 = int(parts[0])
+operator = parts[1]
+num2 = int(parts[2])
+given_result = int(parts[4])
+
+# Calculate the correct result
+if operator == "+":
+    correct_result = num1 + num2
+elif operator == "-":
+    correct_result = num1 - num2
+elif operator == "*":
+    correct_result = num1 * num2
+elif operator == "/":
+    correct_result = num1 / num2
+
+# Check if the equation is correct
+if correct_result == given_result:
+    print("TRUE")
+else:
+    print("FALSE")</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question super-challenge">
+            <div class="question-number">14. **Super Challenge:</div>
+            Can you solve question 13 for more than one operation sign?
+            <div class="note">(Handle multiple arithmetic operations like +, -, *, /)</div>
+            
+            <div class="answer-section">
+                <textarea class="user-input" placeholder="Write your Python code here..."></textarea>
+                <button class="show-answer-btn" onclick="showAnswer(14)">Show Answer</button>
+                <div class="correct-answer" id="answer-14">
+                    <h4>Correct Answer:</h4>
+                    <div class="code-block"># Advanced solution using eval() (be careful with eval in real applications!)
+equation = input("Enter an equation: ")
+parts = equation.split(" = ")
+expression = parts[0]  # The left side (e.g., "3 + 4 * 2")
+given_result = float(parts[1])  # The right side
+
+try:
+    # Calculate the result of the expression
+    calculated_result = eval(expression)
+    
+    if calculated_result == given_result:
+        print("TRUE")
+    else:
+        print("FALSE")
+except:
+    print("Invalid equation format")
+
+# Alternative safer solution without eval():
+def calculate_expression(expression):
+    # Replace spaces and split by operators
+    expression = expression.replace(" ", "")
+    # This is a simplified version - would need more complex parsing
+    # for a complete solution
+    pass
+
+# Note: A complete solution would require building a proper
+# mathematical expression parser, which is quite complex!</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <ul>
+                <li>Type your answers in the text boxes provided</li>
+                <li>For theory questions (1-7), explain your answers clearly</li>
+                <li>For programming questions (8-11), write complete Python code</li>
+                <li>Click "Show Answer" to see the correct solution</li>
+                <li>Challenge questions are optional but encouraged!</li>
+                <li>Test your code in a Python environment to make sure it works</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function showAnswer(questionNumber) {
+            const answerDiv = document.getElementById(`answer-${questionNumber}`);
+            if (answerDiv.style.display === 'none' || answerDiv.style.display === '') {
+                answerDiv.style.display = 'block';
+            } else {
+                answerDiv.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
