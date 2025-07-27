@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python If Statements Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .lab-content {
+            padding: 30px;
+        }
+
+        .exercise {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .exercise:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .exercise h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .exercise-description {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .code-area {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+
+        .input-area {
+            margin-bottom: 20px;
+        }
+
+        .input-area textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-area textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .run-btn {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+        }
+
+        .run-btn:hover {
+            background: linear-gradient(135deg, #229954, #27ae60);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+
+        .hint-btn {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+        }
+
+        .hint-btn:hover {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4);
+        }
+
+        .reset-btn {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background: linear-gradient(135deg, #7f8c8d, #6c7b7d);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(149, 165, 166, 0.4);
+        }
+
+        .output {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            min-height: 60px;
+            margin-bottom: 15px;
+            border: 2px solid #2d3748;
+            white-space: pre-wrap;
+        }
+
+        .hint {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hint h4 {
+            margin-bottom: 10px;
+            color: #7d6608;
+        }
+
+        .success {
+            background: linear-gradient(135deg, #d4edda, #a3d9a4);
+            border: 1px solid #a3d9a4;
+            color: #155724;
+        }
+
+        .error {
+            background: linear-gradient(135deg, #f8d7da, #f1aeb5);
+            border: 1px solid #f1aeb5;
+            color: #721c24;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .keyword {
+            color: #ff79c6;
+            font-weight: bold;
+        }
+
+        .string {
+            color: #50fa7b;
+        }
+
+        .number {
+            color: #bd93f9;
+        }
+
+        .comment {
+            color: #6272a4;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .lab-content {
+                padding: 20px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐍 Python If Statements Lab</h1>
+            <p>Practice conditional statements with interactive exercises</p>
+        </div>
+
+        <div class="lab-content">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+
+            <!-- Exercise 1: Basic If Statement -->
+            <div class="exercise" data-exercise="1">
+                <h3>Exercise 1: Age Verification System</h3>
+                <div class="exercise-description">
+                    <p><strong>Scenario:</strong> You're building an age verification system for a website. Write a program that checks if a user is old enough to access adult content (18 or older).</p>
+                    <p><strong>Requirements:</strong> Ask for the user's age and display an appropriate message based on their age.</p>
+                </div>
+
+                <div class="code-area">
+<span class="comment"># Your task: Complete the age verification system</span>
+<span class="comment"># Hint: Use input() to get user input and int() to convert to number</span>
+
+age = <span class="keyword">int</span>(<span class="keyword">input</span>(<span class="string">"Enter your age: "</span>))
+
+<span class="comment"># Write your if statement here</span>
+</div>
+
+                <div class="button-group">
+                    <button class="hint-btn" onclick="toggleHint(1)">💡 Show Hint</button>
+                </div>
+
+                <div class="hint" id="hint1">
+                    <h4>💡 Hint:</h4>
+                    <p><strong>Step 1:</strong> Use an if statement to check if age >= 18</p>
+                    <p><strong>Step 2:</strong> Print "Access granted" if true, "Access denied" if false</p>
+                    <p><strong>Example structure:</strong></p>
+                    <div class="code-area">
+<span class="keyword">if</span> age >= <span class="number">18</span>:
+    <span class="keyword">print</span>(<span class="string">"Access granted"</span>)
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"Access denied"</span>)</div>
+                </div>
+            </div>
+
+            <!-- Exercise 2: Grade Calculator -->
+            <div class="exercise" data-exercise="2">
+                <h3>Exercise 2: Student Grade Calculator</h3>
+                <div class="exercise-description">
+                    <p><strong>Scenario:</strong> Create a grading system that converts numerical scores to letter grades.</p>
+                    <p><strong>Grading Scale:</strong> A (90-100), B (80-89), C (70-79), D (60-69), F (below 60)</p>
+                </div>
+
+                <div class="code-area">
+<span class="comment"># Grade Calculator System</span>
+score = <span class="keyword">int</span>(<span class="keyword">input</span>(<span class="string">"Enter your score (0-100): "</span>))
+
+<span class="comment"># Write your if-elif-else chain here</span>
+</div>
+
+                <div class="button-group">
+                    <button class="hint-btn" onclick="toggleHint(2)">💡 Show Hint</button>
+                </div>
+
+                <div class="hint" id="hint2">
+                    <h4>💡 Hint:</h4>
+                    <p><strong>Step 1:</strong> Start with the highest grade first (A: 90-100)</p>
+                    <p><strong>Step 2:</strong> Use elif for each subsequent grade range</p>
+                    <p><strong>Step 3:</strong> Use else for the failing grade</p>
+                    <p><strong>Example structure:</strong></p>
+                    <div class="code-area">
+<span class="keyword">if</span> score >= <span class="number">90</span>:
+    <span class="keyword">print</span>(<span class="string">"Grade: A"</span>)
+<span class="keyword">elif</span> score >= <span class="number">80</span>:
+    <span class="keyword">print</span>(<span class="string">"Grade: B"</span>)
+<span class="comment"># Continue the pattern...</span></div>
+                </div>
+            </div>
+
+            <!-- Exercise 3: Server Health Monitor -->
+            <div class="exercise" data-exercise="3">
+                <h3>Exercise 3: DevOps Server Health Monitor</h3>
+                <div class="exercise-description">
+                    <p><strong>Scenario:</strong> You're monitoring server resources. Create a system that alerts based on CPU usage levels.</p>
+                    <p><strong>Alert Levels:</strong> Critical (90%+), High (70-89%), Medium (50-69%), Normal (below 50%)</p>
+                </div>
+
+                <div class="code-area">
+<span class="comment"># Server Health Monitoring System</span>
+cpu_usage = <span class="keyword">float</span>(<span class="keyword">input</span>(<span class="string">"Enter CPU usage percentage: "</span>))
+
+<span class="comment"># Write your monitoring logic here</span>
+<span class="comment"># Include appropriate alert messages and recommended actions</span>
+</div>
+
+                <div class="button-group">
+                    <button class="hint-btn" onclick="toggleHint(3)">💡 Show Hint</button>
+                </div>
+
+                <div class="hint" id="hint3">
+                    <h4>💡 Hint:</h4>
+                    <p><strong>Step 1:</strong> Start with the most critical condition (90%+)</p>
+                    <p><strong>Step 2:</strong> Work your way down through the alert levels</p>
+                    <p><strong>Step 3:</strong> Include both status and action recommendations</p>
+                    <p><strong>Example structure:</strong></p>
+                    <div class="code-area">
+<span class="keyword">if</span> cpu_usage >= <span class="number">90</span>:
+    <span class="keyword">print</span>(<span class="string">"🚨 CRITICAL: CPU usage at"</span>, cpu_usage, <span class="string">"%"</span>)
+    <span class="keyword">print</span>(<span class="string">"Action: Immediate intervention required!"</span>)
+<span class="keyword">elif</span> cpu_usage >= <span class="number">70</span>:
+    <span class="keyword">print</span>(<span class="string">"⚠️ HIGH: CPU usage at"</span>, cpu_usage, <span class="string">"%"</span>)
+<span class="comment"># Continue with other levels...</span></div>
+                </div>
+            </div>
+
+            <!-- Exercise 4: User Authentication -->
+            <div class="exercise" data-exercise="4">
+                <h3>Exercise 4: Multi-Factor Authentication System</h3>
+                <div class="exercise-description">
+                    <p><strong>Scenario:</strong> Build a login system that checks username, password, and account status.</p>
+                    <p><strong>Requirements:</strong> Check username = "admin", password = "secure123", and account must be active.</p>
+                </div>
+
+                <div class="code-area">
+<span class="comment"># Multi-Factor Authentication System</span>
+username = <span class="keyword">input</span>(<span class="string">"Enter username: "</span>)
+password = <span class="keyword">input</span>(<span class="string">"Enter password: "</span>)
+is_active = <span class="keyword">input</span>(<span class="string">"Is account active? (yes/no): "</span>).lower() == <span class="string">"yes"</span>
+
+<span class="comment"># Write your nested authentication logic here</span>
+<span class="comment"># Consider all three factors: username, password, and account status</span>
+</div>
+
+                <div class="button-group">
+                    <button class="hint-btn" onclick="toggleHint(4)">💡 Show Hint</button>
+                </div>
+
+                <div class="hint" id="hint4">
+                    <h4>💡 Hint:</h4>
+                    <p><strong>Step 1:</strong> Check username first with nested if statements</p>
+                    <p><strong>Step 2:</strong> If username is correct, check password</p>
+                    <p><strong>Step 3:</strong> If password is correct, check if account is active</p>
+                    <p><strong>Example structure:</strong></p>
+                    <div class="code-area">
+<span class="keyword">if</span> username == <span class="string">"admin"</span>:
+    <span class="keyword">if</span> password == <span class="string">"secure123"</span>:
+        <span class="keyword">if</span> is_active:
+            <span class="keyword">print</span>(<span class="string">"✅ Login successful!"</span>)
+        <span class="keyword">else</span>:
+            <span class="keyword">print</span>(<span class="string">"❌ Account is inactive"</span>)
+    <span class="keyword">else</span>:
+        <span class="keyword">print</span>(<span class="string">"❌ Invalid password"</span>)
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"❌ Invalid username"</span>)</div>
+                </div>
+            </div>
+
+            <!-- Exercise 5: Advanced Challenge -->
+            <div class="exercise" data-exercise="5">
+                <h3>Exercise 5: Smart Traffic Light System</h3>
+                <div class="exercise-description">
+                    <p><strong>Scenario:</strong> Design a smart traffic light that considers time of day, traffic volume, and emergency vehicles.</p>
+                    <p><strong>Rules:</strong> Emergency vehicles always get green light. During rush hours (7-9 AM, 5-7 PM) with high traffic, extend green time. Otherwise, normal timing.</p>
+                </div>
+
+                <div class="code-area">
+<span class="comment"># Smart Traffic Light System</span>
+hour = <span class="keyword">int</span>(<span class="keyword">input</span>(<span class="string">"Enter current hour (0-23): "</span>))
+traffic_volume = <span class="keyword">input</span>(<span class="string">"Traffic volume (low/medium/high): "</span>).lower()
+emergency_vehicle = <span class="keyword">input</span>(<span class="string">"Emergency vehicle detected? (yes/no): "</span>).lower() == <span class="string">"yes"</span>
+
+<span class="comment"># Write your smart traffic light logic here</span>
+<span class="comment"># Consider all factors and provide appropriate timing</span>
+</div>
+
+                <div class="button-group">
+                    <button class="hint-btn" onclick="toggleHint(5)">💡 Show Hint</button>
+                </div>
+
+                <div class="hint" id="hint5">
+                    <h4>💡 Hint:</h4>
+                    <p><strong>Priority Order:</strong> Emergency vehicles > Rush hour + High traffic > Normal conditions</p>
+                    <p><strong>Rush Hours:</strong> 7-9 AM or 5-7 PM (17-19 in 24-hour format)</p>
+                    <p><strong>Example structure:</strong></p>
+                    <div class="code-area">
+<span class="keyword">if</span> emergency_vehicle:
+    <span class="keyword">print</span>(<span class="string">"🚨 EMERGENCY: Immediate green light!"</span>)
+<span class="keyword">elif</span> (hour >= <span class="number">7</span> <span class="keyword">and</span> hour <= <span class="number">9</span>) <span class="keyword">or</span> (hour >= <span class="number">17</span> <span class="keyword">and</span> hour <= <span class="number">19</span>):
+    <span class="keyword">if</span> traffic_volume == <span class="string">"high"</span>:
+        <span class="keyword">print</span>(<span class="string">"🚦 Rush hour + High traffic: Extended green (60s)"</span>)
+    <span class="keyword">else</span>:
+        <span class="keyword">print</span>(<span class="string">"🚦 Rush hour: Standard timing (45s)"</span>)
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"🚦 Normal conditions: Standard timing (30s)"</span>)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleHint(exerciseNum) {
+            const hint = document.getElementById(`hint${exerciseNum}`);
+            const btn = event.target;
+            
+            if (hint.style.display === "none" || hint.style.display === "") {
+                hint.style.display = "block";
+                btn.textContent = "🙈 Hide Hint";
+            } else {
+                hint.style.display = "none";
+                btn.textContent = "💡 Show Hint";
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Python If Statements Lab loaded successfully!");
+        });
+    </script>
+</body>
+</html>

@@ -191,6 +191,10 @@ Welcome to the DevSecOps course labs! Click on any lab category below to explore
             <li><a href="python/2Lab.html">Python Lab 2</a></li>
      
         </ul>
+         <ul class="file-list">
+            <li><a href="python/3Lab.html">Python Lab 3</a></li>
+     
+        </ul>
     </div>
 </div>
 

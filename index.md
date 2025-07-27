@@ -167,6 +167,13 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
           <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/python2.pdf" class="btn-link">PDF</a>
         </div>
       </li>
+       <li>
+        <span>Lesson 3: If statement </span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/Python/07-python-lesson3.py/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/python3.pdf" class="btn-link">PDF</a>
+        </div>
+      </li>
     </ul>
   </div>
 </div>
