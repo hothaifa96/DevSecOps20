@@ -174,6 +174,15 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
           <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/python3.pdf" class="btn-link">PDF</a>
         </div>
       </li>
+      <li>
+        <span>Lesson 4: Lists,Tuples,sets and for loop </span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/Python/08-python-lesson4.py/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Python/08-python-lesson4.py/python4.drawio.pdf" class="btn-link">PDF</a>
+          <a href="{{ site.baseurl }}/lessons/Python/08-python-lesson4.py/list.md" class="btn-link">list methods</a>
+          <a href="{{ site.baseurl }}/lessons/Python/08-python-lesson4.pyclass_code.py" class="btn-link">class code </a>
+        </div>
+      </li>
     </ul>
   </div>
 </div>

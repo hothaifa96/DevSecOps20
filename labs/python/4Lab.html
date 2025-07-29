@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python DevOps Labs - 11 Progressive Challenges</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .labs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+        }
+
+        .lab-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .lab-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+
+        .lab-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .difficulty-badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8em;
+            margin-right: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .easy { background: linear-gradient(45deg, #4CAF50, #81C784); color: white; }
+        .medium { background: linear-gradient(45deg, #FF9800, #FFB74D); color: white; }
+        .hard { background: linear-gradient(45deg, #F44336, #EF5350); color: white; }
+        .extreme { background: linear-gradient(45deg, #9C27B0, #BA68C8); color: white; }
+
+        .lab-title {
+            font-size: 1.5em;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .lab-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .requirements {
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .requirements h4 {
+            color: #007bff;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .requirements ul {
+            margin-left: 20px;
+        }
+
+        .requirements li {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .hint-section {
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #FFB74D;
+        }
+
+        .hint-header {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .hint-icon {
+            background: linear-gradient(45deg, #FF9800, #FFB74D);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .hint-title {
+            color: #E65100;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .hint-content {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #FFB74D;
+            color: #BF360C;
+            line-height: 1.5;
+            display: none;
+        }
+
+        .hint-content.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .example-code {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.3);
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #81C784);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .lab-footer {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .time-estimate {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .concepts-tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin: 2px;
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .labs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .lab-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐍 Python Lab 4</h1>
+            <p>11 Progressive Challenges - From Beginner to Expert</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <div class="labs-grid">
+            <!-- Lab 1 - Easy -->
+        </div>
+    </div>
+
+    <script>
+        let completedLabs = 0;
+        const totalLabs = 11;
+
+        function toggleHint(element) {
+            const hintContent = element.parentElement.querySelector('.hint-content');
+            hintContent.classList.toggle('show');
+            
+            const icon = element.querySelector('.hint-icon');
+            icon.textContent = hintContent.classList.contains('show') ? '🔍' : '💡';
+        }
+
+        function markComplete() {
+            if (completedLabs < totalLabs) {
+                completedLabs++;
+                updateProgress();
+                
+                // Mark the card as completed
+                const cards = document.querySelectorAll('.lab-card');
+                if (cards[completedLabs - 1]) {
+                    cards[completedLabs - 1].style.opacity = '0.7';
+                    cards[completedLabs - 1].style.border = '3px solid #4CAF50';
+                }
+                
+                if (completedLabs === totalLabs) {
+                    alert('🎉 Congratulations! You\'ve completed all Python DevOps labs!');
+                }
+            }
+        }
+
+        function updateProgress() {
+            const progressFill = document.getElementById('progressFill');
+            const percentage = (completedLabs / totalLabs) * 100;
+            progressFill.style.width = percentage + '%';
+        }
+
+        // Add hover effects and interactions
+        document.querySelectorAll('.lab-card').forEach((card, index) => {
+            card.addEventListener('click', function() {
+                // Highlight the clicked card
+                document.querySelectorAll('.lab-card').forEach(c => c.style.transform = '');
+                this.style.transform = 'scale(1.02)';
+                
+                // Auto-scroll to card
+                this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+
+        // Add difficulty filtering
+        function filterByDifficulty(difficulty) {
+            const cards = document.querySelectorAll('.lab-card');
+            cards.forEach(card => {
+                if (difficulty === 'all' || card.dataset.difficulty === difficulty) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Press 'H' to toggle all hints
+            if (e.key.toLowerCase() === 'h') {
+                const hints = document.querySelectorAll('.hint-header');
+                hints.forEach(hint => toggleHint(hint));
+            }
+            
+            // Press 'Space' to mark complete
+            if (e.key === ' ' && e.target.tagName !== 'INPUT') {
+                e.preventDefault();
+                markComplete();
+            }
+        });
+
+        // Add difficulty filter buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('.header');
+            const filterDiv = document.createElement('div');
+            filterDiv.innerHTML = `
+                <div style="margin-top: 20px;">
+                    <button onclick="filterByDifficulty('all')" style="margin: 5px; padding: 8px 16px; border: none; border-radius: 15px; background: #fff; cursor: pointer;">All</button>
+                    <button onclick="filterByDifficulty('easy')" style="margin: 5px; padding: 8px 16px; border: none; border-radius: 15px; background: #4CAF50; color: white; cursor: pointer;">Easy</button>
+                    <button onclick="filterByDifficulty('medium')" style="margin: 5px; padding: 8px 16px; border: none; border-radius: 15px; background: #FF9800; color: white; cursor: pointer;">Medium</button>
+                    <button onclick="filterByDifficulty('hard')" style="margin: 5px; padding: 8px 16px; border: none; border-radius: 15px; background: #F44336; color: white; cursor: pointer;">Hard</button>
+                    <button onclick="filterByDifficulty('extreme')" style="margin: 5px; padding: 8px 16px; border: none; border-radius: 15px; background: #9C27B0; color: white; cursor: pointer;">Extreme</button>
+                </div>
+                <div style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">
+                    💡 Press 'H' to toggle all hints | Press 'Space' to mark lab complete
+                </div>
+            `;
+            header.appendChild(filterDiv);
+        });
+
+        // Add lab statistics
+        function showStats() {
+            const difficulties = {
+                easy: document.querySelectorAll('[data-difficulty="easy"]').length,
+                medium: document.querySelectorAll('[data-difficulty="medium"]').length,
+                hard: document.querySelectorAll('[data-difficulty="hard"]').length,
+                extreme: document.querySelectorAll('[data-difficulty="extreme"]').length
+            };
+            
+            console.log('Lab Statistics:', difficulties);
+            alert(`Lab Distribution:\n🟢 Easy: ${difficulties.easy}\n🟡 Medium: ${difficulties.medium}\n🔴 Hard: ${difficulties.hard}\n🟣 Extreme: ${difficulties.extreme}`);
+        }
+
+        // Initialize page
+        updateProgress();
+    </script>
+</body>
+</html>
+                        <span class="hint-icon">💡</span>
+                        <span class="hint-title">Click for Hint</span>
+                    </div>
+                    <div class="hint-content">
+                        <p><strong>Hint:</strong> Create each data type and show their unique characteristics.</p>
+                        <div class="example-code"># List - mutable, ordered, allows duplicates
+servers = ['web-01', 'web-02', 'db-01']
+servers.append('cache-01')
+
+# Tuple - immutable, ordered, allows duplicates  
+db_config = ('localhost', 5432, 'production')
+
+# Set - mutable, unordered, no duplicates
+error_codes = {404, 500, 404, 502, 500}
+print(error_codes)  # {404, 500, 502}</div>
+                        <p>Try converting between types: list(tuple), set(list), etc.</p>
+                    </div>
+                </div>
+                <div class="lab-footer">
+                    <span class="time-estimate">⏱️ 15-20 minutes</span>
+                    <div>
+                        <span class="concepts-tag">Lists</span>
+                        <span class="concepts-tag">Tuples</span>
+                        <span class="concepts-tag">Sets</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lab 2 - Easy -->
+            <div class="lab-card" data-difficulty="easy">
+                <div class="lab-header">
+                    <span class="difficulty-badge easy">Easy</span>
+                    <h3 class="lab-title">Lab 1: Server Name Manager</h3>
+                </div>
+                <p class="lab-description">
+                    Build a server inventory system using lists to manage server names and basic operations.
+                </p>
+                <div class="requirements">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>Create a list of server names</li>
+                        <li>Add new servers using append()</li>
+                        <li>Remove servers using remove()</li>
+                        <li>Count total servers and display first/last server</li>
+                        <li>Print servers that contain "web" in their name</li>
+                    </ul>
+                </div>
+                <div class="hint-section">
+                    <div class="hint-header" onclick="toggleHint(this)">
+                        <span class="hint-icon">💡</span>
+                        <span class="hint-title">Click for Hint</span>
+                    </div>
+                    <div class="hint-content">
+                        <p><strong>Hint:</strong> Start with a basic list and use list methods.</p>
+                        <div class="example-code">servers = ['web-01', 'db-01', 'cache-01']
+servers.append('web-02')
+print(f"Total servers: {len(servers)}")
+for server in servers:
+    if 'web' in server:
+        print(f"Web server: {server}")</div>
+                        <p>Use string methods like 'in' to check if a substring exists!</p>
+                    </div>
+                </div>
+                <div class="lab-footer">
+                    <span class="time-estimate">⏱️ 15-20 minutes</span>
+                    <div>
+                        <span class="concepts-tag">Lists</span>
+                        <span class="concepts-tag">String Methods</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lab 3 - Easy -->
+            <div class="lab-card" data-difficulty="easy">
+                <div class="lab-header">
+                    <span class="difficulty-badge easy">Easy</span>
+                    <h3 class="lab-title">Lab 2: Configuration Validator</h3>
+                </div>
+                <p class="lab-description">
+                    Create a configuration tuple validator that ensures database settings are immutable and correct.
+                </p>
+                <div class="requirements">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>Create a tuple with database config (host, port, database)</li>
+                        <li>Validate each setting using indexing</li>
+                        <li>Convert to list, modify, convert back (if needed)</li>
+                        <li>Count occurrences of specific values</li>
+                        <li>Display config in user-friendly format</li>
+                    </ul>
+                </div>
+                <div class="hint-section">
+                    <div class="hint-header" onclick="toggleHint(this)">
+                        <span class="hint-icon">💡</span>
+                        <span class="hint-title">Click for Hint</span>
+                    </div>
+                    <div class="hint-content">
+                        <p><strong>Hint:</strong> Tuples are immutable - convert to list for modifications.</p>
+                        <div class="example-code">config = ('localhost', 5432, 'production')
+print(f"Host: {config[0]}")
+print(f"Port: {config[1]}")
+# To modify: list(config) -> modify -> tuple(list)</div>
+                        <p>Remember that tuples only have count() and index() methods!</p>
+                    </div>
+                </div>
+                <div class="lab-footer">
+                    <span class="time-estimate">⏱️ 15-20 minutes</span>
+                    <div>
+                        <span class="concepts-tag">Tuples</span>
+                        <span class="concepts-tag">Type Conversion</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lab 4 - Medium -->
+            <div class="lab-card" data-difficulty="medium">
+                <div class="lab-header">
+                    <span class="difficulty-badge medium">Medium</span>
+                    <h3 class="lab-title">Lab 3: Unique Log Analyzer</h3>
+                </div>
+                <p class="lab-description">
+                    Build a log analysis tool using sets to find unique IP addresses, error types, and detect suspicious activity.
+                </p>
+                <div class="requirements">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>Create sets of IP addresses, error types, and timestamps</li>
+                        <li>Find unique IPs that had errors</li>
+                        <li>Use set operations (union, intersection, difference)</li>
+                        <li>Identify IPs that appear in both error and success logs</li>
+                        <li>Create alerts for suspicious IPs (multiple error types)</li>
+                    </ul>
+                </div>
+                <div class="hint-section">
+                    <div class="hint-header" onclick="toggleHint(this)">
+                        <span class="hint-icon">💡</span>
+                        <span class="hint-title">Click for Hint</span>
+                    </div>
+                    <div class="hint-content">
+                        <p><strong>Hint:</strong> Sets automatically remove duplicates and have powerful operations.</p>
+                        <div class="example-code">error_ips = {'192.168.1.1', '10.0.0.1', '172.16.0.1'}
+success_ips = {'192.168.1.1', '10.0.0.2'}
+suspicious = error_ips.intersection(success_ips)
+print(f"Suspicious IPs: {suspicious}")</div>
+                        <p>Use & for intersection, | for union, - for difference!</p>
+                    </div>
+                </div>
+                <div class="lab-footer">
+                    <span class="time-estimate">⏱️ 25-30 minutes</span>
+                    <div>
+                        <span class="concepts-tag">Sets</span>
+                        <span class="concepts-tag">Set Operations</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lab 5 - Medium -->
+            <div class="lab-card" data-difficulty="medium">
+                <div class="lab-header">
+                    <span class="difficulty-badge medium">Medium</span>
+                    <h3 class="lab-title">Lab 4: Port Scanner Simulator</h3>
+                </div>
+                <p class="lab-description">
+                    Create a port scanning simulator using range() to check common ports and generate scanning reports.
+                </p>
+                <div class="requirements">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>Generate ranges of common ports (22, 80, 443, 3389, etc.)</li>
+                        <li>Create custom port ranges using range(start, stop, step)</li>
+                        <li>Simulate "open" ports using random selection</li>
+                        <li>Generate lists of ports to scan for different services</li>
+                        <li>Create a tuple of results for each IP:port combination</li>
+                    </ul>
+                </div>
+                <div class="hint-section">
+                    <div class="hint-header" onclick="toggleHint(this)">
+                        <span class="hint-icon">💡</span>
+                        <span class="hint-title">Click for Hint</span>
+                    </div>
+                    <div class="hint-content">
+                        <p><strong>Hint:</strong> Use range() to generate port sequences efficiently.</p>
+                        <div class="example-code">common_ports = list(range(20, 26))  # 20-25
+web_ports = list(range(80, 85)) + list(range(443, 445))
+# Create tuple: (ip, port, status)
+result = ('192.168.1.1', 80, 'open')</div>
+                        <p>Combine multiple ranges with + operator for complex port lists!</p>
+                    </div>
+                </div>
+                <div class="lab-footer">
+                    <span class="time-estimate">⏱️ 20-25 minutes</span>
+                    <div>
+                        <span class="concepts-tag">Range</span>
+                        <span class="concepts-tag">Lists</span>
+                        <span class="concepts-tag">Tuples</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lab 6 - Medium -->
+            <div class="lab-card" data-difficulty="medium">
+                <div class="lab-header">
+                    <span class="difficulty-badge medium">Medium</span>
+                    <h3 class="lab-title">Lab 5: Automated Backup Reporter</h3>
+                </div>
+                <p class="lab-description">
+                    Build an automated backup status reporter using for loops to process multiple servers and backup statuses.
+                </p>
+                <div class="requirements">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>Process a list of servers with backup statuses</li>
+                        <li>Use for loops to categorize successful/failed backups</li>
+                        <li>Calculate backup success rates</li>
+                        <li>Generate alerts for servers with consecutive failures</li>
+                        <li>Create summary reports with statistics</li>
+                    </ul>
+                </div>
+                <div class="hint-section">
+                    <div class="hint-header" onclick="toggleHint(this)">
+                        <span class="hint-icon">💡</span>
+                        <span class="hint-title">Click for Hint</span>
+                    </div>
+                    <div class="hint-content">
+                        <p><strong>Hint:</strong> Use nested data structures and counter variables.</p>
+                        <div class="example-code">backup_status = [
+    ('web-01', 'success'),
+    ('web-02', 'failed'),
+    ('db-01', 'success')
+]
+success_count = 0
+for server, status in backup_status:
+    if status == 'success':
+        success_count += 1</div>
+                        <p>Track success/failure counts in your loop!</p>
+                    </div>
+                </div>
+                <div class="lab-footer">
+                    <span class="time-estimate">⏱️ 30-35 minutes</span>
+                    <div>
+                        <span class="concepts-tag">For Loops</span>
+                        <span class="concepts-tag">Data Processing</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lab 7 - Hard -->
+            <div class="lab-card" data-difficulty="hard">
+                <div class="lab-header">
+                    <span class="difficulty-badge hard">Hard</span>
+                    <h3 class="lab-title">Lab 6: Load Balancer Configurator</h3>
+                </div>
+                <p class="lab-description">
+                    Implement a load balancer configuration system using nested loops to distribute traffic across servers based on health and capacity.
+                </p>
+                <div class="requirements">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>Use nested loops to check server health and assign traffic</li>
+                        <li>Sort servers by response time and capacity</li>
+                        <li>Implement weighted distribution algorithm</li>
+                        <li>Handle server failures and redistribution</li>
+                        <li>Generate configuration files for multiple environments</li>
+                    </ul>
+                </div>
+                <div class="hint-section">
+                    <div class="hint-header" onclick="toggleHint(this)">
+                        <span class="hint-icon">💡</span>
+                        <span class="hint-title">Click for Hint</span>
+                    </div>
+                    <div class="hint-content">
+                        <p><strong>Hint:</strong> Use nested loops for sorting and distribution algorithms.</p>
+                        <div class="example-code">servers = [('web-01', 45, 100), ('web-02', 32, 150)]
+# Bubble sort by response time (index 1)
+for i in range(len(servers)):
+    for j in range(len(servers) - i - 1):
+        if servers[j][1] > servers[j + 1][1]:
+            servers[j], servers[j + 1] = servers[j + 1], servers[j]</div>
+                        <p>Consider using tuple unpacking: name, response_time, capacity = server</p>
+                    </div>
+                </div>
+                <div class="lab-footer">
+                    <span class="time-estimate">⏱️ 40-45 minutes</span>
+                    <div>
+                        <span class="concepts-tag">Nested Loops</span>
+                        <span class="concepts-tag">Sorting</span>
+                        <span class="concepts-tag">Algorithms</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lab 8 - Hard -->
+            <div class="lab-card" data-difficulty="hard">
+                <div class="lab-header">
+                    <span class="difficulty-badge hard">Hard</span>
+                    <h3 class="lab-title">Lab 8: Multi-Tier Health Monitor</h3>
+                </div>
+                <p class="lab-description">
+                    Create a comprehensive health monitoring system that tracks multiple metrics across different infrastructure tiers using all data structures.
+                </p>
+                <div class="requirements">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>Monitor web tier, app tier, and database tier</li>
+                        <li>Use lists for historical data, tuples for immutable configs</li>
+                        <li>Use sets for unique alerts and affected services</li>
+                        <li>Implement cascading failure detection</li>
+                        <li>Generate escalation lists based on severity</li>
+                    </ul>
+                </div>
+                <div class="hint-section">
+                    <div class="hint-header" onclick="toggleHint(this)">
+                        <span class="hint-icon">💡</span>
+                        <span class="hint-title">Click for Hint</span>
+                    </div>
+                    <div class="hint-content">
+                        <p><strong>Hint:</strong> Combine all data structures for a comprehensive solution.</p>
+                        <div class="example-code">web_tier = ['web-01', 'web-02', 'web-03']
+config = ('prod', '10.0.1.0/24', 443)
+alerts = {'high_cpu', 'memory_leak', 'disk_full'}
+for tier in [web_tier, app_tier, db_tier]:
+    # Process each tier...</div>
+                        <p>Think about how different tiers depend on each other!</p>
+                    </div>
+                </div>
+                <div class="lab-footer">
+                    <span class="time-estimate">⏱️ 45-50 minutes</span>
+                    <div>
+                        <span class="concepts-tag">All Data Types</span>
+                        <span class="concepts-tag">Complex Logic</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lab 9 - Hard -->
+            <div class="lab-card" data-difficulty="hard">
+                <div class="lab-header">
+                    <span class="difficulty-badge hard">Hard</span>
+                    <h3 class="lab-title">Lab 9: Container Orchestrator</h3>
+                </div>
+                <p class="lab-description">
+                    Build a container orchestration simulator that manages container lifecycle, resource allocation, and service discovery.
+                </p>
+                <div class="requirements">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>Track containers with lists of tuples (name, image, status, resources)</li>
+                        <li>Use sets for unique service names and ports</li>
+                        <li>Implement container scheduling algorithm</li>
+                        <li>Handle rolling updates and health checks</li>
+                        <li>Generate service mesh configuration</li>
+                    </ul>
+                </div>
+                <div class="hint-section">
+                    <div class="hint-header" onclick="toggleHint(this)">
+                        <span class="hint-icon">💡</span>
+                        <span class="hint-title">Click for Hint</span>
+                    </div>
+                    <div class="hint-content">
+                        <p><strong>Hint:</strong> Model containers as complex data structures with nested loops for management.</p>
+                        <div class="example-code">containers = [
+    ('web-app-1', 'nginx:1.21', 'running', (512, 2)),
+    ('api-1', 'node:16', 'starting', (1024, 4))
+]
+for name, image, status, (memory, cpu) in containers:
+    # Process container...</div>
+                        <p>Use tuple unpacking to access nested resource information!</p>
+                    </div>
+                </div>
+                <div class="lab-footer">
+                    <span class="time-estimate">⏱️ 50-60 minutes</span>
+                    <div>
+                        <span class="concepts-tag">Complex Data</span>
+                        <span class="concepts-tag">Algorithms</span>
+                        <span class="concepts-tag">System Design</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lab 10 - Extreme -->
+            <div class="lab-card" data-difficulty="extreme">
+                <div class="lab-header">
+                    <span class="difficulty-badge extreme">Extreme</span>
+                    <h3 class="lab-title">Lab 10: Infrastructure as Code Generator</h3>
+                </div>
+                <p class="lab-description">
+                    Create an Infrastructure as Code generator that produces deployment configurations based on requirements and optimizes resource allocation.
+                </p>
+                <div class="requirements">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>Parse infrastructure requirements from complex nested data</li>
+                        <li>Generate optimized resource allocation using multiple algorithms</li>
+                        <li>Implement dependency resolution between services</li>
+                        <li>Create multi-environment configurations (dev, staging, prod)</li>
+                        <li>Validate configurations and generate cost estimates</li>
+                        <li>Handle edge cases and error scenarios</li>
+                    </ul>
+                </div>
+                <div class="hint-section">
+                    <div class="hint-header" onclick="toggleHint(this)">
+                        <span class="hint-icon">💡</span>
+                        <span class="hint-title">Click for Hint</span>
+                    </div>
+                    <div class="hint-content">
+                        <p><strong>Hint:</strong> Break down into smaller functions, use nested data structures extensively.</p>
+                        <div class="example-code">requirements = {
+    'web': {'instances': 3, 'memory': 512, 'dependencies': []},
+    'api': {'instances': 2, 'memory': 1024, 'dependencies': ['db']},
+    'db': {'instances': 1, 'memory': 2048, 'dependencies': []}
+}
+# Process dependencies first, then dependent services</div>
+                        <p>Consider using topological sorting for dependency resolution!</p>
+                    </div>
+                </div>
+                <div class="lab-footer">
+                    <span class="time-estimate">⏱️ 60-90 minutes</span>
+                    <div>
+                        <span class="concepts-tag">Advanced Algorithms</span>
+                        <span class="concepts-tag">System Architecture</span>
+                        <span class="concepts-tag">Optimization</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lab 11 - Extreme -->
+            <div class="lab-card" data-difficulty="extreme">
+                <div class="lab-header">
+                    <span class="difficulty-badge extreme">Extreme</span>
+                    <h3 class="lab-title">Lab 11: Distributed System Simulator</h3>
+                </div>
+                <p class="lab-description">
+                    Build a comprehensive distributed system simulator that models network partitions, consensus algorithms, and fault tolerance across multiple data centers.
+                </p>
+                <div class="requirements">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>Simulate multiple data centers with complex topologies</li>
+                        <li>Implement consensus algorithms (simplified Raft/PBFT)</li>
+                        <li>Handle network partitions and node failures</li>
+                        <li>Track data consistency across replicas</li>
+                        <li>Generate performance metrics and failure reports</li>
+                        <li>Implement leader election and failover mechanisms</li>
+                        <li>Create visualization of system state over time</li>
+                    </ul>
+                </div>
+                <div class="hint-section">
+                    <div class="hint-header" onclick="toggleHint(this)">
