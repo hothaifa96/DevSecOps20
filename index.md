@@ -180,7 +180,23 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
           <a href="{{ site.baseurl }}/lessons/Python/08-python-lesson4.py/" class="btn-link">Start Lesson</a>
           <a href="{{ site.baseurl }}/lessons/Python/08-python-lesson4.py/python4.drawio.pdf" class="btn-link">PDF</a>
           <a href="{{ site.baseurl }}/lessons/Python/08-python-lesson4.py/list.md" class="btn-link">list methods</a>
-          <a href="{{ site.baseurl }}/lessons/Python/08-python-lesson4.pyclass_code.py" class="btn-link">class code </a>
+          <a href="{{ site.baseurl }}/lessons/Python/08-python-lesson4/class_code.py" class="btn-link">class code </a>
+        </div>
+      </li>
+      <li>
+        <span>Lesson 5: while and for loops </span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/Python/09-python-lesson5.py/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Python/09-python-lesson4.py/python5.drawio.pdf" class="btn-link">PDF</a>
+          <a href="{{ site.baseurl }}/lessons/Python/09-python-lesson5.py/classcode.py" class="btn-link">class code </a>
+        </div>
+      </li>
+       <li>
+        <span>Lesson 6: JSON, while pip and RESTful API </span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/Python/10-python-lesson6.py/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Python/10-python-lesson4.py/python6.drawio.pdf" class="btn-link">PDF</a>
+          <a href="{{ site.baseurl }}/lessons/Python/10-python-lesson5.py/classcode.py" class="btn-link">class code </a>
         </div>
       </li>
     </ul>
