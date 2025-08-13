@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Functions - Labs and Exercises</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #34495e;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+
+        .exercise {
+            background: #f8f9fa;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .exercise:hover {
+            transform: translateY(-2px);
+        }
+
+        .exercise-number {
+            font-weight: bold;
+            color: #2980b9;
+            font-size: 1.1em;
+        }
+
+        .solution {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .theory {
+            background: #e8f5e8;
+            border-left: 5px solid #27ae60;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐍 Python Functions - Labs and Exercises</h1>
+
+        <h2>📚 Theory Questions</h2>
+
+        <div class="exercise">
+            <div class="exercise-number">1.</div>
+            <strong>What is a function?</strong>
+            <div class="theory">
+                A function is a reusable block of code that performs a specific task. It can accept input (parameters), process that input, and return a result.
+            </div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">2.</div>
+            <strong>How do you define a function in Python?</strong>
+            <div class="theory">
+                Use the <code>def</code> keyword followed by the function name, parentheses, and a colon. For example: <code>def my_function():</code>
+            </div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">3.</div>
+            <strong>How do you add parameters to a function? What is the purpose of parameters? How can you give default values to parameters in Python? What is the rule regarding default value assignment (in terms of alignment)?</strong>
+            <div class="theory">
+                Parameters are added inside the parentheses. They allow functions to accept input. Default values are assigned using <code>=</code>. Rule: Parameters with default values must come after parameters without defaults.
+            </div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">4.</div>
+            <strong>How can you pass a value to a specific parameter in a Python function?</strong>
+            <div class="theory">
+                Use keyword arguments: <code>function_name(parameter_name=value)</code>
+            </div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">5.</div>
+            <strong>Why is it beneficial for functions to return values? How does a Python function return a value?</strong>
+            <div class="theory">
+                Returning values allows functions to provide results that can be used elsewhere. Use the <code>return</code> statement.
+            </div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">6.</div>
+            <strong>What does None mean in Python? When does it appear in functions?</strong>
+            <div class="theory">
+                <code>None</code> represents the absence of a value. Functions return <code>None</code> by default if no <code>return</code> statement is specified.
+            </div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">7.</div>
+            <strong>How do you generate a random number in Python? Which library do you use? How do you import the library into your code?</strong>
+            <div class="theory">
+                Use the <code>random</code> library. Import with <code>import random</code>. Generate numbers with <code>random.randint()</code> or <code>random.random()</code>.
+            </div>
+        </div>
+
+        <h2>💻 Coding Exercises</h2>
+
+        <div class="exercise">
+            <div class="exercise-number">8.</div>
+            Write a function that receives a circle's radius and returns the circle's circumference.
+            <button class="btn" onclick="toggleSolution('sol8')">Show Solution</button>
+            <div class="solution" id="sol8">import math
+
+def circle_circumference(radius):
+    """Calculate the circumference of a circle given its radius"""
+    return 2 * math.pi * radius
+
+# Example usage
+radius = float(input("Enter the radius: "))
+circumference = circle_circumference(radius)
+print(f"The circumference is: {circumference}")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">9.</div>
+            Create the following functions: add, sub, mul, div. These functions should receive two parameters x, y. Each should calculate the mathematical operation it represents and return the result. Input two numbers from the user (using input), call all four functions and print their results. Add default value of zero to x, y.
+            <button class="btn" onclick="toggleSolution('sol9')">Show Solution</button>
+            <div class="solution" id="sol9">def add(x=0, y=0):
+    """Add two numbers"""
+    return x + y
+
+def sub(x=0, y=0):
+    """Subtract y from x"""
+    return x - y
+
+def mul(x=0, y=0):
+    """Multiply two numbers"""
+    return x * y
+
+def div(x=0, y=0):
+    """Divide x by y"""
+    if y != 0:
+        return x / y
+    else:
+        return "Cannot divide by zero"
+
+# Get input from user
+num1 = float(input("Enter first number: "))
+num2 = float(input("Enter second number: "))
+
+# Call functions and print results
+print(f"Addition: {add(num1, num2)}")
+print(f"Subtraction: {sub(num1, num2)}")
+print(f"Multiplication: {mul(num1, num2)}")
+print(f"Division: {div(num1, num2)}")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">10.</div>
+            Write a function named getInRange that receives two parameters: min, max. The function should input a number from the user in a loop, until the inputted number is within the sent range. For example, if min=10 and max=100, the function will input numbers from the user until the inputted number is between 10 and 100 (inclusive). After the function receives "legal" input, it returns the "legal" number the user typed.
+            <button class="btn" onclick="toggleSolution('sol10')">Show Solution</button>
+            <div class="solution" id="sol10">def getInRange(min_val, max_val):
+    """Get a number from user within specified range"""
+    while True:
+        try:
+            number = float(input(f"Enter a number between {min_val} and {max_val}: "))
+            if min_val <= number <= max_val:
+                return number
+            else:
+                print(f"Number must be between {min_val} and {max_val}. Try again.")
+        except ValueError:
+            print("Please enter a valid number.")
+
+# Example usage
+result = getInRange(10, 100)
+print(f"You entered: {result}")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">11.</div>
+            Write a function that receives three numbers and returns the smallest among them.
+            <button class="btn" onclick="toggleSolution('sol11')">Show Solution</button>
+            <div class="solution" id="sol11">def find_minimum(a, b, c):
+    """Find the minimum of three numbers"""
+    return min(a, b, c)
+
+# Alternative implementation without using min()
+def find_minimum_manual(a, b, c):
+    """Find the minimum of three numbers manually"""
+    if a <= b and a <= c:
+        return a
+    elif b <= a and b <= c:
+        return b
+    else:
+        return c
+
+# Example usage
+num1 = float(input("Enter first number: "))
+num2 = float(input("Enter second number: "))
+num3 = float(input("Enter third number: "))
+
+smallest = find_minimum(num1, num2, num3)
+print(f"The smallest number is: {smallest}")</div>
+        </div>
+
+        <h2>🚀 Additional Exercises</h2>
+
+        <div class="exercise">
+            <div class="exercise-number">12.</div>
+            Write a function that checks if a number is even or odd and returns a boolean value.
+            <button class="btn" onclick="toggleSolution('sol12')">Show Solution</button>
+            <div class="solution" id="sol12">def is_even(number):
+    """Check if a number is even"""
+    return number % 2 == 0
+
+# Example usage
+num = int(input("Enter a number: "))
+if is_even(num):
+    print(f"{num} is even")
+else:
+    print(f"{num} is odd")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">13.</div>
+            Create a function that calculates the area of a rectangle given its width and height.
+            <button class="btn" onclick="toggleSolution('sol13')">Show Solution</button>
+            <div class="solution" id="sol13">def rectangle_area(width, height):
+    """Calculate the area of a rectangle"""
+    return width * height
+
+# Example usage
+w = float(input("Enter width: "))
+h = float(input("Enter height: "))
+area = rectangle_area(w, h)
+print(f"The area is: {area}")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">14.</div>
+            Write a function that converts temperature from Celsius to Fahrenheit.
+            <button class="btn" onclick="toggleSolution('sol14')">Show Solution</button>
+            <div class="solution" id="sol14">def celsius_to_fahrenheit(celsius):
+    """Convert Celsius to Fahrenheit"""
+    return (celsius * 9/5) + 32
+
+# Example usage
+temp_c = float(input("Enter temperature in Celsius: "))
+temp_f = celsius_to_fahrenheit(temp_c)
+print(f"{temp_c}°C = {temp_f}°F")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">15.</div>
+            Create a function that calculates the factorial of a number using recursion.
+            <button class="btn" onclick="toggleSolution('sol15')">Show Solution</button>
+            <div class="solution" id="sol15">def factorial(n):
+    """Calculate factorial using recursion"""
+    if n <= 1:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+# Example usage
+number = int(input("Enter a number: "))
+if number < 0:
+    print("Factorial is not defined for negative numbers")
+else:
+    result = factorial(number)
+    print(f"The factorial of {number} is {result}")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">16.</div>
+            Write a function that checks if a string is a palindrome (reads the same forwards and backwards).
+            <button class="btn" onclick="toggleSolution('sol16')">Show Solution</button>
+            <div class="solution" id="sol16">def is_palindrome(text):
+    """Check if a string is a palindrome"""
+    text = text.lower().replace(" ", "")  # Remove spaces and convert to lowercase
+    return text == text[::-1]
+
+# Example usage
+word = input("Enter a word or phrase: ")
+if is_palindrome(word):
+    print(f"'{word}' is a palindrome")
+else:
+    print(f"'{word}' is not a palindrome")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">17.</div>
+            Create a function that generates a random password with specified length.
+            <button class="btn" onclick="toggleSolution('sol17')">Show Solution</button>
+            <div class="solution" id="sol17">import random
+import string
+
+def generate_password(length=8):
+    """Generate a random password"""
+    characters = string.ascii_letters + string.digits + "!@#$%^&*"
+    password = ''.join(random.choice(characters) for _ in range(length))
+    return password
+
+# Example usage
+length = int(input("Enter password length: "))
+password = generate_password(length)
+print(f"Generated password: {password}")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">18.</div>
+            Write a function that calculates the greatest common divisor (GCD) of two numbers.
+            <button class="btn" onclick="toggleSolution('sol18')">Show Solution</button>
+            <div class="solution" id="sol18">def gcd(a, b):
+    """Calculate the Greatest Common Divisor using Euclidean algorithm"""
+    while b:
+        a, b = b, a % b
+    return abs(a)
+
+# Example usage
+num1 = int(input("Enter first number: "))
+num2 = int(input("Enter second number: "))
+result = gcd(num1, num2)
+print(f"GCD of {num1} and {num2} is: {result}")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">19.</div>
+            Create a function that counts the number of vowels in a string.
+            <button class="btn" onclick="toggleSolution('sol19')">Show Solution</button>
+            <div class="solution" id="sol19">def count_vowels(text):
+    """Count the number of vowels in a string"""
+    vowels = "aeiouAEIOU"
+    count = 0
+    for char in text:
+        if char in vowels:
+            count += 1
+    return count
+
+# Example usage
+sentence = input("Enter a sentence: ")
+vowel_count = count_vowels(sentence)
+print(f"Number of vowels: {vowel_count}")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">20.</div>
+            Write a function that calculates the sum of digits in a number.
+            <button class="btn" onclick="toggleSolution('sol20')">Show Solution</button>
+            <div class="solution" id="sol20">def sum_of_digits(number):
+    """Calculate the sum of digits in a number"""
+    return sum(int(digit) for digit in str(abs(number)))
+
+# Example usage
+num = int(input("Enter a number: "))
+digit_sum = sum_of_digits(num)
+print(f"Sum of digits in {num}: {digit_sum}")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">21.</div>
+            Create a function that finds the maximum value in a list without using the built-in max() function.
+            <button class="btn" onclick="toggleSolution('sol21')">Show Solution</button>
+            <div class="solution" id="sol21">def find_max(numbers):
+    """Find the maximum value in a list"""
+    if not numbers:
+        return None
+    
+    maximum = numbers[0]
+    for num in numbers[1:]:
+        if num > maximum:
+            maximum = num
+    return maximum
+
+# Example usage
+numbers_list = [3, 7, 2, 9, 1, 5]
+maximum = find_max(numbers_list)
+print(f"Maximum value: {maximum}")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">22.</div>
+            Write a function that checks if a number is prime.
+            <button class="btn" onclick="toggleSolution('sol22')">Show Solution</button>
+            <div class="solution" id="sol22">def is_prime(number):
+    """Check if a number is prime"""
+    if number < 2:
+        return False
+    if number == 2:
+        return True
+    if number % 2 == 0:
+        return False
+    
+    for i in range(3, int(number**0.5) + 1, 2):
+        if number % i == 0:
+            return False
+    return True
+
+# Example usage
+num = int(input("Enter a number: "))
+if is_prime(num):
+    print(f"{num} is prime")
+else:
+    print(f"{num} is not prime")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">23.</div>
+            Create a function that reverses the words in a sentence.
+            <button class="btn" onclick="toggleSolution('sol23')">Show Solution</button>
+            <div class="solution" id="sol23">def reverse_words(sentence):
+    """Reverse the order of words in a sentence"""
+    words = sentence.split()
+    reversed_words = words[::-1]
+    return ' '.join(reversed_words)
+
+# Example usage
+text = input("Enter a sentence: ")
+reversed_text = reverse_words(text)
+print(f"Reversed: {reversed_text}")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">24.</div>
+            Write a function that calculates the nth Fibonacci number.
+            <button class="btn" onclick="toggleSolution('sol24')">Show Solution</button>
+            <div class="solution" id="sol24">def fibonacci(n):
+    """Calculate the nth Fibonacci number"""
+    if n <= 1:
+        return n
+    
+    a, b = 0, 1
+    for _ in range(2, n + 1):
+        a, b = b, a + b
+    return b
+
+# Example usage
+n = int(input("Enter n: "))
+fib_num = fibonacci(n)
+print(f"The {n}th Fibonacci number is: {fib_num}")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">25.</div>
+            Create a function that converts a decimal number to binary.
+            <button class="btn" onclick="toggleSolution('sol25')">Show Solution</button>
+            <div class="solution" id="sol25">def decimal_to_binary(decimal):
+    """Convert decimal number to binary"""
+    if decimal == 0:
+        return "0"
+    
+    binary = ""
+    while decimal > 0:
+        binary = str(decimal % 2) + binary
+        decimal //= 2
+    return binary
+
+# Example usage
+num = int(input("Enter a decimal number: "))
+binary = decimal_to_binary(num)
+print(f"Binary representation: {binary}")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">26.</div>
+            Write a function that calculates the average of numbers in a list.
+            <button class="btn" onclick="toggleSolution('sol26')">Show Solution</button>
+            <div class="solution" id="sol26">def calculate_average(numbers):
+    """Calculate the average of numbers in a list"""
+    if not numbers:
+        return 0
+    return sum(numbers) / len(numbers)
+
+# Example usage
+numbers_list = [10, 20, 30, 40, 50]
+average = calculate_average(numbers_list)
+print(f"Average: {average}")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">27.</div>
+            Create a function that removes duplicates from a list while maintaining order.
+            <button class="btn" onclick="toggleSolution('sol27')">Show Solution</button>
+            <div class="solution" id="sol27">def remove_duplicates(lst):
+    """Remove duplicates from a list while maintaining order"""
+    seen = set()
+    result = []
+    for item in lst:
+        if item not in seen:
+            seen.add(item)
+            result.append(item)
+    return result
+
+# Example usage
+numbers = [1, 2, 3, 2, 4, 3, 5, 1]
+unique_numbers = remove_duplicates(numbers)
+print(f"Original: {numbers}")
+print(f"Without duplicates: {unique_numbers}")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">28.</div>
+            Write a function that calculates the compound interest.
+            <button class="btn" onclick="toggleSolution('sol28')">Show Solution</button>
+            <div class="solution" id="sol28">def compound_interest(principal, rate, time, compounds_per_year=1):
+    """Calculate compound interest"""
+    amount = principal * (1 + rate/100/compounds_per_year)**(compounds_per_year * time)
+    interest = amount - principal
+    return round(interest, 2), round(amount, 2)
+
+# Example usage
+p = float(input("Enter principal amount: "))
+r = float(input("Enter annual interest rate (%): "))
+t = float(input("Enter time in years: "))
+n = int(input("Enter compounding frequency per year: "))
+
+interest, total = compound_interest(p, r, t, n)
+print(f"Compound Interest: ${interest}")
+print(f"Total Amount: ${total}")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">29.</div>
+            Create a function that validates if an email address has a basic valid format.
+            <button class="btn" onclick="toggleSolution('sol29')">Show Solution</button>
+            <div class="solution" id="sol29">def validate_email(email):
+    """Basic email validation"""
+    if '@' not in email:
+        return False
+    
+    parts = email.split('@')
+    if len(parts) != 2:
+        return False
+    
+    local, domain = parts
+    if len(local) == 0 or len(domain) == 0:
+        return False
+    
+    if '.' not in domain:
+        return False
+    
+    return True
+
+# Example usage
+email = input("Enter an email address: ")
+if validate_email(email):
+    print("Valid email format")
+else:
+    print("Invalid email format")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">30.</div>
+            Write a function that generates the first n prime numbers.
+            <button class="btn" onclick="toggleSolution('sol30')">Show Solution</button>
+            <div class="solution" id="sol30">def is_prime(num):
+    """Helper function to check if a number is prime"""
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+def first_n_primes(n):
+    """Generate the first n prime numbers"""
+    primes = []
+    num = 2
+    while len(primes) < n:
+        if is_prime(num):
+            primes.append(num)
+        num += 1
+    return primes
+
+# Example usage
+n = int(input("How many prime numbers do you want? "))
+primes = first_n_primes(n)
+print(f"First {n} prime numbers: {primes}")</div>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-number">31.</div>
+            Create a function that converts seconds into hours, minutes, and seconds format.
+            <button class="btn" onclick="toggleSolution('sol31')">Show Solution</button>
+            <div class="solution" id="sol31">def convert_seconds(total_seconds):
+    """Convert seconds to hours, minutes, and seconds"""
+    hours = total_seconds // 3600
+    minutes = (total_seconds % 3600) // 60
+    seconds = total_seconds % 60
+    return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+
+# Example usage
+seconds = int(input("Enter total seconds: "))
+formatted_time = convert_seconds(seconds)
+print(f"Time format: {formatted_time}")</div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSolution(solutionId) {
+            const solution = document.getElementById(solutionId);
+            const button = solution.previousElementSibling;
+            
+            if (solution.style.display === 'none' || solution.style.display === '') {
+                solution.style.display = 'block';
+                button.textContent = 'Hide Solution';
+                button.style.background = 'linear-gradient(45deg, #e74c3c, #c0392b)';
+            } else {
+                solution.style.display = 'none';
+                button.textContent = 'Show Solution';
+                button.style.background = 'linear-gradient(45deg, #3498db, #2980b9)';
+            }
+        }
+
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            const exercises = document.querySelectorAll('.exercise');
+            exercises.forEach((exercise, index) => {
+                exercise.addEventListener('mouseenter', function() {
+                    this.style.borderLeftColor = '#e74c3c';
+                });
+                exercise.addEventListener('mouseleave', function() {
+                    this.style.borderLeftColor = '#3498db';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

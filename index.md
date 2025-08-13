@@ -195,8 +195,16 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
         <span>Lesson 6: JSON, while pip and RESTful API </span>
         <div class="lesson-links">
           <a href="{{ site.baseurl }}/lessons/Python/10-python-lesson6.py/" class="btn-link">Start Lesson</a>
-          <a href="{{ site.baseurl }}/lessons/Python/10-python-lesson4.py/python6.drawio.pdf" class="btn-link">PDF</a>
-          <a href="{{ site.baseurl }}/lessons/Python/10-python-lesson5.py/classcode.py" class="btn-link">class code </a>
+          <a href="{{ site.baseurl }}/lessons/Python/10-python-lesson6.py/python6.drawio.pdf" class="btn-link">PDF</a>
+          <a href="{{ site.baseurl }}/lessons/Python/10-python-lesson6.py/classcode.py" class="btn-link">class code </a>
+        </div>
+      </li>
+      <li>
+        <span>Lesson 7: functions and RESTful API </span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/Python/11-python-lesson7.py/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Python/11-python-lesson7.py/python7.pdf" class="btn-link">PDF</a>
+          <a href="{{ site.baseurl }}/lessons/Python/11-python-lesson7.py/classcode.py" class="btn-link">class code </a>
         </div>
       </li>
     </ul>
