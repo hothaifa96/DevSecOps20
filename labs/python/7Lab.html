@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python OOP Labs with UML</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #2196F3, #21CBF3);
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .lab {
+            margin: 30px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .lab-header {
+            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+            color: white;
+            padding: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .lab-content {
+            padding: 25px;
+            background: #fafafa;
+        }
+        
+        .uml-diagram {
+            background: white;
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .class-box {
+            border: 2px solid #333;
+            margin: 10px;
+            background: #f0f8ff;
+            border-radius: 5px;
+            display: inline-block;
+            min-width: 200px;
+        }
+        
+        .class-name {
+            background: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            border-radius: 3px 3px 0 0;
+        }
+        
+        .class-attributes, .class-methods {
+            padding: 10px;
+            border-top: 1px solid #333;
+        }
+        
+        .inheritance-arrow {
+            text-align: center;
+            font-size: 1.5em;
+            color: #2196F3;
+            margin: 10px 0;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .keyword { color: #ff79c6; }
+        .string { color: #f1fa8c; }
+        .comment { color: #6272a4; }
+        .function { color: #50fa7b; }
+        
+        .requirements {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .bonus {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .nav {
+            background: #333;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .nav a:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐍 Python OOP Labs</h1>
+            <p>5 Hands-on Labs with UML Class Diagrams</p>
+        </div>
+        
+        <div class="nav">
+            <a href="#lab1">Lab 1: Library</a>
+            <a href="#lab2">Lab 2: School</a>
+            <a href="#lab3">Lab 3: Bank</a>
+            <a href="#lab4">Lab 4: Zoo</a>
+            <a href="#lab5">Lab 5: Game Store</a>
+        </div>
+
+        <!-- LAB 1: Library Management System -->
+        <div id="lab1" class="lab">
+            <div class="lab-header">📚 Lab 1: Library Management System</div>
+            <div class="lab-content">
+                <h3>UML Class Diagram</h3>
+                <div class="uml-diagram">
+                    <div class="class-box">
+                        <div class="class-name">Book</div>
+                        <div class="class-attributes">
+                            - title: str<br>
+                            - author: str<br>
+                            - isbn: str<br>
+                            - is_borrowed: bool
+                        </div>
+                        <div class="class-methods">
+                            + __init__(title, author, isbn)<br>
+                            + borrow(): bool<br>
+                            + return_book(): bool<br>
+                            + __str__(): str
+                        </div>
+                    </div>
+                    
+                    <div class="class-box">
+                        <div class="class-name">Member</div>
+                        <div class="class-attributes">
+                            - name: str<br>
+                            - member_id: str<br>
+                            - borrowed_books: list
+                        </div>
+                        <div class="class-methods">
+                            + __init__(name, member_id)<br>
+                            + borrow_book(book): bool<br>
+                            + return_book(book): bool<br>
+                            + __str__(): str
+                        </div>
+                    </div>
+                    
+                    <div class="class-box">
+                        <div class="class-name">Library</div>
+                        <div class="class-attributes">
+                            - books: list<br>
+                            - members: list
+                        </div>
+                        <div class="class-methods">
+                            + __init__()<br>
+                            + add_book(book): None<br>
+                            + add_member(member): None<br>
+                            + find_book(isbn): Book<br>
+                            + display_available_books(): None
+                        </div>
+                    </div>
+                </div>
+
+                <div class="requirements">
+                    <strong>📋 Requirements:</strong>
+                    <ul>
+                        <li>Create Book class with title, author, isbn, and borrowing status</li>
+                        <li>Create Member class that can borrow/return books</li>
+                        <li>Create Library class to manage books and members</li>
+                        <li>Implement borrowing logic (can't borrow already borrowed books)</li>
+                        <li>Add string representations for all classes</li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+<span class="comment"># Example implementation starter</span>
+<span class="keyword">class</span> <span class="function">Book</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, title, author, isbn):
+        self.title = title
+        self.author = author
+        self.isbn = isbn
+        self.is_borrowed = <span class="keyword">False</span>
+    
+    <span class="keyword">def</span> <span class="function">borrow</span>(self):
+        <span class="keyword">if</span> not self.is_borrowed:
+            self.is_borrowed = <span class="keyword">True</span>
+            <span class="keyword">return</span> <span class="keyword">True</span>
+        <span class="keyword">return</span> <span class="keyword">False</span>
+
+<span class="comment"># TODO: Implement Member and Library classes</span>
+                </div>
+
+                <div class="bonus">
+                    <strong>🌟 Bonus Challenges:</strong>
+                    <ul>
+                        <li>Add due dates for borrowed books</li>
+                        <li>Implement fine calculation for overdue books</li>
+                        <li>Add book categories/genres</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LAB 2: School Management System -->
+        <div id="lab2" class="lab">
+            <div class="lab-header">🎓 Lab 2: School Management System</div>
+            <div class="lab-content">
+                <h3>UML Class Diagram</h3>
+                <div class="uml-diagram">
+                    <div class="class-box">
+                        <div class="class-name">Person</div>
+                        <div class="class-attributes">
+                            - name: str<br>
+                            - age: int<br>
+                            - id_number: str
+                        </div>
+                        <div class="class-methods">
+                            + __init__(name, age, id_number)<br>
+                            + __str__(): str
+                        </div>
+                    </div>
+                    
+                    <div class="inheritance-arrow">⬇️ inherits</div>
+                    
+                    <div class="class-box">
+                        <div class="class-name">Student</div>
+                        <div class="class-attributes">
+                            - grades: list<br>
+                            - student_id: str
+                        </div>
+                        <div class="class-methods">
+                            + __init__(name, age, id_number, student_id)<br>
+                            + add_grade(grade): None<br>
+                            + calculate_average(): float<br>
+                            + __str__(): str
+                        </div>
+                    </div>
+                    
+                    <div class="class-box">
+                        <div class="class-name">Teacher</div>
+                        <div class="class-attributes">
+                            - subject: str<br>
+                            - salary: float
+                        </div>
+                        <div class="class-methods">
+                            + __init__(name, age, id_number, subject, salary)<br>
+                            + give_grade(student, grade): None<br>
+                            + __str__(): str
+                        </div>
+                    </div>
+                    
+                    <div class="class-box">
+                        <div class="class-name">School</div>
+                        <div class="class-attributes">
+                            - name: str<br>
+                            - students: list<br>
+                            - teachers: list
+                        </div>
+                        <div class="class-methods">
+                            + __init__(name)<br>
+                            + add_student(student): None<br>
+                            + add_teacher(teacher): None<br>
+                            + get_top_students(n): list
+                        </div>
+                    </div>
+                </div>
+
+                <div class="requirements">
+                    <strong>📋 Requirements:</strong>
+                    <ul>
+                        <li>Create Person base class with common attributes</li>
+                        <li>Student and Teacher inherit from Person</li>
+                        <li>Students can have grades and calculate averages</li>
+                        <li>Teachers can give grades to students</li>
+                        <li>School manages collections of students and teachers</li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+<span class="comment"># Example inheritance structure</span>
+<span class="keyword">class</span> <span class="function">Person</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, name, age, id_number):
+        self.name = name
+        self.age = age
+        self.id_number = id_number
+
+<span class="keyword">class</span> <span class="function">Student</span>(Person):
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, name, age, id_number, student_id):
+        <span class="function">super()</span>.__init__(name, age, id_number)
+        self.student_id = student_id
+        self.grades = []
+
+<span class="comment"># TODO: Complete the implementation</span>
+                </div>
+
+                <div class="bonus">
+                    <strong>🌟 Bonus Challenges:</strong>
+                    <ul>
+                        <li>Add Course class with teacher and enrolled students</li>
+                        <li>Implement attendance tracking</li>
+                        <li>Add principal role with administrative functions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LAB 3: Bank Account System -->
+        <div id="lab3" class="lab">
+            <div class="lab-header">💳 Lab 3: Bank Account System</div>
+            <div class="lab-content">
+                <h3>UML Class Diagram</h3>
+                <div class="uml-diagram">
+                    <div class="class-box">
+                        <div class="class-name">BankAccount</div>
+                        <div class="class-attributes">
+                            - account_number: str<br>
+                            - owner_name: str<br>
+                            - balance: float<br>
+                            - transaction_history: list
+                        </div>
+                        <div class="class-methods">
+                            + __init__(account_number, owner_name, initial_balance)<br>
+                            + deposit(amount): bool<br>
+                            + withdraw(amount): bool<br>
+                            + get_balance(): float<br>
+                            + __str__(): str
+                        </div>
+                    </div>
+                    
+                    <div class="inheritance-arrow">⬇️ inherits</div>
+                    
+                    <div class="class-box">
+                        <div class="class-name">SavingsAccount</div>
+                        <div class="class-attributes">
+                            - interest_rate: float<br>
+                            - minimum_balance: float
+                        </div>
+                        <div class="class-methods">
+                            + __init__(account_number, owner_name, initial_balance, interest_rate)<br>
+                            + calculate_interest(): float<br>
+                            + withdraw(amount): bool  # Override
+                        </div>
+                    </div>
+                    
+                    <div class="class-box">
+                        <div class="class-name">CheckingAccount</div>
+                        <div class="class-attributes">
+                            - overdraft_limit: float<br>
+                            - monthly_fee: float
+                        </div>
+                        <div class="class-methods">
+                            + __init__(account_number, owner_name, initial_balance, overdraft_limit)<br>
+                            + withdraw(amount): bool  # Override<br>
+                            + charge_monthly_fee(): None
+                        </div>
+                    </div>
+                    
+                    <div class="class-box">
+                        <div class="class-name">Bank</div>
+                        <div class="class-attributes">
+                            - name: str<br>
+                            - accounts: list
+                        </div>
+                        <div class="class-methods">
+                            + __init__(name)<br>
+                            + create_account(account): None<br>
+                            + find_account(account_number): BankAccount<br>
+                            + total_deposits(): float
+                        </div>
+                    </div>
+                </div>
+
+                <div class="requirements">
+                    <strong>📋 Requirements:</strong>
+                    <ul>
+                        <li>Create base BankAccount class with deposit/withdraw functionality</li>
+                        <li>SavingsAccount has interest calculation and minimum balance restriction</li>
+                        <li>CheckingAccount allows overdraft up to a limit</li>
+                        <li>Bank manages multiple accounts</li>
+                        <li>Track transaction history for all accounts</li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+<span class="comment"># Example with method overriding</span>
+<span class="keyword">class</span> <span class="function">BankAccount</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, account_number, owner_name, initial_balance):
+        self.account_number = account_number
+        self.owner_name = owner_name
+        self.balance = initial_balance
+        self.transaction_history = []
+    
+    <span class="keyword">def</span> <span class="function">withdraw</span>(self, amount):
+        <span class="keyword">if</span> amount > self.balance:
+            <span class="keyword">return</span> <span class="keyword">False</span>
+        self.balance -= amount
+        <span class="keyword">return</span> <span class="keyword">True</span>
+
+<span class="keyword">class</span> <span class="function">CheckingAccount</span>(BankAccount):
+    <span class="keyword">def</span> <span class="function">withdraw</span>(self, amount):  <span class="comment"># Override parent method</span>
+        <span class="keyword">if</span> amount > (self.balance + self.overdraft_limit):
+            <span class="keyword">return</span> <span class="keyword">False</span>
+        self.balance -= amount
+        <span class="keyword">return</span> <span class="keyword">True</span>
+                </div>
+
+                <div class="bonus">
+                    <strong>🌟 Bonus Challenges:</strong>
+                    <ul>
+                        <li>Add transaction timestamps and types</li>
+                        <li>Implement account freezing/unfreezing</li>
+                        <li>Add customer class with multiple accounts</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LAB 4: Zoo Management System -->
+        <div id="lab4" class="lab">
+            <div class="lab-header">🦁 Lab 4: Zoo Management System</div>
+            <div class="lab-content">
+                <h3>UML Class Diagram</h3>
+                <div class="uml-diagram">
+                    <div class="class-box">
+                        <div class="class-name">Animal</div>
+                        <div class="class-attributes">
+                            - name: str<br>
+                            - species: str<br>
+                            - age: int<br>
+                            - health_status: str
+                        </div>
+                        <div class="class-methods">
+                            + __init__(name, species, age)<br>
+                            + make_sound(): str<br>
+                            + feed(): None<br>
+                            + __str__(): str
+                        </div>
+                    </div>
+                    
+                    <div class="inheritance-arrow">⬇️ inherits</div>
+                    
+                    <div class="class-box">
+                        <div class="class-name">Mammal</div>
+                        <div class="class-attributes">
+                            - fur_color: str<br>
+                            - is_warm_blooded: bool = True
+                        </div>
+                        <div class="class-methods">
+                            + __init__(name, species, age, fur_color)<br>
+                            + make_sound(): str  # Override
+                        </div>
+                    </div>
+                    
+                    <div class="class-box">
+                        <div class="class-name">Bird</div>
+                        <div class="class-attributes">
+                            - wing_span: float<br>
+                            - can_fly: bool
+                        </div>
+                        <div class="class-methods">
+                            + __init__(name, species, age, wing_span, can_fly)<br>
+                            + make_sound(): str  # Override<br>
+                            + fly(): str
+                        </div>
+                    </div>
+                    
+                    <div class="class-box">
+                        <div class="class-name">Reptile</div>
+                        <div class="class-attributes">
+                            - is_venomous: bool<br>
+                            - scale_type: str
+                        </div>
+                        <div class="class-methods">
+                            + __init__(name, species, age, is_venomous, scale_type)<br>
+                            + make_sound(): str  # Override<br>
+                            + shed_skin(): None
+                        </div>
+                    </div>
+                    
+                    <div class="class-box">
+                        <div class="class-name">Zoo</div>
+                        <div class="class-attributes">
+                            - name: str<br>
+                            - animals: list<br>
+                            - visitors_today: int
+                        </div>
+                        <div class="class-methods">
+                            + __init__(name)<br>
+                            + add_animal(animal): None<br>
+                            + feed_all_animals(): None<br>
+                            + animal_sounds(): None<br>
+                            + count_by_species(): dict
+                        </div>
+                    </div>
+                </div>
+
+                <div class="requirements">
+                    <strong>📋 Requirements:</strong>
+                    <ul>
+                        <li>Create Animal base class with common attributes and methods</li>
+                        <li>Mammal, Bird, and Reptile inherit from Animal</li>
+                        <li>Each animal type has unique attributes and sounds</li>
+                        <li>Zoo manages collection of different animals</li>
+                        <li>Implement polymorphism - all animals can make_sound() differently</li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+<span class="comment"># Example showing polymorphism</span>
+<span class="keyword">class</span> <span class="function">Animal</span>:
+    <span class="keyword">def</span> <span class="function">make_sound</span>(self):
+        <span class="keyword">return</span> <span class="string">"Some generic animal sound"</span>
+
+<span class="keyword">class</span> <span class="function">Mammal</span>(Animal):
+    <span class="keyword">def</span> <span class="function">make_sound</span>(self):
+        <span class="keyword">if</span> self.species == <span class="string">"Lion"</span>:
+            <span class="keyword">return</span> <span class="string">"Roar!"</span>
+        <span class="keyword">elif</span> self.species == <span class="string">"Elephant"</span>:
+            <span class="keyword">return</span> <span class="string">"Trumpet!"</span>
+
+<span class="keyword">class</span> <span class="function">Zoo</span>:
+    <span class="keyword">def</span> <span class="function">animal_sounds</span>(self):
+        <span class="keyword">for</span> animal <span class="keyword">in</span> self.animals:
+            <span class="function">print</span>(f<span class="string">"{animal.name}: {animal.make_sound()}"</span>)
+                </div>
+
+                <div class="bonus">
+                    <strong>🌟 Bonus Challenges:</strong>
+                    <ul>
+                        <li>Add Zookeeper class to manage animals</li>
+                        <li>Implement feeding schedules</li>
+                        <li>Add endangered species tracking</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LAB 5: Game Store System -->
+        <div id="lab5" class="lab">
+            <div class="lab-header">🎮 Lab 5: Game Store System</div>
+            <div class="lab-content">
+                <h3>UML Class Diagram</h3>
+                <div class="uml-diagram">
+                    <div class="class-box">
+                        <div class="class-name">Game</div>
+                        <div class="class-attributes">
+                            - title: str<br>
+                            - price: float<br>
+                            - genre: str<br>
+                            - rating: str<br>
+                            - in_stock: int
+                        </div>
+                        <div class="class-methods">
+                            + __init__(title, price, genre, rating, stock)<br>
+                            + apply_discount(percentage): None<br>
+                            + __str__(): str
+                        </div>
+                    </div>
+                    
+                    <div class="inheritance-arrow">⬇️ inherits</div>
+                    
+                    <div class="class-box">
+                        <div class="class-name">DigitalGame</div>
+                        <div class="class-attributes">
+                            - download_size: float<br>
+                            - platform: str
+                        </div>
+                        <div class="class-methods">
+                            + __init__(title, price, genre, rating, download_size, platform)<br>
+                            + download(): str<br>
+                            + get_system_requirements(): str
+                        </div>
+                    </div>
+                    
+                    <div class="class-box">
+                        <div class="class-name">PhysicalGame</div>
+                        <div class="class-attributes">
+                            - console: str<br>
+                            - condition: str<br>
+                            - has_manual: bool
+                        </div>
+                        <div class="class-methods">
+                            + __init__(title, price, genre, rating, stock, console, condition)<br>
+                            + ship(): str<br>
+                            + check_compatibility(console): bool
+                        </div>
+                    </div>
+                    
+                    <div class="class-box">
+                        <div class="class-name">Customer</div>
+                        <div class="class-attributes">
+                            - name: str<br>
+                            - email: str<br>
+                            - purchase_history: list<br>
+                            - wallet_balance: float
+                        </div>
+                        <div class="class-methods">
+                            + __init__(name, email, initial_balance)<br>
+                            + buy_game(game): bool<br>
+                            + add_funds(amount): None<br>
+                            + get_total_spent(): float
+                        </div>
+                    </div>
+                    
+                    <div class="class-box">
+                        <div class="class-name">GameStore</div>
+                        <div class="class-attributes">
+                            - name: str<br>
+                            - games: list<br>
+                            - customers: list<br>
+                            - revenue: float
+                        </div>
+                        <div class="class-methods">
+                            + __init__(name)<br>
+                            + add_game(game): None<br>
+                            + register_customer(customer): None<br>
+                            + search_games(genre): list<br>
+                            + best_sellers(): list
+                        </div>
+                    </div>
+                </div>
+
+                <div class="requirements">
+                    <strong>📋 Requirements:</strong>
+                    <ul>
+                        <li>Create Game base class with common game attributes</li>
+                        <li>DigitalGame and PhysicalGame inherit with specific features</li>
+                        <li>Customer can purchase games and track purchase history</li>
+                        <li>GameStore manages inventory and sales</li>
+                        <li>Implement purchase logic with stock management</li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+<span class="comment"># Example with composition and aggregation</span>
+<span class="keyword">class</span> <span class="function">Customer</span>:
+    <span class="keyword">def</span> <span class="function">buy_game</span>(self, game):
+        <span class="keyword">if</span> self.wallet_balance >= game.price <span class="keyword">and</span> game.in_stock > 0:
+            self.wallet_balance -= game.price
+            self.purchase_history.append(game)
+            game.in_stock -= 1
+            <span class="keyword">return</span> <span class="keyword">True</span>
+        <span class="keyword">return</span> <span class="keyword">False</span>
+
+<span class="keyword">class</span> <span class="function">GameStore</span>:
+    <span class="keyword">def</span> <span class="function">search_games</span>(self, genre):
+        <span class="keyword">return</span> [game <span class="keyword">for</span> game <span class="keyword">in</span> self.games <span class="keyword">if</span> game.genre.lower() == genre.lower()]
+    
+    <span class="keyword">def</span> <span class="function">best_sellers</span>(self):
+        <span class="comment"># Return games sorted by stock sold (initial_stock - current_stock)</span>
+        <span class="keyword">return</span> sorted(self.games, key=<span class="keyword">lambda</span> x: x.initial_stock - x.in_stock, reverse=<span class="keyword">True</span>)
+                </div>
+
+                <div class="bonus">
+                    <strong>🌟 Bonus Challenges:</strong>
+                    <ul>
+                        <li>Add review and rating system for games</li>
+                        <li>Implement seasonal sales and discounts</li>
+                        <li>Add subscription service for digital games</li>
+                        <li>Create admin user for inventory management</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: #333; color: white; text-align: center; padding: 20px;">
+            <h3>🎯 Lab Completion Tips</h3>
+            <p>Start with the basic classes, then add inheritance, and finally implement the management systems.</p>
+            <p>Focus on proper encapsulation, method overriding, and polymorphism!</p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

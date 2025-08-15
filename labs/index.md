@@ -208,8 +208,10 @@ Welcome to the DevSecOps course labs! Click on any lab category below to explore
      
         </ul>
         <ul class="file-list">
-            <li><a href="python/cheatsheet.html">tictacto-cheatsheet</a></li>
-     
+            <li><a href="python/cheatsheet.md">tictacto-cheatsheet</a></li>
+        </ul>
+           <ul class="file-list">
+            <li><a href="python/7Lab.html">class labs 1</a></li>
         </ul>
     </div>
 </div>
