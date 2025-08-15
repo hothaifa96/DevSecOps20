@@ -207,6 +207,10 @@ Welcome to the DevSecOps course labs! Click on any lab category below to explore
             <li><a href="python/6tictactoe.pdf">TicTacToe</a></li>
      
         </ul>
+        <ul class="file-list">
+            <li><a href="python/cheatsheet.html">tictacto-cheatsheet</a></li>
+     
+        </ul>
     </div>
 </div>
 

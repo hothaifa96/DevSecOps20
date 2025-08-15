@@ -207,6 +207,15 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
           <a href="{{ site.baseurl }}/lessons/Python/11-python-lesson7.py/classcode.py" class="btn-link">class code </a>
         </div>
       </li>
+
+       <li>
+        <span>Lesson 8: classes and OOP </span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/Python/12-python-lesson8.py/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Python/12-python-lesson8.py/python8.pdf" class="btn-link">PDF</a>
+          <a href="{{ site.baseurl }}/lessons/Python/12-python-lesson8.py/classcode.md" class="btn-link">class code </a>
+        </div>
+      </li>
     </ul>
   </div>
 </div>
