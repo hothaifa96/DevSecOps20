@@ -1,0 +1,7 @@
+<div class="social-links">
+  {%- for platform in site.social -%} {%- if platform[1] -%}
+  <a href="{{ platform[1] }}" target="_blank" rel="noopener noreferrer">
+    {{ platform[0] | capitalize }}
+  </a>
+  {%- endif -%} {%- endfor -%}
+</div>

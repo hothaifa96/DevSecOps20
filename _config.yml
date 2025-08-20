@@ -24,11 +24,3 @@ exclude:
   - vendor/gems/
   - vendor/ruby/
 
-# Collections
-# collections:
-#   lessons:
-#     output: true
-#     permalink: /:collection/:name/
-#   labs:
-#     output: true
-#     permalink: /:collection/:name/
