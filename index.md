@@ -16,6 +16,7 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
     grid-template-areas: 
         "linux python"
         "git .";
+    align-items: start;
 }
 .lesson-card {
     background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
@@ -26,6 +27,8 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
     box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     position: relative;
     overflow: hidden;
+    height: fit-content;
+    align-self: start;
 }
 .lesson-card:hover {
     transform: translateY(-5px);

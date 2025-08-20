@@ -241,25 +241,3 @@ Welcome to the DevSecOps course labs! Click on any lab category below to explore
 </div>
 
 </div>
-
-## Getting Started
-
-1. **Choose a lab category** that interests you from the cards above
-2. **Click on any lab file** to access the detailed instructions
-3. **Follow the step-by-step guides** to complete hands-on exercises
-4. **Practice regularly** to reinforce your learning
-
-## Lab Categories Overview
-
-- **Linux Basics**: Essential commands and system administration
-- **Monitoring**: System observability and logging
-- **Kubernetes**: Container orchestration and management
-- **Docker**: Containerization and image management
-- **Terraform**: Infrastructure as Code
-- **Python**: Automation and scripting
-- **Git & GitHub**: Version control and collaboration
-- **Bash Scripting**: Shell automation and scripting
-
----
-
-_Note: Some labs are currently in development. Check back regularly for new content!_
