@@ -10,9 +10,12 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
 <style>
 .lesson-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     margin: 30px 0;
+    grid-template-areas: 
+        "linux python"
+        "git .";
 }
 .lesson-card {
     background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
@@ -106,7 +109,7 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
 <div class="lesson-container">
 
 <!-- Linux Basics Card -->
-<div class="lesson-card">
+<div class="lesson-card" style="grid-area: linux;">
   <h3>🐧 Linux Basics</h3>
   <p>Master command-line, file systems, permissions, and process control.</p>
   <div class="lesson-files">
@@ -145,7 +148,7 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
 </div>
 
 <!-- Python Card -->
-<div class="lesson-card">
+<div class="lesson-card" style="grid-area: python;">
   <h3>🐍 Python</h3>
   <p>Automate tasks and build tools with Python scripting for DevOps workflows.</p>
   <div class="lesson-files">
@@ -226,13 +229,13 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
         </div>
       </li>
     </ul>
+
   </div>
 </div>
 </div>
 
-
 <!-- Git Card -->
-<div class="lesson-card">
+<div class="lesson-card" style="grid-area: git;">
   <h3>🔄 GIT</h3>
   <p>Mastering Git and Github </p>
   <div class="lesson-files">
@@ -247,5 +250,4 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
       </li>
     </ul>
   </div>
-</div>
 </div>
