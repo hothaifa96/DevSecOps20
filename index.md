@@ -232,7 +232,6 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
 
   </div>
 </div>
-</div>
 
 <!-- Git Card -->
 <div class="lesson-card" style="grid-area: git;">
@@ -250,4 +249,5 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
       </li>
     </ul>
   </div>
+</div>
 </div>
