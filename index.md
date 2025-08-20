@@ -216,6 +216,14 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
           <a href="{{ site.baseurl }}/lessons/Python/12-python-lesson8.py/classcode.md" class="btn-link">class code </a>
         </div>
       </li>
+       <li>
+        <span>Lesson 9: OOP,imports and GIT </span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/Python/Python/13-python-lesson9.py/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Python/Python/13-python-lesson9.py/python9.pdf" class="btn-link">PDF</a>
+          <a href="https://github.com/hothaifa96/DevSecOps20/tree/main/lessons/Python/13-python-lesson9.py/app" class="btn-link">class code </a>
+        </div>
+      </li>
     </ul>
   </div>
 </div>
