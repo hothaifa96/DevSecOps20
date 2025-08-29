@@ -1,0 +1,55 @@
+[11:30]  user added [ron] 
+[11:30]  user added [ishay] 
+[11:31]  user added [dima] 
+[11:42]  user added [dima] 
+[11:46]  Movie added fast 
+[11:49]  user added [daniel] 
+[11:50]  user added [daniel] 
+[11:51]  user added [daniel] 
+[11:54]  user added [daniel] 
+[11:57]  user added [daniel] 
+[11:58]  user added [daniel] 
+[11:59]  user added [daniel] 
+[12:0]  user added [daniel] 
+[12:1]  user added [daniel] 
+[12:17]  user added [daniel] 
+[12:18]  user added [daniel] 
+[12:20]  Movie added fast 
+[12:21]  user added [daniel] 
+[12:25]  127.0.0.1:5001 None -> http://127.0.0.1:5001/movies/2 
+[12:25]  127.0.0.1:5001 None -> http://127.0.0.1:5001/user/login 
+[12:25]  127.0.0.1:5001 None -> http://127.0.0.1:5001/user/signup 
+[12:25]  user added [daniel] 
+[12:25]  127.0.0.1:5001 None -> http://127.0.0.1:5001/user/login 
+[12:25]  127.0.0.1:5001 None -> http://127.0.0.1:5001/movies/2 
+[12:25]  127.0.0.1:5001 None -> http://127.0.0.1:5001/movies/2 
+[12:29]  127.0.0.1:5001 None -> http://127.0.0.1:5001/user/signup 
+[12:29]  user added [daniel] 
+[12:30]  127.0.0.1:5001 None -> http://127.0.0.1:5001/user/signup 
+[12:30]  user added [daniel] 
+[12:30]  duration [0.096786]  
+[12:30]  127.0.0.1:5001 None -> http://127.0.0.1:5001/user/signup 
+[12:30]  user added [daniel] 
+[12:30]  duration [0.087429]  
+[12:30]  127.0.0.1:5001 None -> http://127.0.0.1:5001/user/login 
+[12:30]  duration [0.105384]  
+[12:59]  127.0.0.1:5001 None -> http://127.0.0.1:5001/s 
+[12:59]  duration [0.025266]  
+[13:0]  127.0.0.1:5001 None -> http://127.0.0.1:5001/s 
+[13:0]  duration [0.019868]  
+[13:0]  127.0.0.1:5001 None -> http://127.0.0.1:5001/s 
+[13:0]  duration [0.01026]  
+[13:0]  127.0.0.1:5001 None -> http://127.0.0.1:5001/s 
+[13:0]  duration [0.009511]  
+[13:1]  127.0.0.1:5001 None -> http://127.0.0.1:5001/s 
+[13:1]  duration [0.011606]  
+[13:1]  127.0.0.1:5001 None -> http://127.0.0.1:5001/s 
+[13:1]  duration [0.007632]  
+[13:2]  127.0.0.1:5001 None -> http://127.0.0.1:5001/s 
+[13:2]  duration [0.002754]  
+[13:2]  127.0.0.1:5001 None -> http://127.0.0.1:5001/s 
+[13:2]  duration [0.002442]  
+[13:2]  127.0.0.1:5001 None -> http://127.0.0.1:5001/s 
+[13:2]  duration [0.008659]  
+[13:2]  127.0.0.1:5001 None -> http://127.0.0.1:5001/s 
+[13:2]  duration [0.00378]  
