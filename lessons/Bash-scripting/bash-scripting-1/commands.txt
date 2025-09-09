@@ -1,0 +1,10 @@
+# ls - list directory and files
+# cd - chagnge directory 
+# pwd - print the current working directory
+# echo - print the next content or variable
+# cat - show the content of file
+# cp - copy file or/and folder
+# mv - move or rename file of directory
+# rm - remove file or folder 
+# mkdir - create folder if not exists
+

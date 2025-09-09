@@ -251,3 +251,30 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
   </div>
 </div>
 </div>
+
+<!-- Bash SCripting Card -->
+<div class="lesson-card">
+  <h3> Bash</h3>
+  <p>Bashing and scripting </p>
+  <div class="lesson-files">
+    <h4>Available lessons:</h4>
+    <ul class="file-list">
+      <li>
+        <span>Lesson 1: basics and variables</span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/commands.txt" class="btn-link">basics commands</a>
+          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/demo1.sh" class="btn-link">demo1</a>
+        </div>
+      </li>
+        <li>
+        <span>Lesson 2: if and conditions</span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/class-code.md" class="btn-link">class code</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+</div>

@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bash Scripting Homework</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4a5568;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .difficulty-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .basic { background: #48bb78; color: white; }
+        .intermediate { background: #ed8936; color: white; }
+        .advanced { background: #e53e3e; color: white; }
+
+        .question {
+            background: #f7fafc;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 0 10px 10px 0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: 'bash';
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 0.8em;
+            color: #a0aec0;
+        }
+
+        .missing-line {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .task {
+            background: #e6fffa;
+            border: 2px solid #38b2ac;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .task h4 {
+            color: #2c7a7b;
+            margin-bottom: 10px;
+        }
+
+        .task ul {
+            margin-left: 20px;
+        }
+
+        .task li {
+            margin-bottom: 5px;
+        }
+
+        .command-section {
+            background: #faf5ff;
+            border: 2px solid #9f7aea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .command-section h4 {
+            color: #553c9a;
+            margin-bottom: 10px;
+        }
+
+        .command {
+            background: #2d3748;
+            color: #68d391;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 5px 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
+        }
+
+        .instructions {
+            background: #fff5f5;
+            border: 2px solid #fc8181;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+
+        .instructions h3 {
+            color: #c53030;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bash Scripting Homework Assignment</h1>
+        
+        <div class="instructions">
+            <h3>Instructions</h3>
+            <p>Complete the missing lines in each bash script, explain what the code does, and provide the commands to run each script. Focus on understanding variables, conditionals, loops, and file operations.</p>
+        </div>
+
+        <!-- BASIC LEVEL QUESTIONS -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="difficulty-badge basic">Basic Level</span>
+                Questions 1-10
+            </h2>
+
+            <div class="question">
+                <div class="question-number">Question 1:</div>
+                <div class="code-block">#!/bin/bash
+# Simple variable assignment and output
+name="John Doe"
+age=25
+echo "Name: $name"
+<span class="missing-line"># MISSING LINE: Print the age variable</span></div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Fill in the missing line to print the age</li>
+                        <li>Explain what this script does</li>
+                        <li>Write the commands to make this script executable and run it</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 2:</div>
+                <div class="code-block">#!/bin/bash
+# Check if a file exists
+filename="config.txt"
+<span class="missing-line"># MISSING LINE: if statement to check if file exists</span>
+    echo "File $filename exists"
+else
+    echo "File $filename does not exist"
+fi</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Complete the if statement using the correct file test operator</li>
+                        <li>Explain what file test operator you used and why</li>
+                        <li>Show how to run this script</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 3:</div>
+                <div class="code-block">#!/bin/bash
+# Simple for loop counting
+echo "Counting from 1 to 5:"
+<span class="missing-line"># MISSING LINE: for loop using brace expansion {1..5}</span>
+    echo "Number: $i"
+done</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Write the correct for loop syntax</li>
+                        <li>Explain what brace expansion does</li>
+                        <li>Show the command to execute this script</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 4:</div>
+                <div class="code-block">#!/bin/bash
+# Basic arithmetic
+num1=10
+num2=5
+<span class="missing-line"># MISSING LINE: Calculate sum using $((...))</span>
+echo "Sum: $sum"</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Complete the arithmetic expansion to calculate sum</li>
+                        <li>Explain how arithmetic expansion works in bash</li>
+                        <li>Provide the run command</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 5:</div>
+                <div class="code-block">#!/bin/bash
+# Using command line arguments
+echo "Script name: $0"
+<span class="missing-line"># MISSING LINE: Print the first command line argument</span>
+echo "Number of arguments: $#"</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Add the line to print the first argument</li>
+                        <li>Explain what $0, $1, and $# represent</li>
+                        <li>Show how to run this script with arguments</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 6:</div>
+                <div class="code-block">#!/bin/bash
+# String comparison
+user_input="admin"
+<span class="missing-line"># MISSING LINE: if statement comparing user_input with "admin"</span>
+    echo "Welcome administrator!"
+else
+    echo "Access denied"
+fi</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Write the if statement for string equality</li>
+                        <li>Explain why quotes are important in string comparisons</li>
+                        <li>Show the execution command</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 7:</div>
+                <div class="code-block">#!/bin/bash
+# Creating a simple array
+fruits=("apple" "banana" "orange")
+echo "First fruit: ${fruits[0]}"
+<span class="missing-line"># MISSING LINE: Print all fruits in the array</span></div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Add the line to print all array elements</li>
+                        <li>Explain array syntax in bash</li>
+                        <li>Show the run command</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 8:</div>
+                <div class="code-block">#!/bin/bash
+# While loop with counter
+counter=1
+<span class="missing-line"># MISSING LINE: while loop condition (counter <= 3)</span>
+    echo "Counter: $counter"
+    counter=$((counter + 1))
+done</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Complete the while loop condition</li>
+                        <li>Explain how while loops work</li>
+                        <li>Provide the execution command</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 9:</div>
+                <div class="code-block">#!/bin/bash
+# Check if directory exists and create it
+dir_name="logs"
+<span class="missing-line"># MISSING LINE: if statement to check if directory does NOT exist</span>
+    echo "Creating directory: $dir_name"
+    mkdir "$dir_name"
+fi</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Write the condition to check if directory doesn't exist</li>
+                        <li>Explain the NOT operator and directory test</li>
+                        <li>Show how to run this script</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 10:</div>
+                <div class="code-block">#!/bin/bash
+# Simple case statement
+choice="start"
+case $choice in
+    start)
+        echo "Starting service..."
+        ;;
+<span class="missing-line">    # MISSING LINE: case for "stop"</span>
+        echo "Stopping service..."
+        ;;
+    *)
+        echo "Unknown option"
+        ;;
+esac</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Add the "stop" case</li>
+                        <li>Explain how case statements work</li>
+                        <li>Show the run command</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- INTERMEDIATE LEVEL QUESTIONS -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="difficulty-badge intermediate">Intermediate Level</span>
+                Questions 11-20
+            </h2>
+
+            <div class="question">
+                <div class="question-number">Question 11:</div>
+                <div class="code-block">#!/bin/bash
+# Function definition and usage
+calculate_area() {
+    local length=$1
+    local width=$2
+<span class="missing-line">    # MISSING LINE: calculate area and return/echo it</span>
+}
+
+result=$(calculate_area 5 3)
+echo "Area: $result"</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Complete the function to calculate and return the area</li>
+                        <li>Explain how functions work in bash and what 'local' does</li>
+                        <li>Show how to run this script</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 12:</div>
+                <div class="code-block">#!/bin/bash
+# Reading user input
+echo "Enter your name: "
+<span class="missing-line"># MISSING LINE: read user input into variable 'username'</span>
+if [ -z "$username" ]; then
+    echo "No name provided"
+else
+    echo "Hello, $username!"
+fi</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Add the read command to get user input</li>
+                        <li>Explain what the -z test operator does</li>
+                        <li>Show the execution command</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 13:</div>
+                <div class="code-block">#!/bin/bash
+# Processing command output
+log_file="/var/log/syslog"
+if [ -r "$log_file" ]; then
+<span class="missing-line">    # MISSING LINE: count lines containing "error" (case insensitive)</span>
+    echo "Found $error_count error entries"
+else
+    echo "Cannot read log file"
+fi</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Use grep and wc to count error lines</li>
+                        <li>Explain the pipeline and command substitution</li>
+                        <li>Show how to run this script</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 14:</div>
+                <div class="code-block">#!/bin/bash
+# Loop through files in directory
+for file in /etc/*.conf; do
+<span class="missing-line">    # MISSING LINE: check if it's a regular file</span>
+        echo "Processing: $file"
+        lines=$(wc -l < "$file")
+        echo "  Lines: $lines"
+    fi
+done</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Add the condition to check if it's a regular file</li>
+                        <li>Explain why this check is necessary</li>
+                        <li>Show the run command</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 15:</div>
+                <div class="code-block">#!/bin/bash
+# Error handling with exit codes
+backup_file="/backup/important.tar.gz"
+<span class="missing-line"># MISSING LINE: check if backup exists AND is readable</span>
+    echo "Backup verified successfully"
+    exit 0
+else
+    echo "Backup verification failed"
+    exit 1
+fi</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Write the condition using AND operator</li>
+                        <li>Explain exit codes and their importance</li>
+                        <li>Show how to run and check exit code</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 16:</div>
+                <div class="code-block">#!/bin/bash
+# Using getopts for argument parsing
+verbose=false
+output_file=""
+
+<span class="missing-line"># MISSING LINE: getopts loop to handle -v and -o options</span>
+    case $opt in
+        v)
+            verbose=true
+            ;;
+        o)
+            output_file=$OPTARG
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG"
+            exit 1
+            ;;
+    esac
+done
+
+echo "Verbose: $verbose"
+echo "Output file: $output_file"</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Complete the getopts while loop</li>
+                        <li>Explain how getopts works and what OPTARG is</li>
+                        <li>Show how to run with options: -v -o filename.txt</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 17:</div>
+                <div class="code-block">#!/bin/bash
+# Array processing with loop
+servers=("web1" "web2" "db1" "cache1")
+failed_servers=()
+
+for server in "${servers[@]}"; do
+    # Simulate ping check (replace with actual ping)
+    if (( RANDOM % 2 )); then
+        echo "$server: OK"
+    else
+        echo "$server: FAILED"
+<span class="missing-line">        # MISSING LINE: add failed server to failed_servers array</span>
+    fi
+done
+
+echo "Failed servers: ${failed_servers[@]}"</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Add the failed server to the array</li>
+                        <li>Explain how to append to arrays in bash</li>
+                        <li>Show the execution command</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 18:</div>
+                <div class="code-block">#!/bin/bash
+# File processing with error handling
+input_file=$1
+output_file=$2
+
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 <input_file> <output_file>"
+    exit 1
+fi
+
+<span class="missing-line"># MISSING LINE: check if input file exists and is readable</span>
+    echo "Error: Cannot read input file: $input_file"
+    exit 1
+fi
+
+# Process file (convert to uppercase)
+tr '[:lower:]' '[:upper:]' < "$input_file" > "$output_file"
+echo "File processed successfully"</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Add the condition to validate input file</li>
+                        <li>Explain the tr command and redirection</li>
+                        <li>Show how to run with two arguments</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 19:</div>
+                <div class="code-block">#!/bin/bash
+# Monitoring script with thresholds
+cpu_usage=$(top -bn1 | grep "Cpu(s)" | awk '{print $2}' | cut -d'%' -f1)
+threshold=80
+
+<span class="missing-line"># MISSING LINE: compare cpu_usage with threshold using arithmetic comparison</span>
+    echo "ALERT: CPU usage is ${cpu_usage}% (threshold: ${threshold}%)"
+    # Send notification
+    echo "High CPU usage detected" | mail -s "CPU Alert" admin@company.com
+else
+    echo "CPU usage normal: ${cpu_usage}%"
+fi</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Write the numeric comparison condition</li>
+                        <li>Explain the command pipeline used to get CPU usage</li>
+                        <li>Show how to run this monitoring script</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 20:</div>
+                <div class="code-block">#!/bin/bash
+# Configuration file parser
+config_file="app.conf"
+declare -A config
+
+<span class="missing-line"># MISSING LINE: read configuration file line by line</span>
+    # Skip empty lines and comments
+    [[ $line =~ ^[[:space:]]*$ ]] && continue
+    [[ $line =~ ^[[:space:]]*# ]] && continue
+    
+    # Parse key=value pairs
+    if [[ $line =~ ^([^=]+)=(.*)$ ]]; then
+        key="${BASH_REMATCH[1]}"
+        value="${BASH_REMATCH[2]}"
+        config["$key"]="$value"
+    fi
+done < "$config_file"
+
+echo "Database: ${config[database]}"
+echo "Port: ${config[port]}"</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Add the while read loop to process the file</li>
+                        <li>Explain associative arrays and regex matching</li>
+                        <li>Show how to run this script</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADVANCED LEVEL QUESTIONS -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="difficulty-badge advanced">Advanced Level</span>
+                Questions 21-30
+            </h2>
+
+            <div class="question">
+                <div class="question-number">Question 21:</div>
+                <div class="code-block">#!/bin/bash
+# Advanced process management
+service_name="nginx"
+max_attempts=5
+attempt=1
+
+<span class="missing-line"># MISSING LINE: until loop checking if service is running</span>
+    echo "Attempt $attempt: Starting $service_name..."
+    systemctl start "$service_name" 2>/dev/null
+    
+    if [ $attempt -eq $max_attempts ]; then
+        echo "Failed to start $service_name after $max_attempts attempts"
+        exit 1
+    fi
+    
+    ((attempt++))
+    sleep 2
+done
+
+echo "$service_name is now running"</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Complete the until loop condition</li>
+                        <li>Explain the difference between until and while loops</li>
+                        <li>Show how to run this script with sudo privileges</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 22:</div>
+                <div class="code-block">#!/bin/bash
+# Signal handling and cleanup
+cleanup() {
+    echo "Cleaning up..."
+    kill $background_pid 2>/dev/null
+    rm -f "$temp_file"
+    exit 0
+}
+
+<span class="missing-line"># MISSING LINE: set up signal traps for cleanup</span>
+
+temp_file=$(mktemp)
+echo "Temporary file: $temp_file"
+
+# Start background process
+sleep 300 &
+background_pid=$!
+
+echo "Background process PID: $background_pid"
+echo "Press Ctrl+C to test cleanup"
+
+wait $background_pid</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Add trap commands for SIGINT and SIGTERM</li>
+                        <li>Explain signal handling and why cleanup is important</li>
+                        <li>Show how to run and test this script</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 23:</div>
+                <div class="code-block">#!/bin/bash
+# Advanced file synchronization
+source_dir="/data/source"
+backup_dir="/backup/$(date +%Y%m%d)"
+log_file="/var/log/backup.log"
+
+log_message() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a "$log_file"
+}
+
+<span class="missing-line"># MISSING LINE: create backup directory with parent directories</span>
+
+log_message "Starting backup from $source_dir to $backup_dir"
+
+# Use rsync for efficient copying
+if rsync -av --delete "$source_dir/" "$backup_dir/"; then
+    log_message "Backup completed successfully"
+    
+    # Create checksum file
+    find "$backup_dir" -type f -exec md5sum {} \; > "$backup_dir/checksums.md5"
+    log_message "Checksums created"
+else
+    log_message "ERROR: Backup failed"
+    exit 1
+fi</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Add the mkdir command with appropriate options</li>
+                        <li>Explain rsync options and the checksum verification process</li>
+                        <li>Show how to run this backup script</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 24:</div>
+                <div class="code-block">#!/bin/bash
+# Database backup with compression and encryption
+db_name="production_db"
+backup_dir="/secure/backups"
+encryption_key="/etc/backup.key"
+
+# Function to check prerequisites  
+check_prerequisites() {
+    local missing_tools=()
+    
+<span class="missing-line">    # MISSING LINE: check if required commands exist (pg_dump, gzip, gpg)</span>
+        missing_tools+=("$tool")
+    done
+    
+    if [ ${#missing_tools[@]} -gt 0 ]; then
+        echo "Missing required tools: ${missing_tools[*]}"
+        exit 1
+    fi
+}
+
+timestamp=$(date +%Y%m%d_%H%M%S)
+backup_file="$backup_dir/${db_name}_${timestamp}.sql.gz.gpg"
+
+check_prerequisites
+mkdir -p "$backup_dir"
+
+# Create encrypted compressed backup
+pg_dump "$db_name" | gzip | gpg --cipher-algo AES256 --compress-algo 1 --symmetric --armor --batch --passphrase-file "$encryption_key" > "$backup_file"
+
+echo "Encrypted backup created: $backup_file"</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Complete the tool availability check using 'command -v'</li>
+                        <li>Explain the backup pipeline and encryption process</li>
+                        <li>Show how to run this script and verify the backup</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 25:</div>
+                <div class="code-block">#!/bin/bash
+# System health monitoring with JSON output
+declare -A metrics
+collect_metrics() {
+    metrics[timestamp]=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+    metrics[cpu_usage]=$(top -bn1 | grep "Cpu(s)" | awk '{print $2}' | cut -d'%' -f1)
+    metrics[memory_usage]=$(free | grep '^Mem:' | awk '{printf "%.1f", $3/$2 * 100.0}')
+    metrics[disk_usage]=$(df / | tail -1 | awk '{print $5}' | cut -d'%' -f1)
+    metrics[load_average]=$(uptime | awk -F'load average:' '{print $2}' | awk '{print $1}' | tr -d ',')
+}
+
+output_json() {
+    echo "{"
+<span class="missing-line">    # MISSING LINE: loop through metrics array and output JSON format</span>
+        echo "  \"$key\": \"$value\","
+    done | sed '$ s/,$//'  # Remove trailing comma from last line
+    echo "}"
+}
+
+collect_metrics
+output_json</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Add the for loop to iterate through the associative array</li>
+                        <li>Explain JSON formatting and associative array iteration</li>
+                        <li>Show how to run and redirect output to a JSON file</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 26:</div>
+                <div class="code-block">#!/bin/bash
+# Advanced log analysis with parallel processing
+log_dir="/var/log"
+pattern="ERROR"
+output_file="error_summary.txt"
+
+analyze_log() {
+    local logfile=$1
+    local temp_file=$(mktemp)
+    
+    if [[ $logfile =~ \.gz$ ]]; then
+        zcat "$logfile" | grep -i "$pattern" > "$temp_file"
+    else
+        grep -i "$pattern" "$logfile" > "$temp_file
