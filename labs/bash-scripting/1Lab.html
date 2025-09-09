@@ -1,4 +1,9 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bash Scripting Homework</title>
     <style>
         * {
             margin: 0;
@@ -93,6 +98,7 @@
             overflow-x: auto;
             font-family: 'Courier New', monospace;
             position: relative;
+            white-space: pre-line;
         }
 
         .code-block::before {
@@ -853,23 +859,23 @@ analyze_log() {
     fi
     
     local count=$(wc -l < "$temp_file")
-    echo "$(basename "$logfile"): $count errors" >> "$output_file"
+    if [ $count -gt 0 ]; then
+        echo "$(basename "$logfile"): $count errors found" >> "$output_file"
+    fi
+    
     rm -f "$temp_file"
 }
 
-# Find all log files and process in parallel
-export -f analyze_log
-export pattern output_file
+# Find all log files and process them in parallel
+<span class="missing-line"># MISSING LINE: export the function and run in parallel using xargs</span>
 
-<span class="missing-line"># MISSING LINE: find log files and process them in parallel using xargs</span>
-
-echo "Analysis complete. Results in $output_file"</div>
+echo "Log analysis complete. Results in $output_file"</div>
                 <div class="task">
                     <h4>Your Tasks:</h4>
                     <ul>
-                        <li>Complete the find command with xargs for parallel processing</li>
-                        <li>Explain parallel processing with xargs -P option</li>
-                        <li>Show how to run this script and monitor progress</li>
+                        <li>Use find with xargs to run analyze_log in parallel</li>
+                        <li>Explain parallel processing and why you need to export functions</li>
+                        <li>Show how to run this script and check the results</li>
                     </ul>
                 </div>
             </div>
@@ -877,79 +883,46 @@ echo "Analysis complete. Results in $output_file"</div>
             <div class="question">
                 <div class="question-number">Question 27:</div>
                 <div class="code-block">#!/bin/bash
-# Advanced deployment with rollback capability
+# Network service deployment with health checks
 app_name="myapp"
-deploy_dir="/opt/$app_name"
-versions_dir="/opt/$app_name/versions"
-current_link="/opt/$app_name/current"
-new_version=$1
+docker_image="myapp:latest"
+port=8080
+health_endpoint="/health"
 
-deploy_version() {
-    local version=$1
-    local version_dir="$versions_dir/$version"
+deploy_service() {
+    echo "Stopping existing container..."
+    docker stop "$app_name" 2>/dev/null || true
+    docker rm "$app_name" 2>/dev/null || true
     
-    echo "Deploying version $version..."
+    echo "Starting new container..."
+    docker run -d --name "$app_name" -p "$port:8080" "$docker_image"
     
-    # Download and extract (simulated)
-    mkdir -p "$version_dir"
-    echo "version=$version" > "$version_dir/version.txt"
-    echo "deployed=$(date)" > "$version_dir/deployed.txt"
+<span class="missing-line">    # MISSING LINE: wait for service to be healthy with timeout</span>
     
-<span class="missing-line">    # MISSING LINE: create/update symlink atomically</span>
-    
-    echo "Version $version deployed successfully"
-}
-
-rollback() {
-    local previous_version=$(ls -1t "$versions_dir" | sed -n '2p')
-    
-    if [ -n "$previous_version" ]; then
-        echo "Rolling back to version: $previous_version"
-        ln -sfn "$versions_dir/$previous_version" "$current_link"
-        echo "Rollback completed"
-    else
-        echo "No previous version found for rollback"
-        exit 1
+    if [ $attempt -eq $max_attempts ]; then
+        echo "Health check failed after $max_attempts attempts"
+        docker logs "$app_name"
+        return 1
     fi
+    
+    echo "Service deployed and healthy"
+    return 0
 }
 
-# Health check function
-health_check() {
-    # Simulate health check
-    sleep 2
-    if (( RANDOM % 10 > 7 )); then
-        return 1  # Fail 20% of the time for demo
-    else
-        return 0  # Success
-    fi
-}
+max_attempts=30
+attempt=1
 
-if [ $# -ne 1 ]; then
-    echo "Usage: $0 <version>"
-    exit 1
-fi
-
-mkdir -p "$versions_dir"
-
-# Deploy new version
-deploy_version "$new_version"
-
-# Perform health check
-echo "Performing health check..."
-if health_check; then
-    echo "Health check passed"
+if deploy_service; then
+    echo "Deployment successful"
 else
-    echo "Health check failed - rolling back"
-    rollback
+    echo "Deployment failed"
     exit 1
-fi
-
-echo "Deployment completed successfully"</div>
+fi</div>
                 <div class="task">
                     <h4>Your Tasks:</h4>
                     <ul>
-                        <li>Add the atomic symlink creation command</li>
-                        <li>Explain atomic deployments and rollback strategies</li>
+                        <li>Add a while loop with curl health check and timeout logic</li>
+                        <li>Explain container deployment and health check strategies</li>
                         <li>Show how to run this deployment script</li>
                     </ul>
                 </div>
@@ -958,54 +931,50 @@ echo "Deployment completed successfully"</div>
             <div class="question">
                 <div class="question-number">Question 28:</div>
                 <div class="code-block">#!/bin/bash
-# Network security scanner
-target_network="192.168.1.0/24"
-open_ports=(22 80 443 3306 5432)
-results_file="scan_results_$(date +%Y%m%d_%H%M%S).txt"
+# Multi-server configuration management
+servers=("web1.example.com" "web2.example.com" "db1.example.com")
+config_template="app.conf.template"
+ssh_key="/home/admin/.ssh/deploy_key"
 
-scan_host() {
-    local host=$1
-    local host_results=()
+deploy_config() {
+    local server=$1
+    local server_type=""
     
-    # Check if host is alive
-    if ping -c 1 -W 1 "$host" >/dev/null 2>&1; then
-        echo "Scanning $host..."
-        
-<span class="missing-line">        # MISSING LINE: loop through ports and check if they're open</span>
-            if nc -z -w1 "$host" "$port" 2>/dev/null; then
-                host_results+=("$port:open")
-            else
-                host_results+=("$port:closed")
-            fi
-        done
-        
-        if [ ${#host_results[@]} -gt 0 ]; then
-            echo "$host: ${host_results[*]}" >> "$results_file"
-        fi
+    # Determine server type from hostname
+    case $server in
+        web*) server_type="web" ;;
+        db*) server_type="database" ;;
+        cache*) server_type="cache" ;;
+    esac
+    
+<span class="missing-line">    # MISSING LINE: generate config from template with server-specific values</span>
+    
+    # Deploy configuration
+    if scp -i "$ssh_key" "$temp_config" "admin@$server:/tmp/app.conf"; then
+        ssh -i "$ssh_key" "admin@$server" 'sudo mv /tmp/app.conf /etc/myapp/app.conf && sudo systemctl reload myapp'
+        echo "✅ $server: Configuration deployed successfully"
+        rm -f "$temp_config"
+        return 0
+    else
+        echo "❌ $server: Configuration deployment failed"
+        rm -f "$temp_config"
+        return 1
     fi
 }
 
-# Extract network range and scan
-network_base=$(echo "$target_network" | cut -d'/' -f1 | cut -d'.' -f1-3)
-
-for i in {1..254}; do
-    host="$network_base.$i"
-    scan_host "$host" &
-    
-    # Limit concurrent processes
-    if (( i % 20 == 0 )); then
-        wait
-    fi
+# Deploy to all servers in parallel
+for server in "${servers[@]}"; do
+    deploy_config "$server" &
 done
 
-wait  # Wait for all background processes
-echo "Scan completed. Results in $results_file"</div>
+wait
+echo "Configuration deployment completed"</div>
                 <div class="task">
                     <h4>Your Tasks:</h4>
                     <ul>
-                        <li>Add the for loop to iterate through the ports array</li>
-                        <li>Explain network scanning and concurrent processing</li>
-                        <li>Show how to run this script safely and legally</li>
+                        <li>Use sed or envsubst to replace template variables</li>
+                        <li>Explain template processing and parallel deployment</li>
+                        <li>Show how to run this configuration management script</li>
                     </ul>
                 </div>
             </div>
@@ -1013,75 +982,57 @@ echo "Scan completed. Results in $results_file"</div>
             <div class="question">
                 <div class="question-number">Question 29:</div>
                 <div class="code-block">#!/bin/bash
-# Advanced configuration management
-config_template="app.conf.template"
-config_output="app.conf"
-env_file=".env"
+# Advanced backup rotation with retention policy
+backup_base="/backups"
+retention_days=30
+retention_weeks=12
+retention_months=12
 
-# Load environment variables from file
-load_env() {
-    if [ -f "$env_file" ]; then
-<span class="missing-line">        # MISSING LINE: source the environment file safely</span>
-    else
-        echo "Warning: Environment file $env_file not found"
-    fi
-}
-
-# Template processing function
-process_template() {
-    local template=$1
-    local output=$2
+cleanup_old_backups() {
+    local backup_type=$1
+    local retention_period=$2
+    local date_format=$3
     
-    # Read template and substitute variables
-    while IFS= read -r line; do
-        # Use eval to expand variables in the line
-        eval "echo \"$line\"" 
-    done < "$template" > "$output"
-}
-
-# Validation function
-validate_config() {
-    local config_file=$1
-    local required_keys=("DATABASE_URL" "API_KEY" "LOG_LEVEL")
-    local missing_keys=()
+    echo "Cleaning up $backup_type backups older than $retention_period days..."
     
-    for key in "${required_keys[@]}"; do
-        if ! grep -q "^$key=" "$config_file" 2>/dev/null; then
-            missing_keys+=("$key")
-        fi
+<span class="missing-line">    # MISSING LINE: find and remove backups older than retention period</span>
+        echo "Removing old backup: $backup"
+        rm -rf "$backup"
     done
-    
-    if [ ${#missing_keys[@]} -gt 0 ]; then
-        echo "ERROR: Missing required configuration keys: ${missing_keys[*]}"
-        return 1
-    fi
-    
-    return 0
 }
 
-# Main execution
-if [ ! -f "$config_template" ]; then
-    echo "Error: Template file $config_template not found"
-    exit 1
+# Daily backup
+daily_backup="$backup_base/daily/backup_$(date +%Y%m%d)"
+mkdir -p "$(dirname "$daily_backup")"
+echo "Creating daily backup: $daily_backup"
+# rsync -av /data/ "$daily_backup/"
+
+# Weekly backup (only on Sundays)
+if [ $(date +%u) -eq 7 ]; then
+    weekly_backup="$backup_base/weekly/backup_$(date +%Y_week_%V)"
+    mkdir -p "$(dirname "$weekly_backup")"
+    echo "Creating weekly backup: $weekly_backup"
+    # cp -al "$daily_backup" "$weekly_backup"  # Hard link copy
 fi
 
-load_env
-echo "Processing configuration template..."
-process_template "$config_template" "$config_output"
+# Monthly backup (only on first day of month)
+if [ $(date +%d) -eq 01 ]; then
+    monthly_backup="$backup_base/monthly/backup_$(date +%Y_%m)"
+    mkdir -p "$(dirname "$monthly_backup")"
+    echo "Creating monthly backup: $monthly_backup"
+    # cp -al "$daily_backup" "$monthly_backup"  # Hard link copy
+fi
 
-if validate_config "$config_output"; then
-    echo "Configuration generated successfully: $config_output"
-    chmod 600 "$config_output"  # Secure permissions
-else
-    echo "Configuration validation failed"
-    exit 1
-fi</div>
+# Cleanup old backups
+cleanup_old_backups "daily" $retention_days "%Y%m%d"
+cleanup_old_backups "weekly" $((retention_weeks * 7)) "%Y_week_%V"  
+cleanup_old_backups "monthly" $((retention_months * 30)) "%Y_%m"</div>
                 <div class="task">
                     <h4>Your Tasks:</h4>
                     <ul>
-                        <li>Safely source the environment file (hint: use 'set -a' and 'set +a')</li>
-                        <li>Explain template processing and configuration management</li>
-                        <li>Show how to create template and env files to test this script</li>
+                        <li>Complete the find command with date calculations</li>
+                        <li>Explain backup rotation strategies and hard links</li>
+                        <li>Show how to run this as a cron job</li>
                     </ul>
                 </div>
             </div>
@@ -1089,131 +1040,99 @@ fi</div>
             <div class="question">
                 <div class="question-number">Question 30:</div>
                 <div class="code-block">#!/bin/bash
-# Comprehensive system audit script
-audit_report="system_audit_$(date +%Y%m%d_%H%M%S).json"
-temp_dir=$(mktemp -d)
+# Comprehensive system security audit
+audit_log="/var/log/security_audit.log"
+failed_checks=0
 
-# Cleanup function
-cleanup() {
-    rm -rf "$temp_dir"
+log_audit() {
+    local level=$1
+    local message=$2
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$level] $message" | tee -a "$audit_log"
 }
-trap cleanup EXIT
 
-# Collect system information
-collect_system_info() {
-    local info_file="$temp_dir/system.json"
+check_file_permissions() {
+    local file=$1
+    local expected_perms=$2
+    local actual_perms=$(stat -c "%a" "$file" 2>/dev/null)
     
-    cat > "$info_file" << EOF
-{
-  "hostname": "$(hostname)",
-  "kernel": "$(uname -r)",
-  "os": "$(cat /etc/os-release | grep PRETTY_NAME | cut -d'=' -f2 | tr -d '\"')",
-  "uptime": "$(uptime -p)",
-  "users": $(who | wc -l),
-  "processes": $(ps aux | wc -l)
-}
-EOF
+    if [ "$actual_perms" != "$expected_perms" ]; then
+        log_audit "FAIL" "File $file has permissions $actual_perms, expected $expected_perms"
+        ((failed_checks++))
+        return 1
+    else
+        log_audit "PASS" "File $file has correct permissions $expected_perms"
+        return 0
+    fi
 }
 
-# Security audit function
-security_audit() {
-    local security_file="$temp_dir/security.json"
-    local issues=()
+check_sudo_users() {
+    log_audit "INFO" "Checking sudo users..."
+<span class="missing-line">    # MISSING LINE: get list of users who can sudo and check against whitelist</span>
     
-    # Check for common security issues
-    [ -f /etc/passwd ] && grep '^root:' /etc/passwd >/dev/null || issues+=("no_root_user")
-    [ -w /etc/passwd ] && issues+=("writable_passwd")
-    find /home -name ".ssh/id_*" -not -path "*/.*" 2>/dev/null | grep -q . && issues+=("exposed_ssh_keys")
-    
-<span class="missing-line">    # MISSING LINE: convert issues array to JSON format</span>
-    
-    echo "$json_issues" > "$security_file"
+    local allowed_users=("admin" "devops" "root")
+    for user in $sudo_users; do
+        if [[ ! " ${allowed_users[*]} " =~ " $user " ]]; then
+            log_audit "FAIL" "Unauthorized sudo user found: $user"
+            ((failed_checks++))
+        fi
+    done
 }
 
-# Generate final report
-generate_report() {
-    echo "{"
-    echo '  "audit_timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'",'
-    echo '  "system_info": '$(cat "$temp_dir/system.json")','
-    echo '  "security_audit": '$(cat "$temp_dir/security.json")
-    echo "}"
-}
+log_audit "INFO" "Starting security audit..."
 
-# Main execution
-echo "Starting comprehensive system audit..."
+# Check critical file permissions
+check_file_permissions "/etc/passwd" "644"
+check_file_permissions "/etc/shadow" "640"
+check_file_permissions "/etc/ssh/sshd_config" "644"
 
-collect_system_info
-security_audit
-generate_report > "$audit_report"
+# Check for unauthorized sudo users
+check_sudo_users
 
-echo "System audit completed"
-echo "Report saved to: $audit_report"
-echo "Summary:"
-jq '.security_audit | length' "$audit_report" | xargs -I {} echo "  Security issues found: {}"</div>
+# Check for world-writable files
+log_audit "INFO" "Checking for world-writable files..."
+world_writable=$(find /etc /usr /bin /sbin -type f -perm -002 2>/dev/null)
+if [ -n "$world_writable" ]; then
+    log_audit "FAIL" "World-writable files found: $world_writable"
+    ((failed_checks++))
+fi
+
+log_audit "INFO" "Security audit completed. Failed checks: $failed_checks"
+
+if [ $failed_checks -gt 0 ]; then
+    exit 1
+else
+    exit 0
+fi</div>
                 <div class="task">
                     <h4>Your Tasks:</h4>
                     <ul>
-                        <li>Convert the issues array to JSON format (hint: use printf and join)</li>
-                        <li>Explain the complete audit process and JSON manipulation</li>
-                        <li>Show how to run this script and interpret the results</li>
+                        <li>Extract sudo users using getent or /etc/group</li>
+                        <li>Explain security auditing and permission checking</li>
+                        <li>Show how to run this audit script and interpret results</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="section">
-            <h2 class="section-title">General Instructions</h2>
-            
-            <div class="command-section">
-                <h4>How to Complete This Assignment:</h4>
-                <div class="command"># 1. Create a new script file</div>
-                <div class="command">nano question1.sh</div>
-                
-                <div class="command"># 2. Copy the script code and fill in missing lines</div>
-                
-                <div class="command"># 3. Make the script executable</div>
-                <div class="command">chmod +x question1.sh</div>
-                
-                <div class="command"># 4. Run the script</div>
-                <div class="command">./question1.sh</div>
-                
-                <div class="command"># 5. For scripts with arguments:</div>
-                <div class="command">./script.sh arg1 arg2</div>
-                
-                <div class="command"># 6. Check exit code</div>
-                <div class="command">echo $?</div>
-            </div>
-            
-            <div class="task">
-                <h4>For Each Question, Provide:</h4>
-                <ul>
-                    <li><strong>Missing Line:</strong> The complete line that should replace the comment</li>
-                    <li><strong>Explanation:</strong> What the script does and how the missing line fits</li>
-                    <li><strong>Commands:</strong> How to make executable and run the script</li>
-                    <li><strong>Expected Output:</strong> What you expect to see when running the script</li>
-                </ul>
-            </div>
-            
-            <div class="command-section">
-                <h4>Debugging Tips:</h4>
-                <div class="command"># Add debug output</div>
-                <div class="command">bash -x script.sh</div>
-                
-                <div class="command"># Check syntax without running</div>
-                <div class="command">bash -n script.sh</div>
-                
-                <div class="command"># Add set -x in script for debugging</div>
-                <div class="command">set -x  # Enable debug mode</div>
-                <div class="command">set +x  # Disable debug mode</div>
-            </div>
+        <div class="command-section">
+            <h4>General Commands to Know:</h4>
+            <div class="command">chmod +x script.sh</div>
+            <div class="command">./script.sh</div>
+            <div class="command">bash script.sh</div>
+            <div class="command">./script.sh arg1 arg2</div>
+            <div class="command">echo $?  # Check exit code</div>
+            <div class="command">bash -x script.sh  # Debug mode</div>
         </div>
 
         <div class="footer">
-            <p><strong>Submission Guidelines:</strong></p>
-            <p>Submit each completed script as a separate .sh file with your explanations in comments.</p>
-            <p>Include a README.md file explaining your solutions and any challenges faced.</p>
-            <p><strong>Due Date:</strong> As specified by your instructor</p>
-            <p><strong>Good Luck!</strong> Remember: practice makes perfect in bash scripting.</p>
+            <p><strong>Submission Requirements:</strong></p>
+            <p>For each question, provide:</p>
+            <p>1. The missing line(s) of code</p>
+            <p>2. A clear explanation of what the script does</p>
+            <p>3. The exact commands needed to run the script</p>
+            <p>4. Any additional setup required (file creation, permissions, etc.)</p>
+            <br>
+            <p><em>Focus on understanding the concepts: variables, conditionals, loops, functions, file operations, and error handling.</em></p>
         </div>
     </div>
 </body>
