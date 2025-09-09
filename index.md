@@ -138,7 +138,7 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
         </div>
       </li>
       <li>
-        <span>Lesson 4: Linux Basics 4(networks)</span>
+        <span>Lesson 4: Linux Basics 4 (networks)</span>
         <div class="lesson-links">
           <a href="{{ site.baseurl }}/lessons/Linux-basics/04-linux-basics/" class="btn-link">Start Lesson</a>
         </div>
@@ -147,134 +147,131 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
   </div>
 </div>
 
-<!-- Python Card -->
-<div class="lesson-card">
-  <h3>🐍 Python</h3>
-  <p>Automate tasks and build tools with Python scripting for DevOps workflows.</p>
+<!-- Bash Scripting Card -->
+<div class="lesson-card" style="background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);">
+  <h3>📜 Bash Scripting</h3>
+  <p>Automate tasks and create powerful scripts with bash programming.</p>
   <div class="lesson-files">
     <h4>Available lessons:</h4>
     <ul class="file-list">
       <li>
-        <span>Lesson 1: input,print and datatypes</span>
+        <span>Lesson 1: Basics and Variables</span>
         <div class="lesson-links">
-          <a href="{{ site.baseurl }}/lessons/Python/05-python-lesson1.py/" class="btn-link">Start Lesson</a>
-          <a href="https://github.com/hothaifa96/DevSecOps20/blob/main/lessons/Python/05-python-lesson1.py/class_code.py" class="btn-link">Class Code</a>
-          <a href="{{ site.baseurl }}/lessons/Python/05-python-lesson1.py/python1.pdf" class="btn-link">PDF</a>
+          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/commands.txt" class="btn-link">Basic Commands</a>
+          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/demo1.sh" class="btn-link">Demo1</a>
+        </div>
+      </li>
+      <li>
+        <span>Lesson 2: If Statements and Conditions</span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/class-code.md" class="btn-link">Class Code</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Python Card -->
+<div class="lesson-card" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); color: #333;">
+  <h3 style="color: #333;">🐍 Python</h3>
+  <p style="color: #444;">Automate tasks and build tools with Python scripting for DevOps workflows.</p>
+  <div class="lesson-files">
+    <h4 style="color: #333;">Available lessons:</h4>
+    <ul class="file-list">
+      <li>
+        <span>Lesson 1: Input, Print and Datatypes</span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/Python/05-python-lesson1.py/" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Start Lesson</a>
+          <a href="https://github.com/hothaifa96/DevSecOps20/blob/main/lessons/Python/05-python-lesson1.py/class_code.py" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Class Code</a>
+          <a href="{{ site.baseurl }}/lessons/Python/05-python-lesson1.py/python1.pdf" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">PDF</a>
         </div>
       </li>
       <li>
         <span>Lesson 2: Strings and Lists</span>
         <div class="lesson-links">
-          <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/" class="btn-link">Start Lesson</a>
-          <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/cheatsheet.webp" class="btn-link">Cheatsheet</a>
-          <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/python2.pdf" class="btn-link">PDF</a>
-        </div>
-      </li>
-       <li>
-        <span>Lesson 3: If statement </span>
-        <div class="lesson-links">
-          <a href="{{ site.baseurl }}/lessons/Python/07-python-lesson3.py/" class="btn-link">Start Lesson</a>
-          <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/python3.pdf" class="btn-link">PDF</a>
+          <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/cheatsheet.webp" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Cheatsheet</a>
+          <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/python2.pdf" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">PDF</a>
         </div>
       </li>
       <li>
-        <span>Lesson 4: Lists,Tuples,sets and for loop </span>
+        <span>Lesson 3: If Statement</span>
         <div class="lesson-links">
-          <a href="{{ site.baseurl }}/lessons/Python/08-python-lesson4.py/" class="btn-link">Start Lesson</a>
-          <a href="{{ site.baseurl }}/lessons/Python/08-python-lesson4.py/python4.drawio.pdf" class="btn-link">PDF</a>
-          <a href="{{ site.baseurl }}/lessons/Python/08-python-lesson4.py/list.md" class="btn-link">list methods</a>
-          <a href="{{ site.baseurl }}/lessons/Python/08-python-lesson4/class_code.py" class="btn-link">class code </a>
+          <a href="{{ site.baseurl }}/lessons/Python/07-python-lesson3.py/" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Python/06-python-lesson2.py/python3.pdf" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">PDF</a>
         </div>
       </li>
       <li>
-        <span>Lesson 5: while and for loops </span>
+        <span>Lesson 4: Lists, Tuples, Sets and For Loop</span>
         <div class="lesson-links">
-          <a href="{{ site.baseurl }}/lessons/Python/09-python-lesson5.py/" class="btn-link">Start Lesson</a>
-          <a href="{{ site.baseurl }}/lessons/Python/09-python-lesson4.py/python5.drawio.pdf" class="btn-link">PDF</a>
-          <a href="{{ site.baseurl }}/lessons/Python/09-python-lesson5.py/classcode.py" class="btn-link">class code </a>
-        </div>
-      </li>
-       <li>
-        <span>Lesson 6: JSON, while pip and RESTful API </span>
-        <div class="lesson-links">
-          <a href="{{ site.baseurl }}/lessons/Python/10-python-lesson6.py/" class="btn-link">Start Lesson</a>
-          <a href="{{ site.baseurl }}/lessons/Python/10-python-lesson6.py/python6.drawio.pdf" class="btn-link">PDF</a>
-          <a href="{{ site.baseurl }}/lessons/Python/10-python-lesson6.py/classcode.py" class="btn-link">class code </a>
+          <a href="{{ site.baseurl }}/lessons/Python/08-python-lesson4.py/" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Python/08-python-lesson4.py/python4.drawio.pdf" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">PDF</a>
+          <a href="{{ site.baseurl }}/lessons/Python/08-python-lesson4.py/list.md" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">List Methods</a>
+          <a href="{{ site.baseurl }}/lessons/Python/08-python-lesson4/class_code.py" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Class Code</a>
         </div>
       </li>
       <li>
-        <span>Lesson 7: functions and RESTful API </span>
+        <span>Lesson 5: While and For Loops</span>
         <div class="lesson-links">
-          <a href="{{ site.baseurl }}/lessons/Python/11-python-lesson7.py/" class="btn-link">Start Lesson</a>
-          <a href="{{ site.baseurl }}/lessons/Python/11-python-lesson7.py/python7.pdf" class="btn-link">PDF</a>
-          <a href="{{ site.baseurl }}/lessons/Python/11-python-lesson7.py/classcode.py" class="btn-link">class code </a>
+          <a href="{{ site.baseurl }}/lessons/Python/09-python-lesson5.py/" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Python/09-python-lesson4.py/python5.drawio.pdf" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">PDF</a>
+          <a href="{{ site.baseurl }}/lessons/Python/09-python-lesson5.py/classcode.py" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Class Code</a>
         </div>
       </li>
-
-       <li>
-        <span>Lesson 8: classes and OOP </span>
+      <li>
+        <span>Lesson 6: JSON, PIP and RESTful API</span>
         <div class="lesson-links">
-          <a href="{{ site.baseurl }}/lessons/Python/12-python-lesson8.py/" class="btn-link">Start Lesson</a>
-          <a href="{{ site.baseurl }}/lessons/Python/12-python-lesson8.py/python8.pdf" class="btn-link">PDF</a>
-          <a href="{{ site.baseurl }}/lessons/Python/12-python-lesson8.py/classcode.md" class="btn-link">class code </a>
+          <a href="{{ site.baseurl }}/lessons/Python/10-python-lesson6.py/" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Python/10-python-lesson6.py/python6.drawio.pdf" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">PDF</a>
+          <a href="{{ site.baseurl }}/lessons/Python/10-python-lesson6.py/classcode.py" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Class Code</a>
         </div>
       </li>
-
-       <li>
-        <span>Lesson 9: OOP,imports and GIT </span>
+      <li>
+        <span>Lesson 7: Functions and RESTful API</span>
         <div class="lesson-links">
-          <a href="{{ site.baseurl }}/lessons/Python/Python/13-python-lesson9.py/" class="btn-link">Start Lesson</a>
-          <a href="{{ site.baseurl }}/lessons/Python/Python/13-python-lesson9.py/python9.pdf" class="btn-link">PDF</a>
-          <a href="https://github.com/hothaifa96/DevSecOps20/tree/main/lessons/Python/13-python-lesson9.py/app" class="btn-link">class code </a>
+          <a href="{{ site.baseurl }}/lessons/Python/11-python-lesson7.py/" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Python/11-python-lesson7.py/python7.pdf" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">PDF</a>
+          <a href="{{ site.baseurl }}/lessons/Python/11-python-lesson7.py/classcode.py" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Class Code</a>
+        </div>
+      </li>
+      <li>
+        <span>Lesson 8: Classes and OOP</span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/Python/12-python-lesson8.py/" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Python/12-python-lesson8.py/python8.pdf" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">PDF</a>
+          <a href="{{ site.baseurl }}/lessons/Python/12-python-lesson8.py/classcode.md" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Class Code</a>
+        </div>
+      </li>
+      <li>
+        <span>Lesson 9: OOP, Imports and GIT</span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/Python/Python/13-python-lesson9.py/" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Python/Python/13-python-lesson9.py/python9.pdf" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">PDF</a>
+          <a href="https://github.com/hothaifa96/DevSecOps20/tree/main/lessons/Python/13-python-lesson9.py/app" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Class Code</a>
         </div>
       </li>
     </ul>
-
   </div>
 </div>
 
 <!-- Git Card -->
-<div class="lesson-card">
-  <h3>🔄 GIT</h3>
-  <p>Mastering Git and Github </p>
+<div class="lesson-card" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); color: #333;">
+  <h3 style="color: #333;">🔄 Git</h3>
+  <p style="color: #444;">Master version control with Git and GitHub for collaborative development.</p>
   <div class="lesson-files">
-    <h4>Available lessons:</h4>
+    <h4 style="color: #333;">Available lessons:</h4>
     <ul class="file-list">
       <li>
-        <span>Lesson 1: basics and configs</span>
+        <span>Lesson 1: Basics and Configs</span>
         <div class="lesson-links">
-          <a href="{{ site.baseurl }}/lessons/GIT/lesson1/" class="btn-link">Start Lesson</a>
-          <a href="{{ site.baseurl }}/lessons/GIT/lesson1/GIT1.pdf" class="btn-link">PDF</a>
+          <a href="{{ site.baseurl }}/lessons/GIT/lesson1/" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/GIT/lesson1/GIT1.pdf" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">PDF</a>
         </div>
       </li>
     </ul>
   </div>
-</div>
 </div>
 
-<!-- Bash SCripting Card -->
-<div class="lesson-card">
-  <h3> Bash</h3>
-  <p>Bashing and scripting </p>
-  <div class="lesson-files">
-    <h4>Available lessons:</h4>
-    <ul class="file-list">
-      <li>
-        <span>Lesson 1: basics and variables</span>
-        <div class="lesson-links">
-          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/" class="btn-link">Start Lesson</a>
-          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/commands.txt" class="btn-link">basics commands</a>
-          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/demo1.sh" class="btn-link">demo1</a>
-        </div>
-      </li>
-        <li>
-        <span>Lesson 2: if and conditions</span>
-        <div class="lesson-links">
-          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/" class="btn-link">Start Lesson</a>
-          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/class-code.md" class="btn-link">class code</a>
-        </div>
-      </li>
-    </ul>
-  </div>
-</div>
 </div>

@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bash Scripting Homework</title>
+
     <style>
         * {
             margin: 0;
@@ -854,4 +849,372 @@ analyze_log() {
     if [[ $logfile =~ \.gz$ ]]; then
         zcat "$logfile" | grep -i "$pattern" > "$temp_file"
     else
-        grep -i "$pattern" "$logfile" > "$temp_file
+        grep -i "$pattern" "$logfile" > "$temp_file"
+    fi
+    
+    local count=$(wc -l < "$temp_file")
+    echo "$(basename "$logfile"): $count errors" >> "$output_file"
+    rm -f "$temp_file"
+}
+
+# Find all log files and process in parallel
+export -f analyze_log
+export pattern output_file
+
+<span class="missing-line"># MISSING LINE: find log files and process them in parallel using xargs</span>
+
+echo "Analysis complete. Results in $output_file"</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Complete the find command with xargs for parallel processing</li>
+                        <li>Explain parallel processing with xargs -P option</li>
+                        <li>Show how to run this script and monitor progress</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 27:</div>
+                <div class="code-block">#!/bin/bash
+# Advanced deployment with rollback capability
+app_name="myapp"
+deploy_dir="/opt/$app_name"
+versions_dir="/opt/$app_name/versions"
+current_link="/opt/$app_name/current"
+new_version=$1
+
+deploy_version() {
+    local version=$1
+    local version_dir="$versions_dir/$version"
+    
+    echo "Deploying version $version..."
+    
+    # Download and extract (simulated)
+    mkdir -p "$version_dir"
+    echo "version=$version" > "$version_dir/version.txt"
+    echo "deployed=$(date)" > "$version_dir/deployed.txt"
+    
+<span class="missing-line">    # MISSING LINE: create/update symlink atomically</span>
+    
+    echo "Version $version deployed successfully"
+}
+
+rollback() {
+    local previous_version=$(ls -1t "$versions_dir" | sed -n '2p')
+    
+    if [ -n "$previous_version" ]; then
+        echo "Rolling back to version: $previous_version"
+        ln -sfn "$versions_dir/$previous_version" "$current_link"
+        echo "Rollback completed"
+    else
+        echo "No previous version found for rollback"
+        exit 1
+    fi
+}
+
+# Health check function
+health_check() {
+    # Simulate health check
+    sleep 2
+    if (( RANDOM % 10 > 7 )); then
+        return 1  # Fail 20% of the time for demo
+    else
+        return 0  # Success
+    fi
+}
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <version>"
+    exit 1
+fi
+
+mkdir -p "$versions_dir"
+
+# Deploy new version
+deploy_version "$new_version"
+
+# Perform health check
+echo "Performing health check..."
+if health_check; then
+    echo "Health check passed"
+else
+    echo "Health check failed - rolling back"
+    rollback
+    exit 1
+fi
+
+echo "Deployment completed successfully"</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Add the atomic symlink creation command</li>
+                        <li>Explain atomic deployments and rollback strategies</li>
+                        <li>Show how to run this deployment script</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 28:</div>
+                <div class="code-block">#!/bin/bash
+# Network security scanner
+target_network="192.168.1.0/24"
+open_ports=(22 80 443 3306 5432)
+results_file="scan_results_$(date +%Y%m%d_%H%M%S).txt"
+
+scan_host() {
+    local host=$1
+    local host_results=()
+    
+    # Check if host is alive
+    if ping -c 1 -W 1 "$host" >/dev/null 2>&1; then
+        echo "Scanning $host..."
+        
+<span class="missing-line">        # MISSING LINE: loop through ports and check if they're open</span>
+            if nc -z -w1 "$host" "$port" 2>/dev/null; then
+                host_results+=("$port:open")
+            else
+                host_results+=("$port:closed")
+            fi
+        done
+        
+        if [ ${#host_results[@]} -gt 0 ]; then
+            echo "$host: ${host_results[*]}" >> "$results_file"
+        fi
+    fi
+}
+
+# Extract network range and scan
+network_base=$(echo "$target_network" | cut -d'/' -f1 | cut -d'.' -f1-3)
+
+for i in {1..254}; do
+    host="$network_base.$i"
+    scan_host "$host" &
+    
+    # Limit concurrent processes
+    if (( i % 20 == 0 )); then
+        wait
+    fi
+done
+
+wait  # Wait for all background processes
+echo "Scan completed. Results in $results_file"</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Add the for loop to iterate through the ports array</li>
+                        <li>Explain network scanning and concurrent processing</li>
+                        <li>Show how to run this script safely and legally</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 29:</div>
+                <div class="code-block">#!/bin/bash
+# Advanced configuration management
+config_template="app.conf.template"
+config_output="app.conf"
+env_file=".env"
+
+# Load environment variables from file
+load_env() {
+    if [ -f "$env_file" ]; then
+<span class="missing-line">        # MISSING LINE: source the environment file safely</span>
+    else
+        echo "Warning: Environment file $env_file not found"
+    fi
+}
+
+# Template processing function
+process_template() {
+    local template=$1
+    local output=$2
+    
+    # Read template and substitute variables
+    while IFS= read -r line; do
+        # Use eval to expand variables in the line
+        eval "echo \"$line\"" 
+    done < "$template" > "$output"
+}
+
+# Validation function
+validate_config() {
+    local config_file=$1
+    local required_keys=("DATABASE_URL" "API_KEY" "LOG_LEVEL")
+    local missing_keys=()
+    
+    for key in "${required_keys[@]}"; do
+        if ! grep -q "^$key=" "$config_file" 2>/dev/null; then
+            missing_keys+=("$key")
+        fi
+    done
+    
+    if [ ${#missing_keys[@]} -gt 0 ]; then
+        echo "ERROR: Missing required configuration keys: ${missing_keys[*]}"
+        return 1
+    fi
+    
+    return 0
+}
+
+# Main execution
+if [ ! -f "$config_template" ]; then
+    echo "Error: Template file $config_template not found"
+    exit 1
+fi
+
+load_env
+echo "Processing configuration template..."
+process_template "$config_template" "$config_output"
+
+if validate_config "$config_output"; then
+    echo "Configuration generated successfully: $config_output"
+    chmod 600 "$config_output"  # Secure permissions
+else
+    echo "Configuration validation failed"
+    exit 1
+fi</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Safely source the environment file (hint: use 'set -a' and 'set +a')</li>
+                        <li>Explain template processing and configuration management</li>
+                        <li>Show how to create template and env files to test this script</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 30:</div>
+                <div class="code-block">#!/bin/bash
+# Comprehensive system audit script
+audit_report="system_audit_$(date +%Y%m%d_%H%M%S).json"
+temp_dir=$(mktemp -d)
+
+# Cleanup function
+cleanup() {
+    rm -rf "$temp_dir"
+}
+trap cleanup EXIT
+
+# Collect system information
+collect_system_info() {
+    local info_file="$temp_dir/system.json"
+    
+    cat > "$info_file" << EOF
+{
+  "hostname": "$(hostname)",
+  "kernel": "$(uname -r)",
+  "os": "$(cat /etc/os-release | grep PRETTY_NAME | cut -d'=' -f2 | tr -d '\"')",
+  "uptime": "$(uptime -p)",
+  "users": $(who | wc -l),
+  "processes": $(ps aux | wc -l)
+}
+EOF
+}
+
+# Security audit function
+security_audit() {
+    local security_file="$temp_dir/security.json"
+    local issues=()
+    
+    # Check for common security issues
+    [ -f /etc/passwd ] && grep '^root:' /etc/passwd >/dev/null || issues+=("no_root_user")
+    [ -w /etc/passwd ] && issues+=("writable_passwd")
+    find /home -name ".ssh/id_*" -not -path "*/.*" 2>/dev/null | grep -q . && issues+=("exposed_ssh_keys")
+    
+<span class="missing-line">    # MISSING LINE: convert issues array to JSON format</span>
+    
+    echo "$json_issues" > "$security_file"
+}
+
+# Generate final report
+generate_report() {
+    echo "{"
+    echo '  "audit_timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'",'
+    echo '  "system_info": '$(cat "$temp_dir/system.json")','
+    echo '  "security_audit": '$(cat "$temp_dir/security.json")
+    echo "}"
+}
+
+# Main execution
+echo "Starting comprehensive system audit..."
+
+collect_system_info
+security_audit
+generate_report > "$audit_report"
+
+echo "System audit completed"
+echo "Report saved to: $audit_report"
+echo "Summary:"
+jq '.security_audit | length' "$audit_report" | xargs -I {} echo "  Security issues found: {}"</div>
+                <div class="task">
+                    <h4>Your Tasks:</h4>
+                    <ul>
+                        <li>Convert the issues array to JSON format (hint: use printf and join)</li>
+                        <li>Explain the complete audit process and JSON manipulation</li>
+                        <li>Show how to run this script and interpret the results</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">General Instructions</h2>
+            
+            <div class="command-section">
+                <h4>How to Complete This Assignment:</h4>
+                <div class="command"># 1. Create a new script file</div>
+                <div class="command">nano question1.sh</div>
+                
+                <div class="command"># 2. Copy the script code and fill in missing lines</div>
+                
+                <div class="command"># 3. Make the script executable</div>
+                <div class="command">chmod +x question1.sh</div>
+                
+                <div class="command"># 4. Run the script</div>
+                <div class="command">./question1.sh</div>
+                
+                <div class="command"># 5. For scripts with arguments:</div>
+                <div class="command">./script.sh arg1 arg2</div>
+                
+                <div class="command"># 6. Check exit code</div>
+                <div class="command">echo $?</div>
+            </div>
+            
+            <div class="task">
+                <h4>For Each Question, Provide:</h4>
+                <ul>
+                    <li><strong>Missing Line:</strong> The complete line that should replace the comment</li>
+                    <li><strong>Explanation:</strong> What the script does and how the missing line fits</li>
+                    <li><strong>Commands:</strong> How to make executable and run the script</li>
+                    <li><strong>Expected Output:</strong> What you expect to see when running the script</li>
+                </ul>
+            </div>
+            
+            <div class="command-section">
+                <h4>Debugging Tips:</h4>
+                <div class="command"># Add debug output</div>
+                <div class="command">bash -x script.sh</div>
+                
+                <div class="command"># Check syntax without running</div>
+                <div class="command">bash -n script.sh</div>
+                
+                <div class="command"># Add set -x in script for debugging</div>
+                <div class="command">set -x  # Enable debug mode</div>
+                <div class="command">set +x  # Disable debug mode</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Submission Guidelines:</strong></p>
+            <p>Submit each completed script as a separate .sh file with your explanations in comments.</p>
+            <p>Include a README.md file explaining your solutions and any challenges faced.</p>
+            <p><strong>Due Date:</strong> As specified by your instructor</p>
+            <p><strong>Good Luck!</strong> Remember: practice makes perfect in bash scripting.</p>
+        </div>
+    </div>
+</body>
+</html>
