@@ -270,6 +270,20 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
           <a href="{{ site.baseurl }}/lessons/GIT/lesson1/GIT1.pdf" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">PDF</a>
         </div>
       </li>
+      <li>
+        <span>Lesson 2: Branching and Merging</span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/GIT/Lesson2/" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/GIT/Lesso2/Git3.drawio.pdf" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">PDF</a>
+        </div>
+      </li>
+      <li>
+        <span>Lesson 3: github and git </span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/GIT/Lesson3/" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/GIT/Lesson3/lesson3.pdf" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">PDF</a>
+        </div>
+      </li>
     </ul>
   </div>
 </div>
