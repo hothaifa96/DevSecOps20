@@ -148,7 +148,7 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
 </div>
 
 <!-- Bash Scripting Card -->
-<div class="lesson-card" style="background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);">
+<div class="lesson-card" style="background: linear-gradient(135deg, #43cea2 0%,rgb(20, 216, 108) 100%);">
   <h3>📜 Bash Scripting</h3>
   <p>Automate tasks and create powerful scripts with bash programming.</p>
   <div class="lesson-files">
@@ -282,6 +282,32 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
         <div class="lesson-links">
           <a href="{{ site.baseurl }}/lessons/GIT/Lesson3/" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Start Lesson</a>
           <a href="{{ site.baseurl }}/lessons/GIT/Lesson3/lesson3.pdf" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">PDF</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="lesson-card" style="background: linear-gradient(135deg, #43cea2 0%,rgb(24, 116, 209) 100%);">
+  <h3>📜 Docker </h3>
+  <p>Containerize and run all applications</p>
+  <div class="lesson-files">
+    <h4>Available lessons:</h4>
+    <ul class="file-list">
+      <li>
+        <span>Lesson 1: Docker archeticture and Run command</span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/commands.txt" class="btn-link">Basic Commands</a>
+          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/demo1.sh" class="btn-link">Demo1</a>
+        </div>
+      </li>
+      <li>
+        <span>Lesson 2: If Statements and Conditions</span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/class-code.md" class="btn-link">Class Code</a>
         </div>
       </li>
     </ul>
