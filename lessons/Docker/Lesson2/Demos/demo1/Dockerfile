@@ -1,0 +1,9 @@
+# os -> python -> copy -> run
+
+FROM python:3.12.10-alpine
+
+WORKDIR /app
+
+COPY main.py ./
+
+CMD ["python3","main.py"]

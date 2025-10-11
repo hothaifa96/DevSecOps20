@@ -288,7 +288,6 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
   </div>
 </div>
 
-
 <div class="lesson-card" style="background: linear-gradient(135deg, #43cea2 0%,rgb(24, 116, 209) 100%);">
   <h3>📜 Docker </h3>
   <p>Containerize and run all applications</p>
@@ -298,9 +297,9 @@ Welcome to the DevSecOps course lessons! Click on any lesson topic below to expl
       <li>
         <span>Lesson 1: Docker archeticture and Run command</span>
         <div class="lesson-links">
-          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/" class="btn-link">Start Lesson</a>
-          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/commands.txt" class="btn-link">Basic Commands</a>
-          <a href="{{ site.baseurl }}/lessons/Bash-scripting/bash-scripting-1/demo1.sh" class="btn-link">Demo1</a>
+          <a href="{{ site.baseurl }}/lessons/Docker/Lession1/" class="btn-link">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/Docker/CheatSheet.md" class="btn-link">Docker Commands</a>
+          <a href="{{ site.baseurl }}/lessons/Docker/Docker1.pdf" class="btn-link">PDF</a>
         </div>
       </li>
       <li>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Docker Run Labs - Easy to Extreme</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px;
+        color: #333;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+      }
+
+      header {
+        background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+        color: white;
+        padding: 40px;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        font-size: 1.2em;
+        opacity: 0.9;
+      }
+
+      .content {
+        padding: 40px;
+      }
+
+      .difficulty-badge {
+        display: inline-block;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 0.9em;
+        margin-bottom: 15px;
+      }
+
+      .easy {
+        background: #2ecc71;
+        color: white;
+      }
+      .intermediate {
+        background: #f39c12;
+        color: white;
+      }
+      .advanced {
+        background: #e67e22;
+        color: white;
+      }
+      .expert {
+        background: #e74c3c;
+        color: white;
+      }
+      .extreme {
+        background: #c0392b;
+        color: white;
+      }
+
+      .lab {
+        background: #f8f9fa;
+        border-left: 5px solid #3498db;
+        padding: 25px;
+        margin-bottom: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .lab h3 {
+        color: #2c3e50;
+        margin-bottom: 15px;
+        font-size: 1.5em;
+      }
+
+      .scenario {
+        background: #e8f4f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+        border-left: 3px solid #3498db;
+      }
+
+      .scenario strong {
+        color: #2980b9;
+      }
+
+      .data-section {
+        background: #fff3cd;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+        border-left: 3px solid #ffc107;
+      }
+
+      .data-section h4 {
+        color: #856404;
+        margin-bottom: 10px;
+      }
+
+      .data-section ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .data-section li {
+        padding: 5px 0;
+        color: #856404;
+      }
+
+      .data-section li:before {
+        content: "📌 ";
+        margin-right: 5px;
+      }
+
+      .solution {
+        background: #d4edda;
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 15px;
+        border-left: 3px solid #28a745;
+      }
+
+      .solution h4 {
+        color: #155724;
+        margin-bottom: 15px;
+      }
+
+      .command {
+        background: #1e1e1e;
+        color: #d4d4d4;
+        padding: 15px;
+        border-radius: 5px;
+        font-family: "Courier New", monospace;
+        margin: 10px 0;
+        overflow-x: auto;
+        border-left: 4px solid #007acc;
+      }
+
+      .command code {
+        color: #9cdcfe;
+      }
+
+      .learning-objectives {
+        background: #f0f0f0;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+      }
+
+      .learning-objectives h4 {
+        color: #495057;
+        margin-bottom: 10px;
+      }
+
+      .learning-objectives ul {
+        padding-left: 20px;
+      }
+
+      .learning-objectives li {
+        color: #6c757d;
+        margin: 5px 0;
+      }
+
+      .toggle-btn {
+        background: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+        margin-top: 10px;
+        transition: background 0.3s;
+      }
+
+      .toggle-btn:hover {
+        background: #2980b9;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .section-title {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        margin: 30px -40px;
+        font-size: 1.8em;
+        text-align: center;
+      }
+
+      footer {
+        background: #2c3e50;
+        color: white;
+        text-align: center;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Docker Run Command Labs</h1>
+        <p></p>
+      </header>
+
+      <div class="content">
+        <div class="section-title">EASY LEVEL</div>
+
+        <!-- LAB 1 -->
+        <div class="lab">
+          <span class="difficulty-badge easy"> EASY - Lab 1</span>
+          <h3>Basic Web Server Deployment</h3>
+
+          <div class="scenario">
+            <strong>Scenario:</strong> Your company needs a quick static website
+            for testing. Deploy an Nginx web server accessible on port 8080.
+          </div>
+
+          <div class="data-section">
+            <h4>📋 Given Data:</h4>
+            <ul>
+              <li><strong>Image name:</strong> nginx</li>
+              <li><strong>Container port:</strong> 80</li>
+              <li><strong>Host port:</strong> 8080</li>
+              <li><strong>Mode:</strong> Detached (background)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- LAB 2 -->
+        <div class="lab">
+          <span class="difficulty-badge easy">🟢 EASY - Lab 2</span>
+          <h3>Interactive Ubuntu Environment</h3>
+
+          <div class="scenario">
+            <strong>Scenario:</strong> You need a temporary Ubuntu environment
+            to test bash scripts without affecting your host machine.
+          </div>
+
+          <div class="data-section">
+            <h4>📋 Given Data:</h4>
+            <ul>
+              <li><strong>Image name:</strong> ubuntu</li>
+              <li><strong>Mode:</strong> Interactive with terminal</li>
+              <li><strong>Command:</strong> bash</li>
+              <li><strong>Container name:</strong> test-ubuntu</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- LAB 3 -->
+        <div class="lab">
+          <span class="difficulty-badge easy">🟢 EASY - Lab 3</span>
+          <h3>Environment Variables Configuration</h3>
+
+          <div class="scenario">
+            <strong>Scenario:</strong> Deploy a MySQL database with custom root
+            password and database name for your development environment.
+          </div>
+
+          <div class="data-section">
+            <h4>📋 Given Data:</h4>
+            <ul>
+              <li><strong>Image name:</strong> mysql:8.0</li>
+              <li><strong>Root password:</strong> DevPass123!</li>
+              <li><strong>Database name:</strong> testdb</li>
+              <li><strong>Port:</strong> 3306</li>
+              <li><strong>Container name:</strong> dev-mysql</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- LAB 4 -->
+        <div class="lab">
+          <span class="difficulty-badge easy">🟢 EASY - Lab 4</span>
+          <h3>Automatic Container Cleanup</h3>
+
+          <div class="scenario">
+            <strong>Scenario:</strong> Run temporary containers for testing that
+            automatically remove themselves after execution to keep your system
+            clean.
+          </div>
+
+          <div class="data-section">
+            <h4>📋 Given Data:</h4>
+            <ul>
+              <li><strong>Image name:</strong> ubuntu</li>
+              <li><strong>Mode:</strong> Interactive</li>
+              <li><strong>Cleanup:</strong> Automatic removal on exit</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- LAB 5 -->
+        <div class="lab">
+          <span class="difficulty-badge easy">🟢 EASY - Lab 5</span>
+          <h3>Restart Policy Configuration</h3>
+
+          <div class="scenario">
+            <strong>Scenario:</strong> Deploy a Redis cache server that
+            automatically restarts if it crashes or when the server reboots.
+          </div>
+
+          <div class="data-section">
+            <h4>📋 Given Data:</h4>
+            <ul>
+              <li><strong>Image name:</strong> redis</li>
+              <li><strong>Port:</strong> 6379</li>
+              <li><strong>Restart policy:</strong> always</li>
+              <li><strong>Container name:</strong> cache-server</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-title">🟡 INTERMEDIATE LEVEL</div>
+
+        <!-- LAB 6 -->
+        <div class="lab">
+          <span class="difficulty-badge intermediate"
+            >🟡 INTERMEDIATE - Lab 6</span
+          >
+          <h3>Jenkins Admin Password Recovery</h3>
+
+          <div class="scenario">
+            <strong>Scenario:</strong> Deploy Jenkins CI/CD server and retrieve
+            the initial admin password for first-time setup. Your DevOps team
+            needs to configure Jenkins but doesn't have the password yet.
+          </div>
+
+          <div class="data-section">
+            <h4>📋 Given Data:</h4>
+            <ul>
+              <li><strong>Image name:</strong> jenkins/jenkins:lts</li>
+              <li><strong>Web port:</strong> 8080</li>
+              <li><strong>Agent port:</strong> 50000</li>
+              <li>
+                <strong>Password file location:</strong>
+                /var/jenkins_home/secrets/initialAdminPassword
+              </li>
+              <li><strong>Container name:</strong> jenkins-server</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

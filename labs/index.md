@@ -160,7 +160,7 @@ Welcome to the DevSecOps course labs! Click on any lab category below to explore
     <div class="lab-files">
         <h4>Available Labs:</h4>
         <ul class="file-list">
-            <li class="empty-folder">Coming Soon - Labs in development</li>
+            <li><a href="docker/1lab.html">Docker Lab 1</a></li>
         </ul>
     </div>
 </div>
