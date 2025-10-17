@@ -14,3 +14,11 @@
 
 * Remove one container and recreate it with port mapping, then try accessing from your host again
 
+# WEB Application
+
+
+* we have a website to run on docker with 3 parts :
+    - frontend 
+    - backend
+    - data base
+* draw the docker network isolation best practices diagram
