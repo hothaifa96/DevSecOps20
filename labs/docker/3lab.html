@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Volumes & Networks Exercises</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .exercise {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .exercise:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .exercise-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .exercise-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .exercise-title {
+            flex: 1;
+        }
+
+        .exercise-title h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .difficulty {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .easy {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .hard {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .extreme {
+            background: #d6d8db;
+            color: #1b1e21;
+        }
+
+        .objective {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        h3 {
+            color: #667eea;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .note {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .note strong {
+            color: #2196F3;
+        }
+
+        .hint {
+            background: #fff9e6;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .hint strong {
+            color: #f57c00;
+        }
+
+        .deliverable {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .deliverable strong {
+            color: #2e7d32;
+        }
+
+        code {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+            }
+            
+            .exercise {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐳 Docker Volumes & Networks</h1>
+            <p>Progressive Exercises from Easy to Extreme</p>
+        </header>
+
+        <div class="content">
+            <!-- Exercise 1 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-number">1</div>
+                    <div class="exercise-title">
+                        <h2>Basic Named Volume</h2>
+                        <span class="difficulty easy">Easy</span>
+                    </div>
+                </div>
+                <div class="objective">Understand persistent data with named volumes</div>
+                
+                <h3>Task:</h3>
+                <ol>
+                    <li>Create a named volume called <code>mydata</code></li>
+                    <li>Run an <code>nginx</code> container that uses this volume mounted at <code>/usr/share/nginx/html</code></li>
+                    <li>Create an <code>index.html</code> file in the volume with custom content</li>
+                    <li>Stop and remove the container, then create a new one using the same volume</li>
+                    <li>Verify your data persisted</li>
+                </ol>
+
+                <div class="note">
+                    <strong>Remember:</strong> nginx is accessible on port 80
+                </div>
+            </div>
+
+            <!-- Exercise 2 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-number">2</div>
+                    <div class="exercise-title">
+                        <h2>Bind Mount Web Development</h2>
+                        <span class="difficulty easy">Easy</span>
+                    </div>
+                </div>
+                <div class="objective">Use bind mounts for live development</div>
+                
+                <h3>Task:</h3>
+                <ol>
+                    <li>Create a local directory with a simple HTML file and a CSS file</li>
+                    <li>Run an <code>nginx</code> container with a bind mount pointing your local directory to <code>/usr/share/nginx/html</code></li>
+                    <li>Modify the HTML file on your host machine</li>
+                    <li>Verify changes appear immediately in the browser without restarting the container</li>
+                </ol>
+
+                <div class="deliverable">
+                    <strong>Challenge:</strong> Make the container run on port 8080 of your host
+                </div>
+            </div>
+
+            <!-- Exercise 3 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-number">3</div>
+                    <div class="exercise-title">
+                        <h2>Network Communication Between Containers</h2>
+                        <span class="difficulty medium">Medium</span>
+                    </div>
+                </div>
+                <div class="objective">Connect two containers on a custom network</div>
+                
+                <h3>Task:</h3>
+                <ol>
+                    <li>Create a custom bridge network called <code>app-network</code></li>
+                    <li>Run a <code>mysql:8.0</code> container on this network with:
+                        <ul>
+                            <li>Container name: <code>mydb</code></li>
+                            <li>Environment variables for root password</li>
+                            <li>A named volume for data persistence</li>
+                        </ul>
+                    </li>
+                    <li>Run an <code>adminer</code> (database management tool) container on the same network</li>
+                    <li>Access adminer through your browser and connect to the mysql container using the container name as hostname</li>
+                </ol>
+            </div>
+
+            <!-- Exercise 4 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-number">4</div>
+                    <div class="exercise-title">
+                        <h2>Volume Backup and Restore</h2>
+                        <span class="difficulty medium">Medium - Challenge</span>
+                    </div>
+                </div>
+                <div class="objective">Learn to backup and restore volume data</div>
+                
+                <h3>Task:</h3>
+                <ol>
+                    <li>Create a named volume and run a <code>postgres:15</code> container with it</li>
+                    <li>Use <code>docker exec</code> to create a database and table with some data</li>
+                    <li>Write a bash/python script that:
+                        <ul>
+                            <li>Stops the postgres container</li>
+                            <li>Creates a backup of the volume data to a tar file</li>
+                            <li>Restarts the container</li>
+                        </ul>
+                    </li>
+                    <li>Delete the volume and container</li>
+                    <li>Create a new volume and restore the data from your backup</li>
+                    <li>Verify data integrity</li>
+                </ol>
+
+                <div class="deliverable">
+                    <strong>Deliverable:</strong> A <code>backup.sh</code> and <code>restore.sh</code> script
+                </div>
+            </div>
+
+            <!-- Exercise 5 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-number">5</div>
+                    <div class="exercise-title">
+                        <h2>Multi-Container Application with Shared Volume</h2>
+                        <span class="difficulty medium">Medium</span>
+                    </div>
+                </div>
+                <div class="objective">Share data between containers using volumes</div>
+                
+                <h3>Task:</h3>
+                <ol>
+                    <li>Create a named volume called <code>shared-logs</code></li>
+                    <li>Run a container with <code>busybox</code> that writes the current timestamp to a file in the shared volume every 5 seconds (use a bash/sh loop)</li>
+                    <li>Run an <code>nginx</code> container that mounts the same volume and serves the log file</li>
+                    <li>Access the log file through nginx and watch it update</li>
+                </ol>
+
+                <div class="hint">
+                    <strong>Hint:</strong> Use <code>tail -f</code> or configure nginx to serve the logs directory
+                </div>
+            </div>
+
+            <!-- Exercise 6 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-number">6</div>
+                    <div class="exercise-title">
+                        <h2>Network Isolation Testing</h2>
+                        <span class="difficulty hard">Hard</span>
+                    </div>
+                </div>
+                <div class="objective">Understand network isolation and security</div>
+                
+                <h3>Task:</h3>
+                <ol>
+                    <li>Create three custom bridge networks: <code>frontend</code>, <code>backend</code>, <code>database</code></li>
+                    <li>Run containers:
+                        <ul>
+                            <li><code>nginx</code> connected to <code>frontend</code> only (name: web)</li>
+                            <li><code>python:3.9</code> connected to <code>frontend</code> and <code>backend</code> (name: api)</li>
+                            <li><code>redis</code> connected to <code>backend</code> and <code>database</code> (name: cache)</li>
+                            <li><code>postgres</code> connected to <code>database</code> only (name: db)</li>
+                        </ul>
+                    </li>
+                    <li>Test and document which containers can ping each other</li>
+                    <li>Connect the API container to multiple networks and verify connectivity changes</li>
+                </ol>
+
+                <div class="deliverable">
+                    <strong>Deliverable:</strong> Network diagram and connectivity test results
+                </div>
+            </div>
+
+            <!-- Exercise 7 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-number">7</div>
+                    <div class="exercise-title">
+                        <h2>Read-Only Volumes and Security</h2>
+                        <span class="difficulty hard">Hard</span>
+                    </div>
+                </div>
+                <div class="objective">Implement read-only mounts for security</div>
+                
+                <h3>Task:</h3>
+                <ol>
+                    <li>Create a Python script that reads configuration from a file and writes logs to another location</li>
+                    <li>Run a <code>python:3.9</code> container with:
+                        <ul>
+                            <li>A read-only bind mount for the config file</li>
+                            <li>A writable named volume for logs</li>
+                            <li>A read-only mount for the Python script itself</li>
+                        </ul>
+                    </li>
+                    <li>Verify the application cannot modify the config file but can write logs</li>
+                    <li>Try to modify the config from inside the container and document the behavior</li>
+                </ol>
+
+                <div class="deliverable">
+                    <strong>Deliverable:</strong> Python script and documentation of read-only behavior
+                </div>
+            </div>
+
+            <!-- Exercise 9 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-number">9</div>
+                    <div class="exercise-title">
+                        <h2>Inter-Network Communication with Port Mapping</h2>
+                        <span class="difficulty hard">Hard</span>
+                    </div>
+                </div>
+                <div class="objective">Advanced networking with multiple networks and port exposure</div>
+                
+                <h3>Task:</h3>
+                <ol>
+                    <li>Create two networks: <code>public</code> and <code>private</code></li>
+                    <li>Run a <code>redis</code> container on the <code>private</code> network only</li>
+                    <li>Run a <code>python:3.9</code> container connected to BOTH networks that:
+                        <ul>
+                            <li>Acts as a proxy/API between the networks</li>
+                            <li>Exposes port 5000 to the host</li>
+                            <li>Connects to redis on the private network</li>
+                            <li>Serves HTTP requests on the public network</li>
+                        </ul>
+                    </li>
+                    <li>Write a Python Flask application that:
+                        <ul>
+                            <li>Receives HTTP POST requests with key-value pairs</li>
+                            <li>Stores them in Redis</li>
+                            <li>Retrieves them on GET requests</li>
+                        </ul>
+                    </li>
+                    <li>The redis container should NOT be directly accessible from the host</li>
+                </ol>
+
+                <div class="deliverable">
+                    <strong>Deliverable:</strong> Python Flask app and documentation of the network architecture
+                </div>
+            </div>
+
+            <!-- Exercise 10 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-number">10</div>
+                    <div class="exercise-title">
+                        <h2>Complete Application Stack with Volume Management</h2>
+                        <span class="difficulty extreme">Extreme Challenge</span>
+                    </div>
+                </div>
+                <div class="objective">Build a complete, production-like setup</div>
+                
+                <h3>Task:</h3>
+                <p>Create a blogging platform with the following requirements:</p>
+
+                <h3>1. Database Layer (network: db-net)</h3>
+                <ul>
+                    <li><code>postgres:15</code> container with named volume for data</li>
+                    <li>Automated backup script that runs daily (simulate with a container)</li>
+                </ul>
+
+                <h3>2. Application Layer (networks: db-net, app-net)</h3>
+                <ul>
+                    <li><code>wordpress:latest</code> container connected to both networks</li>
+                    <li>Bind mount for custom theme development</li>
+                    <li>Named volume for uploaded media</li>
+                </ul>
+
+                <h3>3. Reverse Proxy Layer (network: app-net)</h3>
+                <ul>
+                    <li><code>nginx</code> container as reverse proxy</li>
+                    <li>Bind mount for custom nginx configuration</li>
+                    <li>SSL termination (self-signed certificate)</li>
+                </ul>
+
+                <h3>4. Monitoring (network: app-net)</h3>
+                <ul>
+                    <li>Container that monitors logs and saves analytics</li>
+                </ul>
+
+                <h3>Requirements:</h3>
+                <ul>
+                    <li>Write a bash script that provisions the entire stack</li>
+                    <li>Implement health checks</li>
+                    <li>Document all volume mount points and their purposes</li>
+                    <li>Create a backup/restore strategy</li>
+                    <li>Network isolation: database should not be accessible from proxy layer</li>
+                </ul>
+
+                <div class="deliverable">
+                    <strong>Deliverable:</strong>
+                    <ul>
+                        <li>Complete setup script</li>
+                        <li>Network and volume architecture diagram</li>
+                        <li>Backup/restore scripts</li>
+                        <li>Documentation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>🐳 Docker DevOps Course | Volumes & Networks Exercises</p>
+            <p>Good luck with your assignments!</p>
+        </footer>
+    </div>
+</body>
+</html>
