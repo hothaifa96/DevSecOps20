@@ -162,6 +162,8 @@ Welcome to the DevSecOps course labs! Click on any lab category below to explore
         <ul class="file-list">
             <li><a href="docker/1lab.html">Docker Lab 1</a></li>
             <li><a href="docker/3lab.html">Docker Lab 2</a></li>
+            <li><a href="docker/full-lab.html">Docker challenge</a></li>
+
         </ul>
     </div>
 </div>

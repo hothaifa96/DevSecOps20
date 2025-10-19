@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Docker Exercise: API Logger and Data Viewer</title>
+</head>
+<body>
+  <h1>🐳 Docker Exercise: API Logger and Data Viewer</h1>
+
+  <h2>🎯 Objective</h2>
+  <p>Create a system of two Docker containers:</p>
+  <ol>
+    <li>One container logs API responses into a file at random intervals.</li>
+    <li>Another container reads and summarizes the log based on the hour.</li>
+  </ol>
+
+  <hr>
+
+  <h2>📌 Part 1: API Logging Script</h2>
+  <h3>✅ Task:</h3>
+  <ul>
+    <li>Write a <strong>Python or Bash script</strong> that performs the following:</li>
+    <ul>
+      <li>Runs in an <strong>infinite loop</strong>.</li>
+      <li>At <strong>random intervals</strong>, fetches data from <strong>any public API</strong>.</li>
+      <li>On each request:
+        <ul>
+          <li>Logs the <strong>current date and time</strong>, the <strong>API URL</strong>, and the <strong>full response</strong>.</li>
+        </ul>
+      </li>
+      <li>Appends this information to a <strong>log file</strong> (in append mode).</li>
+    </ul>
+  </ul>
+
+  <hr>
+
+  <h2>📦 Part 2: Dockerizing the Logger</h2>
+  <h3>✅ Task:</h3>
+  <ul>
+    <li>Create a <strong>Dockerfile</strong> for the logging script.</li>
+    <li>Build a <strong>Docker image</strong> from this file.</li>
+    <li>Run a <strong>Docker container</strong> from this image:
+      <ul>
+        <li>Use a <strong>Docker volume</strong> to persist and share the log file with other containers.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <hr>
+
+  <h2>📌 Part 3: Log Viewer Script</h2>
+  <h3>✅ Task:</h3>
+  <ul>
+    <li>Write another <strong>Python or Bash script</strong> that:
+      <ul>
+        <li>Reads from the <strong>shared log file</strong>.</li>
+        <li>Groups and displays the API response entries by <strong>hour</strong>.</li>
+        <li>For example, if two entries are logged at <code>12:01:05</code> and <code>12:04:05</code>, the viewer shows them both under <code>12:00</code>.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <hr>
+
+  <h2>📦 Part 4: Dockerizing the Viewer</h2>
+  <h3>✅ Task:</h3>
+  <ul>
+    <li>Create a <strong>second Dockerfile</strong> for the viewer script.</li>
+    <li>Build a <strong>Docker image</strong>.</li>
+    <li>Run a <strong>second Docker container</strong> from this image:
+      <ul>
+        <li>Mount the <strong>same volume</strong> to access the log file.</li>
+        <li>On execution, it should display the grouped data based on the hour.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <hr>
+
+  <h2>📝 Notes</h2>
+  <ul>
+    <li>You may use <strong>any public API</strong>, such as:
+      <ul>
+        <li><code>https://api.chucknorris.io/jokes/random</code></li>
+        <li><code>https://catfact.ninja/fact</code></li>
+        <li>Or any other of your choice.</li>
+      </ul>
+    </li>
+    <li>Each log entry must include:
+      <ul>
+        <li><strong>Timestamp</strong></li>
+        <li><strong>API URL</strong></li>
+        <li><strong>Response</strong></li>
+      </ul>
+    </li>
+    <li>The viewer container does <strong>not</strong> need to run continuously — it can be executed on demand.</li>
+  </ul>
+</body>
+</html>
