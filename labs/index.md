@@ -161,7 +161,7 @@ Welcome to the DevSecOps course labs! Click on any lab category below to explore
         <h4>Available Labs:</h4>
         <ul class="file-list">
             <li><a href="docker/1lab.html">Docker Lab 1</a></li>
-            <li><a href="docker/3lab.html">Docker Lab 1</a></li>
+            <li><a href="docker/3lab.html">Docker Lab 2</a></li>
         </ul>
     </div>
 </div>
