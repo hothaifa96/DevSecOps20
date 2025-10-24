@@ -132,6 +132,7 @@ a:hover {
   <p>Apply your knowledge with practical exercises, real-world scenarios, and interactive challenges. Master DevSecOps through hands-on experience.</p>
   <div class="lesson-files">
     <a href="{{ site.baseurl }}/labs/" class="btn-link" style="font-size:1.1em; font-weight:bold;">Access Labs</a>
+    <a href="{{ site.baseurl }}/quizes/Docker-quiz.html" class="btn-link">quiz docker</a>
   </div>
 </div>
 
