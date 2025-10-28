@@ -343,4 +343,23 @@ a:hover {
   </div>
 </div>
 
+<!-- K8s Card -->
+<div class="lesson-card" >
+  <h3 style="color: #333;"> Kubernetes </h3>
+  <p style="color: #444;">mastering k8s</p>
+  <div class="lesson-files">
+    <h4 style="color: #333;">Available lessons:</h4>
+    <ul class="file-list">
+      <li>
+        <span>Lesson 1: Arch and main components</span>
+        <div class="lesson-links">
+          <a href="{{ site.baseurl }}/lessons/kubernetes/lesson1/" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">Start Lesson</a>
+          <a href="{{ site.baseurl }}/lessons/kubernetes/lesson1/GIT1.pdf" class="btn-link" style="background: rgba(0,0,0,0.15); color: #333;">PDF</a>
+        </div>
+      </li>
+      </li>
+    </ul>
+  </div>
+</div>
+
 </div>
