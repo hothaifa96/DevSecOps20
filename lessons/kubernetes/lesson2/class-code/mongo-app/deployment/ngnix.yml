@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: hodi
+spec:
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+          ports:
+             - containerPort: 8081
+  replicas: 1
+  selector:
+   matchLabels:
+     app: nginx

@@ -16,15 +16,33 @@ spec:
              - containerPort: 8081
           env:
             - name: ME_CONFIG_MONGODB_AUTH_USERNAME
-              value: trala
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-cm
+                  key: admin-username
             - name: ME_CONFIG_MONGODB_AUTH_PASSWORD
-              value: hodi
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: admin-password
             - name: ME_CONFIG_MONGODB_SERVER
               value: mongo-svc
+              # valueFrom:
+              #   configMapKeyRef:
+              #     name: mongo-cm
+              #     key: database-host
             - name: ME_CONFIG_BASICAUTH_USERNAME
-              value: rabbit
+              value: yuval
+              # valueFrom:
+              #   configMapKeyRef:
+              #     name: mongo-cm
+              #     key: admin-username
             - name: ME_CONFIG_BASICAUTH_PASSWORD
-              value: hothaifa
+              value: shay
+              # valueFrom:
+              #   secretKeyRef:
+              #     name: mongo-secret
+              #     key: admin-password
   replicas: 2
   selector:
    matchLabels:

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-cm
+  namespace: default
+data:
+  admin-username: yuval
+  user-username: alex
+  database-host: mongo-svc
