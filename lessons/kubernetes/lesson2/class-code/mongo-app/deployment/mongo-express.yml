@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-express
+  namespace: default
+spec:
+  template:
+    metadata:
+      labels:
+        app: mongo-express
+    spec:
+      containers:
+        - name: mongo-express
+          image: mongo-express:latest
+          ports:
+             - containerPort: 8081
+          env:
+            - name: ME_CONFIG_MONGODB_AUTH_USERNAME
+              value: trala
+            - name: ME_CONFIG_MONGODB_AUTH_PASSWORD
+              value: hodi
+            - name: ME_CONFIG_MONGODB_SERVER
+              value: mongo-svc
+            - name: ME_CONFIG_BASICAUTH_USERNAME
+              value: rabbit
+            - name: ME_CONFIG_BASICAUTH_PASSWORD
+              value: hothaifa
+  replicas: 2
+  selector:
+   matchLabels:
+     app: mongo-express
