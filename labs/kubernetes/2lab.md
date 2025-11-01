@@ -6,3 +6,7 @@
 - svc yaml
 - and try to reach the app in port 31113
 
+* (note that this is a react application)
+    * npm i -- install the application packages
+    * npm start -- to start the app on port 3000
+    * npm run build -- builds the html manifest
