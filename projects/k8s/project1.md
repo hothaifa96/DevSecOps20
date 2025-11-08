@@ -15,7 +15,10 @@ It will help you understand which areas you're comfortable with and where you ne
 And it will give you an app that you modelled yourself, which you can use as a reference next time you model a new app.
 
 ℹ️ There are several parts to the hackathon - you're not expected to complete them all. In some classes we have a whole day for this, in others just a few hours. Get as far as you can in the time, it's all great experience.
-
+---
+### send me the github link:
+- hozu96@proton.me
+- before : 18/11/2025
 ---
 
 ## Choose Your Application
