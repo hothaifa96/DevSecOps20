@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todos-deploy
+  namespace: todos
+spec:
+  replicas: 1 
+  selector: 
+    matchLabels:
+      app: todos
+  template:
+    metadata:
+      name: todos-pod
+      labels:
+        app: todos
+    spec:
+      containers:
+        - name: todo-api-container
+          image: todos-frontend:latest
+          imagePullPolicy: Never
+          ports: 
+           - containerPort: 80
+          env:
+           - name: USERS_API_URL
+             valueFrom:
+               configMapKeyRef:
+                 name: env-cm
+                 key: users
+           - name: AUTH_API_URL
+             valueFrom:
+               configMapKeyRef:
+                 name: env-cm
+                 key: auth
+           - name: TODOS_API_URL
+             valueFrom:
+               configMapKeyRef:
+                 name: env-cm
+                 key: todo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todos-svc
+spec:
+  type: NodePort
+  selector:
+    app: todos
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 31180

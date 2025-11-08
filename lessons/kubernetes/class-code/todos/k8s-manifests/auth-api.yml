@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-api-deploy
+  namespace: todos
+spec:
+  replicas: 1 
+  selector: 
+    matchLabels:
+      app: auth-api
+  template:
+    metadata:
+      name: auth-api-pod
+      labels:
+        app: auth-api
+    spec:
+      containers:
+        - name: auth-api-container
+          image: todos-auth:v1
+          ports: 
+           - containerPort: 5002
+          env:
+           - name: USERS_API_URL
+             valueFrom:
+               configMapKeyRef:
+                 name: env-cm
+                 key: users
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-svc
+spec:
+  type: NodePort
+  selector:
+    app: auth-api
+  ports:
+  - port: 5002
+    targetPort: 5002
+    nodePort: 31132
