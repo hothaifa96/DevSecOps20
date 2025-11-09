@@ -5,20 +5,23 @@
 The hackathon is your chance to spend some decent time modelling and deploying a Kubernetes app on your own.
 
 You'll use all the key skills you've learned in the course, and:
-* 😣 you will get stuck
-* 💥 you will have errors and broken apps
-* 📑 you will need to research and troubleshoot
+
+- 😣 you will get stuck
+- 💥 you will have errors and broken apps
+- 📑 you will need to research and troubleshoot
 
 That's why the hackathon is so useful!
 
 It will help you understand which areas you're comfortable with and where you need to spend some more time.
 And it will give you an app that you modelled yourself, which you can use as a reference next time you model a new app.
 
-ℹ️ There are several parts to the hackathon - you're not expected to complete them all. In some classes we have a whole day for this, in others just a few hours. Get as far as you can in the time, it's all great experience.
----
+## ℹ️ There are several parts to the hackathon - you're not expected to complete them all. In some classes we have a whole day for this, in others just a few hours. Get as far as you can in the time, it's all great experience.
+
 ### send me the github link:
+
 - hozu96@proton.me
 - before : 18/11/2025
+
 ---
 
 ## Choose Your Application
@@ -26,9 +29,11 @@ And it will give you an app that you modelled yourself, which you can use as a r
 You can choose from three different applications. All have verified working images on Docker Hub:
 
 ### **Option 1: Docker Voting App** ⭐ RECOMMENDED
+
 **Best for:** Students who want a cool, interactive frontend
 
 **Application Components:**
+
 - **Vote (Frontend)** - Python Flask web app with a modern UI
 - **Redis** - In-memory queue for collecting votes
 - **Worker** - .NET service that processes votes
@@ -36,6 +41,7 @@ You can choose from three different applications. All have verified working imag
 - **Result (Frontend)** - Node.js real-time results dashboard
 
 **Why it's great:**
+
 - ✅ Official Docker sample application
 - ✅ Cool interactive voting interface (Cats vs Dogs)
 - ✅ Real-time results visualization
@@ -45,13 +51,16 @@ You can choose from three different applications. All have verified working imag
 ---
 
 ### **Option 2: RSVP App**
+
 **Best for:** Students who want something simpler
 
 **Application Components:**
+
 - **Frontend** - Python Flask RSVP application
 - **MongoDB** - Database for storing RSVPs
 
 **Why it's good:**
+
 - ✅ Simpler 2-tier architecture
 - ✅ Good for beginners
 - ✅ Clean interface
@@ -97,22 +106,22 @@ We'll use the **Docker Voting App** for this tutorial. If you chose a different 
 
 ## Docker Images to Use
 
-| Component | Docker Image | Replicas | Port |
-|-----------|-------------|----------|------|
-| Vote | `dockersamples/examplevotingapp_vote:latest` | 2 | 80 |
-| Redis | `redis:alpine` | 1 | 6379 |
-| Worker | `dockersamples/examplevotingapp_worker:latest` | 1 | N/A |
-| PostgreSQL | `postgres:15-alpine` | 1 | 5432 |
-| Result | `dockersamples/examplevotingapp_result:latest` | 1 | 80 |
+| Component  | Docker Image                                   | Replicas | Port |
+| ---------- | ---------------------------------------------- | -------- | ---- |
+| Vote       | `dockersamples/examplevotingapp_vote:latest`   | 2        | 80   |
+| Redis      | `redis:alpine`                                 | 1        | 6379 |
+| Worker     | `dockersamples/examplevotingapp_worker:latest` | 1        | N/A  |
+| PostgreSQL | `postgres:15-alpine`                           | 1        | 5432 |
+| Result     | `dockersamples/examplevotingapp_result:latest` | 1        | 80   |
 
 ## Service Requirements
 
-| Service | Type | Port | Target Port | NodePort |
-|---------|------|------|-------------|----------|
-| vote | NodePort | 80 | 80 | 31000 |
-| redis | ClusterIP | 6379 | 6379 | - |
-| db | ClusterIP | 5432 | 5432 | - |
-| result | NodePort | 80 | 80 | 31001 |
+| Service | Type      | Port | Target Port | NodePort |
+| ------- | --------- | ---- | ----------- | -------- |
+| vote    | NodePort  | 80   | 80          | 31000    |
+| redis   | ClusterIP | 6379 | 6379        | -        |
+| db      | ClusterIP | 5432 | 5432        | -        |
+| result  | NodePort  | 80   | 80          | 31001    |
 
 **Note:** Worker doesn't need a service as it's a background processor.
 
@@ -127,7 +136,7 @@ We'll use the **Docker Voting App** for this tutorial. If you chose a different 
 
 ### Hints
 
-- DNS names for services: `redis`, `db`, `vote`, `result`
+- DNS names for services: `redis`, `db`, `vote`, `result`,`worker`
 - The Vote app connects to Redis using hostname `redis`
 - The Worker connects to both Redis (`redis`) and PostgreSQL (`db`)
 - The Result app connects to PostgreSQL (`db`)
@@ -138,6 +147,7 @@ We'll use the **Docker Voting App** for this tutorial. If you chose a different 
 ### Expected Result
 
 When you're done:
+
 - Navigate to `http://localhost:31000` - You should see the voting page (Cats vs Dogs)
 - Cast your vote
 - Navigate to `http://localhost:31001` - You should see live results updating
@@ -165,6 +175,7 @@ hackathon/
 ```
 
 **Deploy everything:**
+
 ```bash
 kubectl apply -f hackathon/part-1/namespace.yaml
 kubectl apply -f hackathon/part-1/ -R
@@ -187,21 +198,25 @@ Great job! Now let's make this production-ready by externalizing configuration.
 #### 1. Create Secrets for Sensitive Data
 
 **Database Secret:**
+
 - `POSTGRES_USER=postgres`
-- `POSTGRES_PASSWORD=postgres123!`
+- `POSTGRES_PASSWORD=postgres`
 
 #### 2. Create ConfigMaps for Non-Sensitive Data
 
 **Vote App ConfigMap:**
+
 - `OPTION_A=Cats`
 - `OPTION_B=Dogs`
 - `REDIS_HOST=redis`
 
 **Worker ConfigMap:**
+
 - `REDIS_HOST=redis`
 - `POSTGRES_HOST=db`
 
 **Result App ConfigMap:**
+
 - `POSTGRES_HOST=db`
 
 ### Your Tasks
@@ -216,6 +231,7 @@ Great job! Now let's make this production-ready by externalizing configuration.
 ### Hints
 
 **Using Secrets in Deployments:**
+
 ```yaml
 env:
   - name: POSTGRES_PASSWORD
@@ -226,6 +242,7 @@ env:
 ```
 
 **Using ConfigMaps in Deployments:**
+
 ```yaml
 env:
   - name: OPTION_A
@@ -236,6 +253,7 @@ env:
 ```
 
 **Testing your ConfigMaps:**
+
 ```bash
 # Check if ConfigMap exists
 kubectl get configmap -n voting-app
@@ -264,25 +282,29 @@ kubectl apply -f hackathon/part-2/ -R -n voting-app
 
 ---
 
-## Part 3 - Persistent Storage & Volumes optinal 
+## Part 3 - Persistent Storage & Volumes optinal
 
 Time to add persistence and caching!
 
 ### Requirements
 
 #### 1. Database Persistence
+
 The PostgreSQL database needs persistent storage so data survives Pod restarts.
 
 **Your tasks:**
+
 - Add a PersistentVolumeClaim (PVC) for PostgreSQL
 - Mount the volume to `/var/lib/postgresql/data`
 - Size: 1Gi
 - AccessMode: ReadWriteOnce
 
 #### 2. Redis Caching
+
 Redis could benefit from a volume for cache persistence (though not critical).
 
 **Your tasks:**
+
 - Add an `emptyDir` volume for Redis
 - Mount to `/data`
 - This survives container restarts but not Pod deletions (good for cache)
@@ -290,6 +312,7 @@ Redis could benefit from a volume for cache persistence (though not critical).
 ### Hints
 
 **PersistentVolumeClaim example:**
+
 ```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -304,6 +327,7 @@ spec:
 ```
 
 **Using PVC in Deployment:**
+
 ```yaml
 volumes:
   - name: db-data
@@ -312,6 +336,7 @@ volumes:
 ```
 
 **EmptyDir volume:**
+
 ```yaml
 volumes:
   - name: redis-data
@@ -319,6 +344,7 @@ volumes:
 ```
 
 **Check PVC status:**
+
 ```bash
 kubectl get pvc -n voting-app
 kubectl describe pvc db-data -n voting-app
@@ -346,6 +372,7 @@ Let's set up proper DNS names instead of using NodePorts!
 ### Requirements
 
 Deploy an Ingress Controller and create Ingress rules for:
+
 - `vote.local` → Vote application
 - `result.local` → Result application
 
@@ -370,26 +397,26 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: vote.local
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: vote
-            port:
-              number: 80
-  - host: result.local
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: result
-            port:
-              number: 80
+    - host: vote.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: vote
+                port:
+                  number: 80
+    - host: result.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: result
+                port:
+                  number: 80
 ```
 
 ### Deploy NGINX Ingress Controller
@@ -432,6 +459,7 @@ Time to productionize! Add the following to ALL your Deployments:
 ### 1. Health Checks
 
 **Liveness Probes** (restart if unhealthy):
+
 ```yaml
 livenessProbe:
   httpGet:
@@ -442,6 +470,7 @@ livenessProbe:
 ```
 
 **Readiness Probes** (don't send traffic if not ready):
+
 ```yaml
 readinessProbe:
   httpGet:
@@ -463,7 +492,6 @@ resources:
     cpu: "100m"
 ```
 
-
 ### 4. Pod Disruption Budget
 
 ```yaml
@@ -481,6 +509,7 @@ spec:
 ### Your Tasks
 
 Add all production features to:
+
 - Vote deployment
 - Result deployment
 - Worker deployment
@@ -489,11 +518,11 @@ Add all production features to:
 
 ### Health Check Endpoints
 
-| Component | Path | Port |
-|-----------|------|------|
-| Vote | `/` | 80 |
-| Result | `/` | 80 |
-| Redis | TCP Socket | 6379 |
+| Component  | Path         | Port |
+| ---------- | ------------ | ---- |
+| Vote       | `/`          | 80   |
+| Result     | `/`          | 80   |
+| Redis      | TCP Socket   | 6379 |
 | PostgreSQL | `pg_isready` | 5432 |
 
 ### Expected Result
@@ -510,8 +539,6 @@ kubectl apply -f hackathon/part-5/ -R -n voting-app
 ```
 
 ---
-
-
 
 ### Useful Commands
 
@@ -550,6 +577,7 @@ kubectl get endpoints -n voting-app
 ### Troubleshooting
 
 **Pod not starting?**
+
 ```bash
 kubectl describe pod <pod-name> -n voting-app
 kubectl logs <pod-name> -n voting-app
@@ -557,18 +585,21 @@ kubectl get events -n voting-app --sort-by=.metadata.creationTimestamp
 ```
 
 **Service not accessible?**
+
 ```bash
 kubectl get endpoints vote -n voting-app
 kubectl describe svc vote -n voting-app
 ```
 
 **Database connection issues?**
+
 ```bash
 kubectl exec -it -n voting-app deployment/worker -- nslookup db
 kubectl exec -it -n voting-app deployment/worker -- nc -zv db 5432
 ```
 
 **Check ConfigMaps and Secrets:**
+
 ```bash
 kubectl get configmap -n voting-app
 kubectl get secret -n voting-app
@@ -580,18 +611,22 @@ kubectl describe configmap vote-config -n voting-app
 ### Option 2: RSVP App
 
 **Docker Images:**
+
 - Frontend: `teamcloudyuga/rsvpapp`
 - Database: `mongo:4.4`
 
 **Service DNS:**
+
 - Frontend: `rsvp`
 - Database: `mongodb`
 
 **Ports:**
+
 - Frontend: 5000
 - MongoDB: 27017
 
 **Environment Variable:**
+
 ```yaml
 env:
   - name: MONGODB_HOST
@@ -603,16 +638,19 @@ env:
 ### Option 3: Guestbook App
 
 **Docker Images:**
+
 - Frontend: `gcr.io/google-samples/gb-frontend:v5`
 - Redis Leader: `redis:6.0`
 - Redis Follower: `redis:6.0`
 
 **Service DNS:**
+
 - Frontend: `frontend`
 - Redis Leader: `redis-leader`
 - Redis Follower: `redis-follower`
 
 **Ports:**
+
 - Frontend: 80
 - Redis: 6379
 
