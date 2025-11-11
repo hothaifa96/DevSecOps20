@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: moshe
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: utils
+  namespace: moshe
+  labels:
+    app: utils
+    language: python
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: utils
+  template:
+    metadata:
+      labels:
+        app: utils
+    spec:
+      containers:
+        - name: utils-container
+          image: utils:latest
+          imagePullPolicy: Never
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8080
+          volumeMounts: # container -> volume pod 
+            - name: util-vol-1
+              mountPath: /data
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 40
+            timeoutSeconds: 35
+            failureThreshold: 2
+          livenessProbe:
+            httpGet:
+              path: /healthz  # fixed spelling from 'heathz'
+              port: 8080
+            initialDelaySeconds: 2
+            periodSeconds: 15
+            timeoutSeconds: 3
+            failureThreshold: 3
+      volumes: # pod -> pvc 
+        - name: util-vol-1
+          persistentVolumeClaim:
+            claimName: utils-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: utils-svc
+  namespace: moshe
+spec:
+  type: NodePort
+  selector:
+    app: utils
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 31311

@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: delete-logs-cron
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: delete-logs-cron-container
+            image: busybox
+            command: ["rm","/data/system_usage.log"]
+            volumeMounts: # container -> volume pod 
+              - name: util-vol-1
+                mountPath: /data
+          restartPolicy: OnFailure
+          volumes: # pod -> pvc 
+            - name: util-vol-1
+              persistentVolumeClaim:
+                claimName: utils-pvc

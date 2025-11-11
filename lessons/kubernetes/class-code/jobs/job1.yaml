@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: delete-logs
+spec:
+  ttlSecondsAfterFinished: 90
+  template:
+    spec:
+      containers:
+      - name: deleter
+        image: busybox
+        command: ["mv","/data/system_usage.log",'/data/$(date).log']
+        volumeMounts: # container -> volume pod 
+          - name: util-vol-1
+            mountPath: /data
+      restartPolicy: Never
+      volumes: # pod -> pvc 
+        - name: util-vol-1
+          persistentVolumeClaim:
+            claimName: utils-pvc
