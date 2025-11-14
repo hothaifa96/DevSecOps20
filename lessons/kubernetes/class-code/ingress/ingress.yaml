@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+  namespace: app1
+spec:
+  rules:
+  - host: pizza-moshe.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/jobs"
+        backend:
+          service:
+            name: jenkins-svc
+            port: 
+              number: 2000
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: grafana-svc
+            port: 
+              number: 80
+      
+  - host: vote.pizza-moshe.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: vote-svc
+            port: 
+              number: 4000
