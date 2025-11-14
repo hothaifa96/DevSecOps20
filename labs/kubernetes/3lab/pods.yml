@@ -1,0 +1,94 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: writer-1
+  namespace: storages
+  labels:
+    app: writer
+    replica: st
+    image: busybox
+    tier: internal
+spec:
+  containers:
+  - name: writer-container
+    image: busybox
+    env:
+      - name: STORAGE
+        value: shared-data
+    command: ["/bin/sh", "-c"]
+    args: 
+     - |
+       while true; do                        
+           echo "${HOSTNAME} -> $(uname -a) " >> /${STORAGE}/log.txt
+           sleep 2                   
+       done     
+    volumeMounts:
+      - name: storage-vol
+        mountPath: /shared-data
+  volumes:
+   - name: storage-vol
+     persistentVolumeClaim:
+      claimName: shared-data
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: writer-2
+  namespace: storages
+  labels:
+    app: writer
+    replica: nd
+    image: busybox
+    tier: internal
+spec:
+  containers:
+  - name: writer-container
+    image: busybox
+    env:
+      - name: STORAGE
+        value: shared-data
+    command: ["/bin/sh", "-c"]
+    args: 
+     - |
+       while true; do                        
+           echo "${HOSTNAME} $(date) -> $(uname -a) " >> /${STORAGE}/log.txt 
+           sleep 2                   
+       done     
+    volumeMounts:
+      - name: storage-vol
+        mountPath: /shared-data
+  volumes:
+   - name: storage-vol
+     persistentVolumeClaim:
+      claimName: shared-data
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: reader-1
+  namespace: storages
+  labels:
+    app: reader
+    image: busybox
+    tier: internal
+spec:
+  containers:
+  - name: reader-container
+    image: busybox
+    env:
+      - name: STORAGE
+        value: shared-data
+    command: ["/bin/sh", "-c"]
+    args: 
+     - |
+       while true; do                        
+           cat /${STORAGE}/log.txt
+           sleep 1                   
+       done     
+    volumeMounts:
+      - name: storage-vol
+        mountPath: /shared-data
+  volumes:
+   - name: storage-vol
+     persistentVolumeClaim:
+      claimName: shared-data
