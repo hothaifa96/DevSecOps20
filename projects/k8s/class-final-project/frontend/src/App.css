@@ -1,0 +1,180 @@
+.app-shell {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #101629 0%, #05060d 60%);
+  color: #f5f6ff;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  width: min(1100px, 90vw);
+  margin: 4rem auto;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.navbar .brand {
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.navbar .brand small {
+  font-weight: 400;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.navbar nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar nav a {
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.navbar nav a.active {
+  background: rgba(99, 102, 241, 0.2);
+  color: #c7d2fe;
+}
+
+.panel {
+  background: rgba(13, 17, 31, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 18px;
+  padding: 2.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.scan-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.scan-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.scan-form input,
+.scan-form select {
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.75rem 1rem;
+  background: rgba(9, 12, 25, 0.8);
+  color: inherit;
+}
+
+.scan-form button {
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.scan-form button:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.scan-form button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+.scan-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.scan-table th {
+  text-align: left;
+  font-weight: 500;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.scan-table td {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.status {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status.passed {
+  color: #34d399;
+}
+
+.status.warning {
+  color: #fbbf24;
+}
+
+.status.failed {
+  color: #f87171;
+}
+
+.env-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.env-grid article {
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 1.5rem;
+  background: rgba(14, 19, 33, 0.9);
+}
+
+dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.3rem 1rem;
+}
+
+dt {
+  opacity: 0.75;
+  font-size: 0.85rem;
+}
+
+dd {
+  margin: 0;
+  font-weight: 600;
+  color: #e5e7ff;
+}
+
+.error {
+  color: #f87171;
+  margin-bottom: 1rem;
+}
