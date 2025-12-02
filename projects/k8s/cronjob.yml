@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: health-checker
+  namespace: raedhy
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: python
+            command:
+            - export API_URL = backend-service:5001
+            - |
+              python3 -c
+              import time
+              import os
+
+              try:
+                response = os.system(f"curl {http://backend-service:5001/api/health}" )
+                time.sleep(2)
+                print(response.json)
+              except Exception as e:
+                print(f' error: {e}')
+              
+          restartPolicy: OnFailure

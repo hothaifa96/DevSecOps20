@@ -80,3 +80,15 @@ docker build -f frontend/Dockerfile -t autoscan-frontend:dev frontend
 docker run --rm -p 8080:80 autoscan-frontend:dev
 ```
 
+### Frontend runtime configuration
+
+`VITE_API_URL` is now injected at container start, so you can deploy one frontend image to multiple clusters:
+
+```yaml
+env:
+  - name: VITE_API_URL
+    value: https://autoscan-api.example.com
+```
+
+The entrypoint rewrites `app-config.js` before nginx launches; no rebuild is required when the backend host changes.
+
