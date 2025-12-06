@@ -1,0 +1,58 @@
+pipeline{
+    agent any
+    environment{
+        REPO='https://github.com/'
+        FOLDER='tictactoe'
+        PROJECT='devopsPRO27'
+    }
+    stages{
+        stage("checkout"){
+            steps{
+                // git 'https://github.com/devopsPRO27/tictactoe'
+                sh "git clone $REPO/$PROJECT/$FOLDER"
+            }
+        }
+        stage("test"){
+            steps{
+                sh ''' count=$(ls tictactoe| wc -l)
+                        if [ $count -ne 4]; then 
+                            exit 11
+                        fi
+                '''
+            }
+        }
+        stage("validate"){
+            // dir("$FOLDER"){
+            parallel{
+                stage('content file1'){
+                    steps{
+                        sh 'cat tictactoe/ttt.py'
+                    }
+                }
+                stage('content file2'){
+                    steps{
+                        sh 'cat tictactoe/main.py'
+                    }
+                }
+                stage('content file3'){
+                    steps{
+                        sh 'cat tictactoe/ttt_without_i.py'
+                    }
+                }
+            // }
+            }
+        }
+    }
+        post{
+            always{
+                sh "rm -fr $FOLDER"
+            }
+            success{
+                sh 'echo tictactoe in on'
+            }
+            failure{
+                sh 'echo emailing the admin '
+            }
+        
+    }
+}

@@ -1,0 +1,35 @@
+pipeline{
+    agent any
+    stages{
+        stage("checkout"){
+            steps{
+                echo "========executing checkout========"
+            }
+        }
+        stage("build"){
+            steps{
+                echo "========executing build========"
+            }
+        }
+        stage("build docker image"){
+            steps{
+                echo "========executing build docker image========"
+            }
+        }
+        stage("test"){
+            parallel{
+                stage("integration test"){
+                    steps{
+                        sh 'echo integration test '
+                    }
+                }
+                stage("e2e test"){
+                    steps{
+                        sh 'echo e2e test '
+                    }
+                }
+            }
+        }
+       
+    }
+}

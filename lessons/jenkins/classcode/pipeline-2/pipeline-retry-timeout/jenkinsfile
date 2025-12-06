@@ -1,0 +1,15 @@
+pipeline{
+    agent any
+    stages{
+        stage("start"){
+            steps{
+                timeout(time:3 , unit: 'MINUTE'){
+                retry(3)
+                    echo " start "
+                    sh 'docker build '
+                }
+            }
+        }
+      
+    }
+}

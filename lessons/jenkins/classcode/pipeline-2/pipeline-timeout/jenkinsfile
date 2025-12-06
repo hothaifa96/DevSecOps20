@@ -1,0 +1,24 @@
+pipeline{
+    agent any
+    stages{
+        stage("start"){
+            steps{
+                timeout(time: 4 , unit: 'SECONDS'){
+                    echo " start "
+                    sh 'sleep 1'
+                }
+
+            }
+        }
+        stage("timeout"){
+            steps{
+                timeout(time: 4 , unit: 'SECONDS'){
+                    echo " start "
+                    sh 'sleep 10'
+                }
+
+            }
+        }
+      
+    }
+}
