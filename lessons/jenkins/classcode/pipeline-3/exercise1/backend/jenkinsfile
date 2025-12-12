@@ -5,6 +5,7 @@ pipeline{
             steps{
                 echo "clonning the app repo"
                 sh "rm -fr DevSecOps20"
+
                 sh "git clone https://github.com/hothaifa96/DevSecOps20"
             }
         }
@@ -12,6 +13,7 @@ pipeline{
             steps{
             echo "buliding docker images"
             sh "whoami"
+            sh "cat /etc/group "
             dir("lessons/jenkins/classcode/pipeline-3/exercise1/backend"){
                 sh "docker build -t app:v${env.BUILD_NUMBER} ."
             }
