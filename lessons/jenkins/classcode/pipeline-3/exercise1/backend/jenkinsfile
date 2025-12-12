@@ -1,0 +1,37 @@
+# git clone code repo
+# build image -tag
+# test run container -- health
+# re-tag push 
+# deploy 
+
+pipeline{
+    agent any
+    environment{
+
+    }
+    stages{
+        stage("checkout"){
+            steps{
+                echo "clonning the app repo"
+                sh "git clone https://github.com/hothaifa96/DevSecOps20"
+            }
+        }
+        stage("build image"){
+            steps{
+            echo "buliding docker images"
+            dir("lessons/jenkins/classcode/pipeline-3/exercise1/backend"){
+                sh "docker build -t app:v${env.BUILD_NUMBER} ."
+            }
+        }
+        }
+        stage("test"){
+        steps{
+            sh "docker images"
+            sh " docker run -d --name app1 -p 5000:5000 app:v${env.BUILD_NUMBER} " 
+            sh "curl http://localhost:5000/api/health"
+            sh "docker rm -f app1"
+        }
+        }
+    }
+
+}
