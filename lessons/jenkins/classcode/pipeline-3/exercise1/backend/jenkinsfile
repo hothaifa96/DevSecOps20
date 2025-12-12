@@ -1,14 +1,5 @@
-# git clone code repo
-# build image -tag
-# test run container -- health
-# re-tag push 
-# deploy 
-
 pipeline{
     agent any
-    environment{
-
-    }
     stages{
         stage("checkout"){
             steps{
