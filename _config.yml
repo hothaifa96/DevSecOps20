@@ -23,4 +23,34 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
+  - "**/venv/"
+  - "**/__pycache__/"
+  - "**/*.pyc"
+  - "**/site-packages/"
+  - "**/bin/python"
+  - "**/bin/activate"
+  - "**/pip"
+  - "**/pip3"
+  - "**/python*"
+  - "**/lib/python*/"
+  - "**/include/python*/"
+  - "**/share/python*/"
+  - "**/pyvenv.cfg"
 
+# Include only specific file types for safety
+include:
+  - "*.md"
+  - "*.html"
+  - "*.css"
+  - "*.js"
+  - "*.json"
+  - "*.yml"
+  - "*.yaml"
+  - "*.txt"
+  - "*.pdf"
+  - "*.png"
+  - "*.jpg"
+  - "*.jpeg"
+  - "*.gif"
+  - "*.svg"
+  - "*.webp"
